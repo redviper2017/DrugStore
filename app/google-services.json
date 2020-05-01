@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "856304614713",
+    "firebase_url": "https://drugstore-59a24.firebaseio.com",
+    "project_id": "drugstore-59a24",
+    "storage_bucket": "drugstore-59a24.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:856304614713:android:0f83bdbf12f14d7b15bce8",
+        "android_client_info": {
+          "package_name": "com.clairvoyant.drugstore"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "856304614713-foqe5oh3itle8rd7r7rsaqg59ripg7uj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.clairvoyant.drugstore",
+            "certificate_hash": "1c44e18324afcd9218060b4cb7370f73b4af0fe8"
+          }
+        },
+        {
+          "client_id": "856304614713-uk6fcmu4o763btu16irkm7cg4apunprt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBA-NtB2SQyyWrn5FizBQIyY9_vbSOheGg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "856304614713-uk6fcmu4o763btu16irkm7cg4apunprt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

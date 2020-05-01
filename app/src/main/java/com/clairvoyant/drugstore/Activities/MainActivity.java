@@ -1,4 +1,4 @@
-package com.clairvoyant.drugstore;
+package com.clairvoyant.drugstore.Activities;
 
 import android.Manifest;
 import android.content.Intent;
@@ -7,11 +7,16 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+
+import com.clairvoyant.drugstore.Models.MedicineData;
+import com.clairvoyant.drugstore.R;
+import com.google.android.material.textfield.TextInputEditText;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -114,6 +119,7 @@ public class MainActivity extends AppCompatActivity {
                 selectCSVFile();
                 return true;
             } else {
+
                 Log.v("MainActivity", "Permission is revoked");
                 ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
                 return false;

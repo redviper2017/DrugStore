@@ -1,6 +1,6 @@
-package com.clairvoyant.drugstore;
+package com.clairvoyant.drugstore.Models;
 
-class MedicineData {
+public class MedicineData {
     private String name, code, brand, category, saleUnit;
     private double cost, price;
     private int availableQty;
