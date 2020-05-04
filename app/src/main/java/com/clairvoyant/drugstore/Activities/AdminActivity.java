@@ -41,6 +41,7 @@ import java.util.Objects;
 public class AdminActivity extends AppCompatActivity implements View.OnClickListener {
 
     private List<MedicineData> medicineDataList = new ArrayList<>();
+    private ArrayList<MedicineData> productListFromServer = new ArrayList<>();
     private static final String TAG = "AdminActivity";
 
     private MaterialCardView productsCard, ordersCard, customersCard, salesCard, suppliersCard, requestsCard;
@@ -85,6 +86,12 @@ public class AdminActivity extends AppCompatActivity implements View.OnClickList
                 fetchDataFromFirestore();
                 break;
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        productListFromServer = new ArrayList<>();
     }
 
     // written functions
@@ -207,8 +214,18 @@ public class AdminActivity extends AppCompatActivity implements View.OnClickList
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : Objects.requireNonNull(task.getResult())) {
-                                Log.d(TAG, document.getId() + " => " + document.getData());
+                                Log.d(TAG, "document = " + " => " + document.getData());
+
+                                MedicineData medicineData;
+                                medicineData  = document.toObject(MedicineData.class);
+                                Log.d(TAG,"medicine = "+medicineData);
+                                productListFromServer.add(medicineData);
                             }
+
+                            Intent intent = new Intent(AdminActivity.this,ProductsActivity.class);
+                            Log.d(TAG,"is product list empty = "+productListFromServer);
+                            intent.putParcelableArrayListExtra("Products",productListFromServer);
+                            startActivity(intent);
                         } else {
                             Log.w(TAG, "Error getting documents.", task.getException());
                         }

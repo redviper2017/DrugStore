@@ -1,9 +1,39 @@
 package com.clairvoyant.drugstore.Models;
 
-public class MedicineData {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class MedicineData implements Parcelable{
     private String name, code, brand, category, saleUnit;
     private double cost, price;
     private int availableQty;
+
+    public MedicineData(Parcel in) {
+        name = in.readString();
+        code = in.readString();
+        brand = in.readString();
+        category = in.readString();
+        saleUnit = in.readString();
+        cost = in.readDouble();
+        price = in.readDouble();
+        availableQty = in.readInt();
+    }
+
+    public static final Creator<MedicineData> CREATOR = new Creator<MedicineData>() {
+        @Override
+        public MedicineData createFromParcel(Parcel in) {
+            return new MedicineData(in);
+        }
+
+        @Override
+        public MedicineData[] newArray(int size) {
+            return new MedicineData[size];
+        }
+    };
+
+    public MedicineData() {
+
+    }
 
     public String getName() {
         return name;
@@ -81,5 +111,22 @@ public class MedicineData {
                 ", price=" + price +
                 ", availableQty=" + availableQty +
                 '}';
+    }
+
+    @Override
+    public int describeContents() {
+        return hashCode();
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(name);
+        dest.writeString(code);
+        dest.writeString(brand);
+        dest.writeString(category);
+        dest.writeString(saleUnit);
+        dest.writeDouble(cost);
+        dest.writeDouble(price);
+        dest.writeInt(availableQty);
     }
 }
