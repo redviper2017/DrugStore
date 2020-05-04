@@ -14,13 +14,16 @@
         android:padding="@dimen/_10sdp">
 
         <com.google.android.material.card.MaterialCardView
+            android:id="@+id/products_card"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/_5sdp"
             android:layout_weight="1"
             app:cardBackgroundColor="@color/colorPrimary"
             app:cardCornerRadius="@dimen/_5sdp"
-            app:cardElevation="@dimen/_10sdp">
+            app:cardElevation="@dimen/_10sdp"
+            android:clickable="true"
+            android:focusable="true">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -48,6 +51,7 @@
         </com.google.android.material.card.MaterialCardView>
 
         <com.google.android.material.card.MaterialCardView
+            android:id="@+id/orders_card"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_5sdp"
@@ -91,6 +95,7 @@
         android:padding="@dimen/_10sdp">
 
         <com.google.android.material.card.MaterialCardView
+            android:id="@+id/customers_card"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/_5sdp"
@@ -125,6 +130,7 @@
         </com.google.android.material.card.MaterialCardView>
 
         <com.google.android.material.card.MaterialCardView
+            android:id="@+id/sales_card"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_5sdp"
@@ -167,6 +173,7 @@
         android:orientation="horizontal"
         android:padding="@dimen/_10sdp">
         <com.google.android.material.card.MaterialCardView
+            android:id="@+id/suppliers_card"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/_5sdp"
@@ -201,6 +208,7 @@
         </com.google.android.material.card.MaterialCardView>
 
         <com.google.android.material.card.MaterialCardView
+            android:id="@+id/requests_card"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_5sdp"
