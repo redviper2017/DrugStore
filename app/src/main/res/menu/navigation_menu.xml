@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/nav_my_orders"
+        android:icon="@drawable/ic_iconmonstr_shopping_bag_8"
+        android:title="My Orders"/>
+    <item android:id="@+id/nav_profile"
+        android:icon="@drawable/person_icon_black"
+        android:title="Profile"/>
+    <item android:id="@+id/nav_contact_us"
+        android:icon="@drawable/contact_us_icon"
+        android:title="Contact Us"/>
+    <item android:id="@+id/nav_faq"
+        android:icon="@drawable/faqs_icon"
+        android:title="FAQs"/>
+    <item android:id="@+id/nav_sign_out"
+        android:icon="@drawable/sign_out_icon"
+        android:title="Sign Out"/>
+</menu>
