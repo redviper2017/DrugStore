@@ -31,7 +31,6 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/choose_medicine_type_text"
                 android:layout_marginStart="@dimen/_5sdp"
-                android:layout_marginTop="@dimen/_5sdp"
                 android:layout_marginEnd="@dimen/_5sdp"
                 android:scrollbars="none">
 
@@ -149,7 +148,7 @@
                             android:padding="@dimen/_10sdp">
 
                             <ImageView
-                                android:id="@+id/drop_syrup"
+                                android:id="@+id/drop_image"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_centerHorizontal="true"
@@ -158,10 +157,42 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_below="@id/drop_syrup"
+                                android:layout_below="@id/drop_image"
                                 android:layout_centerHorizontal="true"
                                 android:layout_marginTop="@dimen/_5sdp"
                                 android:text="Drop" />
+                        </RelativeLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/topical_card"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/_5sdp"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_toEndOf="@+id/drop_card"
+                        android:clickable="true"
+                        android:focusable="true">
+
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="@dimen/_10sdp">
+
+                            <ImageView
+                                android:id="@+id/topical_image"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerHorizontal="true"
+                                android:src="@drawable/topical_icon" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@id/topical_image"
+                                android:layout_centerHorizontal="true"
+                                android:layout_marginTop="@dimen/_5sdp"
+                                android:text="Topical" />
                         </RelativeLayout>
                     </androidx.cardview.widget.CardView>
                 </RelativeLayout>
@@ -185,7 +216,6 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/choose_medicine_for_text"
                 android:layout_marginStart="@dimen/_5sdp"
-                android:layout_marginTop="@dimen/_5sdp"
                 android:layout_marginEnd="@dimen/_5sdp"
                 android:scrollbars="none">
 
@@ -337,7 +367,6 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/choose_brand_text"
                 android:layout_marginStart="@dimen/_5sdp"
-                android:layout_marginTop="@dimen/_5sdp"
                 android:layout_marginEnd="@dimen/_5sdp"
                 android:scrollbars="none">
 
@@ -351,6 +380,7 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="@dimen/_5sdp"
                         android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_toEndOf="@id/radiant_card"
                         android:clickable="true"
                         android:focusable="true">
 
@@ -374,7 +404,7 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="@dimen/_5sdp"
                         android:layout_marginStart="@dimen/_10sdp"
-                        android:layout_toEndOf="@id/square_card"
+                        android:layout_toEndOf="@id/ibnsina_card"
                         android:clickable="true"
                         android:focusable="true">
 
@@ -398,7 +428,6 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="@dimen/_5sdp"
                         android:layout_marginStart="@dimen/_10sdp"
-                        android:layout_toEndOf="@id/popular_card"
                         android:clickable="true"
                         android:focusable="true">
 
@@ -422,7 +451,7 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="@dimen/_5sdp"
                         android:layout_marginStart="@dimen/_10sdp"
-                        android:layout_toEndOf="@id/aci_card"
+                        android:layout_toEndOf="@id/acme_card"
                         android:clickable="true"
                         android:focusable="true">
 
@@ -437,6 +466,54 @@
                                 android:layout_height="@dimen/_50sdp"
                                 android:layout_centerHorizontal="true"
                                 android:src="@drawable/ibnsina" />
+                        </RelativeLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/radiant_card"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/_5sdp"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_toEndOf="@id/popular_card"
+                        android:clickable="true"
+                        android:focusable="true">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="@dimen/_5sdp">
+
+                            <ImageView
+                                android:id="@+id/radiant_image"
+                                android:layout_width="@dimen/_100sdp"
+                                android:layout_height="@dimen/_50sdp"
+                                android:layout_centerHorizontal="true"
+                                android:src="@drawable/radiant" />
+                        </RelativeLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/acme_card"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/_5sdp"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_toEndOf="@id/aci_card"
+                        android:clickable="true"
+                        android:focusable="true">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="@dimen/_5sdp">
+
+                            <ImageView
+                                android:id="@+id/acme_image"
+                                android:layout_width="@dimen/_100sdp"
+                                android:layout_height="@dimen/_50sdp"
+                                android:layout_centerHorizontal="true"
+                                android:src="@drawable/acme" />
                         </RelativeLayout>
                     </androidx.cardview.widget.CardView>
                 </RelativeLayout>
