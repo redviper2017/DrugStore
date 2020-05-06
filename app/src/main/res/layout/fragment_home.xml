@@ -5,578 +5,610 @@
     android:layout_height="match_parent"
     tools:context=".Fragments.HomeFragment">
 
-    <RelativeLayout
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:fillViewport="true">
 
-        <TextView
-            android:id="@+id/choose_medicine_type_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_10sdp"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:layout_marginEnd="@dimen/_10sdp"
-            android:text="Medicine type:"
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="@dimen/_14ssp" />
-
-        <HorizontalScrollView
-            android:id="@+id/medicine_type_horizontal_view"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/choose_medicine_type_text"
-            android:layout_marginStart="@dimen/_5sdp"
-            android:layout_marginTop="@dimen/_5sdp"
-            android:layout_marginEnd="@dimen/_5sdp"
-            android:scrollbars="none">
+            android:layout_height="wrap_content">
 
-            <RelativeLayout
+            <TextView
+                android:id="@+id/choose_medicine_type_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:text="Medicine type:"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="@dimen/_14ssp" />
+
+            <HorizontalScrollView
+                android:id="@+id/medicine_type_horizontal_view"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_below="@id/choose_medicine_type_text"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginEnd="@dimen/_5sdp"
+                android:scrollbars="none">
 
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/capcule_card"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/_5sdp"
-                    android:clickable="true"
-                    android:focusable="true">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-                    <RelativeLayout
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/capcule_card"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:padding="@dimen/_10sdp">
+                        android:layout_margin="@dimen/_5sdp"
+                        android:clickable="true"
+                        android:focusable="true">
 
-                        <ImageView
-                            android:id="@+id/image_capsule"
+                        <RelativeLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_centerHorizontal="true"
-                            android:src="@drawable/tab_capsule_icon" />
+                            android:padding="@dimen/_10sdp">
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@id/image_capsule"
-                            android:layout_centerHorizontal="true"
-                            android:layout_marginTop="@dimen/_5sdp"
-                            android:text="Capsule/Tablets" />
-                    </RelativeLayout>
-                </androidx.cardview.widget.CardView>
+                            <ImageView
+                                android:id="@+id/image_capsule"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerHorizontal="true"
+                                android:src="@drawable/tab_capsule_icon" />
 
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/injection_card"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/_5sdp"
-                    android:layout_marginStart="@dimen/_10sdp"
-                    android:layout_toEndOf="@+id/capcule_card"
-                    android:clickable="true"
-                    android:focusable="true">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@id/image_capsule"
+                                android:layout_centerHorizontal="true"
+                                android:layout_marginTop="@dimen/_5sdp"
+                                android:text="Capsule/Tablets" />
+                        </RelativeLayout>
+                    </androidx.cardview.widget.CardView>
 
-                    <RelativeLayout
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/injection_card"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:padding="@dimen/_10sdp">
+                        android:layout_margin="@dimen/_5sdp"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_toEndOf="@+id/capcule_card"
+                        android:clickable="true"
+                        android:focusable="true">
 
-                        <ImageView
-                            android:id="@+id/image_injection"
+                        <RelativeLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_centerHorizontal="true"
-                            android:src="@drawable/injection_icon" />
+                            android:padding="@dimen/_10sdp">
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@id/image_injection"
-                            android:layout_centerHorizontal="true"
-                            android:layout_marginTop="@dimen/_5sdp"
-                            android:text="Injection" />
-                    </RelativeLayout>
-                </androidx.cardview.widget.CardView>
+                            <ImageView
+                                android:id="@+id/image_injection"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerHorizontal="true"
+                                android:src="@drawable/injection_icon" />
 
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/syrup_card"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/_5sdp"
-                    android:layout_marginStart="@dimen/_10sdp"
-                    android:layout_toEndOf="@+id/injection_card"
-                    android:clickable="true"
-                    android:focusable="true">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@id/image_injection"
+                                android:layout_centerHorizontal="true"
+                                android:layout_marginTop="@dimen/_5sdp"
+                                android:text="Injection" />
+                        </RelativeLayout>
+                    </androidx.cardview.widget.CardView>
 
-                    <RelativeLayout
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/syrup_card"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:padding="@dimen/_10sdp">
+                        android:layout_margin="@dimen/_5sdp"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_toEndOf="@+id/injection_card"
+                        android:clickable="true"
+                        android:focusable="true">
 
-                        <ImageView
-                            android:id="@+id/image_syrup"
+                        <RelativeLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_centerHorizontal="true"
-                            android:src="@drawable/syrup_icon" />
+                            android:padding="@dimen/_10sdp">
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@id/image_syrup"
-                            android:layout_centerHorizontal="true"
-                            android:layout_marginTop="@dimen/_5sdp"
-                            android:text="Liquid" />
-                    </RelativeLayout>
-                </androidx.cardview.widget.CardView>
+                            <ImageView
+                                android:id="@+id/image_syrup"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerHorizontal="true"
+                                android:src="@drawable/syrup_icon" />
 
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/drop_card"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/_5sdp"
-                    android:layout_marginStart="@dimen/_10sdp"
-                    android:layout_toEndOf="@+id/syrup_card"
-                    android:clickable="true"
-                    android:focusable="true">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@id/image_syrup"
+                                android:layout_centerHorizontal="true"
+                                android:layout_marginTop="@dimen/_5sdp"
+                                android:text="Liquid" />
+                        </RelativeLayout>
+                    </androidx.cardview.widget.CardView>
 
-                    <RelativeLayout
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/drop_card"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:padding="@dimen/_10sdp">
+                        android:layout_margin="@dimen/_5sdp"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_toEndOf="@+id/syrup_card"
+                        android:clickable="true"
+                        android:focusable="true">
 
-                        <ImageView
-                            android:id="@+id/drop_syrup"
+                        <RelativeLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_centerHorizontal="true"
-                            android:src="@drawable/eyedrop_icon" />
+                            android:padding="@dimen/_10sdp">
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@id/drop_syrup"
-                            android:layout_centerHorizontal="true"
-                            android:layout_marginTop="@dimen/_5sdp"
-                            android:text="Drop" />
-                    </RelativeLayout>
-                </androidx.cardview.widget.CardView>
-            </RelativeLayout>
-        </HorizontalScrollView>
+                            <ImageView
+                                android:id="@+id/drop_syrup"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerHorizontal="true"
+                                android:src="@drawable/eyedrop_icon" />
 
-        <TextView
-            android:id="@+id/choose_medicine_for_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/medicine_type_horizontal_view"
-            android:layout_marginStart="@dimen/_10sdp"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:layout_marginEnd="@dimen/_10sdp"
-            android:text="Medicine for:"
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="@dimen/_14ssp" />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@id/drop_syrup"
+                                android:layout_centerHorizontal="true"
+                                android:layout_marginTop="@dimen/_5sdp"
+                                android:text="Drop" />
+                        </RelativeLayout>
+                    </androidx.cardview.widget.CardView>
+                </RelativeLayout>
+            </HorizontalScrollView>
 
-        <HorizontalScrollView
-            android:id="@+id/medicine_for_horizontal_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/choose_medicine_for_text"
-            android:layout_marginStart="@dimen/_5sdp"
-            android:layout_marginTop="@dimen/_5sdp"
-            android:layout_marginEnd="@dimen/_5sdp"
-            android:scrollbars="none">
+            <TextView
+                android:id="@+id/choose_medicine_for_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/medicine_type_horizontal_view"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:text="Medicine for:"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="@dimen/_14ssp" />
 
-            <RelativeLayout
+            <HorizontalScrollView
+                android:id="@+id/medicine_for_horizontal_view"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_below="@id/choose_medicine_for_text"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginEnd="@dimen/_5sdp"
+                android:scrollbars="none">
 
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/cold_card"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/_5sdp"
-                    android:layout_marginStart="@dimen/_10sdp"
-                    android:clickable="true"
-                    android:focusable="true">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/_50sdp">
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cold_card"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/_5sdp"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:clickable="true"
+                        android:focusable="true">
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_centerInParent="true"
-                            android:layout_gravity="center"
-                            android:padding="@dimen/_10sdp"
-                            android:text="Cold, Cough &amp; Flu"
-                            android:textSize="@dimen/_12ssp" />
-                    </RelativeLayout>
-                </androidx.cardview.widget.CardView>
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_50sdp">
 
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/diabetes_care_card"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/_5sdp"
-                    android:layout_marginStart="@dimen/_10sdp"
-                    android:layout_toEndOf="@id/cold_card"
-                    android:clickable="true"
-                    android:focusable="true">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerInParent="true"
+                                android:layout_gravity="center"
+                                android:padding="@dimen/_10sdp"
+                                android:text="Cold, Cough &amp; Flu"
+                                android:textSize="@dimen/_12ssp" />
+                        </RelativeLayout>
+                    </androidx.cardview.widget.CardView>
 
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/_50sdp">
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/diabetes_care_card"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/_5sdp"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_toEndOf="@id/cold_card"
+                        android:clickable="true"
+                        android:focusable="true">
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_centerInParent="true"
-                            android:layout_gravity="center"
-                            android:padding="@dimen/_10sdp"
-                            android:text="Diabetes Care"
-                            android:textSize="@dimen/_12ssp" />
-                    </RelativeLayout>
-                </androidx.cardview.widget.CardView>
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_50sdp">
 
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/child_card"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/_5sdp"
-                    android:layout_marginStart="@dimen/_10sdp"
-                    android:layout_toEndOf="@id/diabetes_care_card"
-                    android:clickable="true"
-                    android:focusable="true">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerInParent="true"
+                                android:layout_gravity="center"
+                                android:padding="@dimen/_10sdp"
+                                android:text="Diabetes Care"
+                                android:textSize="@dimen/_12ssp" />
+                        </RelativeLayout>
+                    </androidx.cardview.widget.CardView>
 
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/_50sdp">
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/child_card"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/_5sdp"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_toEndOf="@id/diabetes_care_card"
+                        android:clickable="true"
+                        android:focusable="true">
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_centerInParent="true"
-                            android:layout_gravity="center"
-                            android:padding="@dimen/_10sdp"
-                            android:text="Child Care"
-                            android:textSize="@dimen/_12ssp" />
-                    </RelativeLayout>
-                </androidx.cardview.widget.CardView>
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_50sdp">
 
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/eye_care_card"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/_5sdp"
-                    android:layout_marginStart="@dimen/_10sdp"
-                    android:layout_toEndOf="@id/child_card"
-                    android:clickable="true"
-                    android:focusable="true">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerInParent="true"
+                                android:layout_gravity="center"
+                                android:padding="@dimen/_10sdp"
+                                android:text="Child Care"
+                                android:textSize="@dimen/_12ssp" />
+                        </RelativeLayout>
+                    </androidx.cardview.widget.CardView>
 
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/_50sdp">
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/eye_care_card"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/_5sdp"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_toEndOf="@id/child_card"
+                        android:clickable="true"
+                        android:focusable="true">
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_centerInParent="true"
-                            android:layout_gravity="center"
-                            android:padding="@dimen/_10sdp"
-                            android:text="Eye Care"
-                            android:textSize="@dimen/_12ssp" />
-                    </RelativeLayout>
-                </androidx.cardview.widget.CardView>
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_50sdp">
 
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/vitamins_care_card"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/_5sdp"
-                    android:layout_marginStart="@dimen/_10sdp"
-                    android:layout_toEndOf="@id/eye_care_card"
-                    android:clickable="true"
-                    android:focusable="true">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerInParent="true"
+                                android:layout_gravity="center"
+                                android:padding="@dimen/_10sdp"
+                                android:text="Eye Care"
+                                android:textSize="@dimen/_12ssp" />
+                        </RelativeLayout>
+                    </androidx.cardview.widget.CardView>
 
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/_50sdp">
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/vitamins_care_card"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/_5sdp"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_toEndOf="@id/eye_care_card"
+                        android:clickable="true"
+                        android:focusable="true">
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_centerInParent="true"
-                            android:layout_gravity="center"
-                            android:padding="@dimen/_10sdp"
-                            android:text="Vitamins &amp; Supplements"
-                            android:textSize="@dimen/_12ssp" />
-                    </RelativeLayout>
-                </androidx.cardview.widget.CardView>
-            </RelativeLayout>
-        </HorizontalScrollView>
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_50sdp">
 
-        <TextView
-            android:id="@+id/choose_brand_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/medicine_for_horizontal_view"
-            android:layout_marginStart="@dimen/_10sdp"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:layout_marginEnd="@dimen/_10sdp"
-            android:text="Medicine from:"
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="@dimen/_14ssp" />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerInParent="true"
+                                android:layout_gravity="center"
+                                android:padding="@dimen/_10sdp"
+                                android:text="Vitamins &amp; Supplements"
+                                android:textSize="@dimen/_12ssp" />
+                        </RelativeLayout>
+                    </androidx.cardview.widget.CardView>
+                </RelativeLayout>
+            </HorizontalScrollView>
 
-        <HorizontalScrollView
-            android:id="@+id/medicine_from_horizontal_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/choose_brand_text"
-            android:layout_marginStart="@dimen/_5sdp"
-            android:layout_marginTop="@dimen/_5sdp"
-            android:layout_marginEnd="@dimen/_5sdp"
-            android:scrollbars="none">
+            <TextView
+                android:id="@+id/choose_brand_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/medicine_for_horizontal_view"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:text="Medicine from:"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="@dimen/_14ssp" />
 
-            <RelativeLayout
+            <HorizontalScrollView
+                android:id="@+id/medicine_from_horizontal_view"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_below="@id/choose_brand_text"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginEnd="@dimen/_5sdp"
+                android:scrollbars="none">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/square_card"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/_5sdp"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:clickable="true"
+                        android:focusable="true">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="@dimen/_5sdp">
+
+                            <ImageView
+                                android:id="@+id/square_image"
+                                android:layout_width="@dimen/_100sdp"
+                                android:layout_height="@dimen/_50sdp"
+                                android:layout_centerHorizontal="true"
+                                android:src="@drawable/square" />
+                        </RelativeLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/popular_card"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/_5sdp"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_toEndOf="@id/square_card"
+                        android:clickable="true"
+                        android:focusable="true">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="@dimen/_5sdp">
+
+                            <ImageView
+                                android:id="@+id/popular_image"
+                                android:layout_width="@dimen/_100sdp"
+                                android:layout_height="@dimen/_50sdp"
+                                android:layout_centerHorizontal="true"
+                                android:src="@drawable/popular" />
+                        </RelativeLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/aci_card"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/_5sdp"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_toEndOf="@id/popular_card"
+                        android:clickable="true"
+                        android:focusable="true">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="@dimen/_5sdp">
+
+                            <ImageView
+                                android:id="@+id/aci_image"
+                                android:layout_width="@dimen/_100sdp"
+                                android:layout_height="@dimen/_50sdp"
+                                android:layout_centerHorizontal="true"
+                                android:src="@drawable/aci" />
+                        </RelativeLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/ibnsina_card"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/_5sdp"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_toEndOf="@id/aci_card"
+                        android:clickable="true"
+                        android:focusable="true">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="@dimen/_5sdp">
+
+                            <ImageView
+                                android:id="@+id/ibnsina_image"
+                                android:layout_width="@dimen/_100sdp"
+                                android:layout_height="@dimen/_50sdp"
+                                android:layout_centerHorizontal="true"
+                                android:src="@drawable/ibnsina" />
+                        </RelativeLayout>
+                    </androidx.cardview.widget.CardView>
+                </RelativeLayout>
+            </HorizontalScrollView>
+
+            <TextView
+                android:id="@+id/all_product_category_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/medicine_from_horizontal_view"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:text="All Prodducts:"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="@dimen/_14ssp" />
+
+            <LinearLayout
+                android:id="@+id/all_product_category_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/all_product_category_text"
+                android:padding="@dimen/_5sdp">
 
                 <androidx.cardview.widget.CardView
-                    android:id="@+id/square_card"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/all_pharma_products_category_card"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/_5sdp"
-                    android:layout_marginStart="@dimen/_10sdp"
-                    android:clickable="true"
-                    android:focusable="true">
+                    android:layout_weight="1">
 
                     <RelativeLayout
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:padding="@dimen/_5sdp">
+                        android:layout_gravity="center"
+                        android:padding="@dimen/_10sdp">
 
                         <ImageView
-                            android:id="@+id/square_image"
-                            android:layout_width="@dimen/_100sdp"
-                            android:layout_height="@dimen/_50sdp"
+                            android:id="@+id/image_all_pharma_product"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
                             android:layout_centerHorizontal="true"
-                            android:src="@drawable/square" />
+                            android:src="@drawable/pharma_products_icon" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/image_all_pharma_product"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:text="Pharma" />
                     </RelativeLayout>
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
-                    android:id="@+id/popular_card"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/all_non_pharma_products_category_card"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/_5sdp"
-                    android:layout_marginStart="@dimen/_10sdp"
-                    android:layout_toEndOf="@id/square_card"
-                    android:clickable="true"
-                    android:focusable="true">
+                    android:layout_weight="1">
 
                     <RelativeLayout
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:padding="@dimen/_5sdp">
+                        android:layout_gravity="center"
+                        android:padding="@dimen/_10sdp">
 
                         <ImageView
-                            android:id="@+id/popular_image"
-                            android:layout_width="@dimen/_100sdp"
-                            android:layout_height="@dimen/_50sdp"
+                            android:id="@+id/image_all_non_pharma_product"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
                             android:layout_centerHorizontal="true"
-                            android:src="@drawable/popular" />
+                            android:src="@drawable/nonpharma_icon" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/image_all_non_pharma_product"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:text="Non Pharma" />
                     </RelativeLayout>
                 </androidx.cardview.widget.CardView>
+            </LinearLayout>
 
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/aci_card"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/_5sdp"
-                    android:layout_marginStart="@dimen/_10sdp"
-                    android:layout_toEndOf="@id/popular_card"
-                    android:clickable="true"
-                    android:focusable="true">
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:padding="@dimen/_5sdp">
-
-                        <ImageView
-                            android:id="@+id/aci_image"
-                            android:layout_width="@dimen/_100sdp"
-                            android:layout_height="@dimen/_50sdp"
-                            android:layout_centerHorizontal="true"
-                            android:src="@drawable/aci" />
-                    </RelativeLayout>
-                </androidx.cardview.widget.CardView>
-
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/ibnsina_card"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/_5sdp"
-                    android:layout_marginStart="@dimen/_10sdp"
-                    android:layout_toEndOf="@id/aci_card"
-                    android:clickable="true"
-                    android:focusable="true">
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:padding="@dimen/_5sdp">
-
-                        <ImageView
-                            android:id="@+id/ibnsina_image"
-                            android:layout_width="@dimen/_100sdp"
-                            android:layout_height="@dimen/_50sdp"
-                            android:layout_centerHorizontal="true"
-                            android:src="@drawable/ibnsina" />
-                    </RelativeLayout>
-                </androidx.cardview.widget.CardView>
-            </RelativeLayout>
-        </HorizontalScrollView>
-
-        <TextView
-            android:id="@+id/all_product_category_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/medicine_from_horizontal_view"
-            android:layout_marginStart="@dimen/_10sdp"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:layout_marginEnd="@dimen/_10sdp"
-            android:text="All Prodducts:"
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="@dimen/_14ssp" />
-
-        <LinearLayout
-            android:id="@+id/all_product_category_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/all_product_category_text"
-            android:padding="@dimen/_5sdp">
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/all_pharma_products_category_card"
-                android:layout_width="0dp"
+                android:id="@+id/functions_card"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/_5sdp"
-                android:layout_weight="1">
+                android:layout_below="@id/all_product_category_layout"
+                android:layout_margin="@dimen/_10sdp">
 
                 <RelativeLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:padding="@dimen/_10sdp">
+                    android:layout_gravity="center_horizontal">
 
-                    <ImageView
-                        android:id="@+id/image_all_pharma_product"
+                    <RelativeLayout
+                        android:id="@+id/request_products_layout"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_centerHorizontal="true"
-                        android:src="@drawable/pharma_products_icon" />
+                        android:layout_centerVertical="true"
+                        android:padding="@dimen/_10sdp">
 
-                    <TextView
+                        <ImageView
+                            android:id="@+id/request_products_image"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerHorizontal="true"
+                            android:src="@drawable/reques_product_icon" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/request_products_image"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:text="Request Medicine" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/favorites_layout"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/image_all_pharma_product"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginTop="@dimen/_5sdp"
-                        android:text="Pharma" />
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_toEndOf="@id/request_products_layout"
+                        android:padding="@dimen/_10sdp">
+
+                        <ImageView
+                            android:id="@+id/favorites_image"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerHorizontal="true"
+                            android:src="@drawable/favorites_icon" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/favorites_image"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:text="Favorites" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/points_layout"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_toEndOf="@id/favorites_layout"
+                        android:padding="@dimen/_10sdp">
+
+                        <ImageView
+                            android:id="@+id/points_image"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerHorizontal="true"
+                            android:src="@drawable/points_icon" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/points_image"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:text="My Points" />
+                    </RelativeLayout>
                 </RelativeLayout>
             </androidx.cardview.widget.CardView>
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/all_non_pharma_products_category_card"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/_5sdp"
-                android:layout_weight="1">
-
-                <RelativeLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:padding="@dimen/_10sdp">
-
-                    <ImageView
-                        android:id="@+id/image_all_non_pharma_product"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerHorizontal="true"
-                        android:src="@drawable/nonpharma_icon" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/image_all_non_pharma_product"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginTop="@dimen/_5sdp"
-                        android:text="Non Pharma" />
-                </RelativeLayout>
-            </androidx.cardview.widget.CardView>
-        </LinearLayout>
-
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/functions_card"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/all_product_category_layout"
-            android:layout_margin="@dimen/_10sdp">
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <RelativeLayout
-                    android:id="@+id/request_products_layout"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="@dimen/_10sdp">
-
-                    <ImageView
-                        android:id="@+id/request_products_image"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerHorizontal="true"
-                        android:src="@drawable/reques_product_icon" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/request_products_image"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginTop="@dimen/_5sdp"
-                        android:text="Request Medicine" />
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:id="@+id/favorites_layout"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_10sdp"
-                    android:layout_toEndOf="@id/request_products_layout"
-                    android:padding="@dimen/_10sdp">
-
-                    <ImageView
-                        android:id="@+id/favorites_image"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerHorizontal="true"
-                        android:src="@drawable/favorites_icon" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/favorites_image"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginTop="@dimen/_5sdp"
-                        android:text="Favorites" />
-                </RelativeLayout>
-            </RelativeLayout>
-        </androidx.cardview.widget.CardView>
-
-    </RelativeLayout>
+        </RelativeLayout>
+    </androidx.core.widget.NestedScrollView>
 
 </FrameLayout>
