@@ -8,8 +8,11 @@
     android:layout_height="match_parent"
     tools:context=".Activities.MainActivity">
 
-
-
+    <FrameLayout
+        android:id="@+id/fragment_holder_main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </FrameLayout>
 
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nav_view"
