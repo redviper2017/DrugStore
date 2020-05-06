@@ -539,7 +539,6 @@
                         android:id="@+id/request_products_layout"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
                         android:padding="@dimen/_10sdp">
 
                         <ImageView
@@ -604,6 +603,60 @@
                             android:layout_centerHorizontal="true"
                             android:layout_marginTop="@dimen/_5sdp"
                             android:text="My Points" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/request_products_layout"
+                        android:layout_centerHorizontal="true">
+
+                        <RelativeLayout
+                            android:id="@+id/discounts_offers_layout"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+
+                            android:padding="@dimen/_10sdp">
+
+                            <ImageView
+                                android:id="@+id/discounts_offers_image"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerHorizontal="true"
+                                android:src="@drawable/discount_icon" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@id/discounts_offers_image"
+                                android:layout_centerHorizontal="true"
+                                android:layout_marginTop="@dimen/_5sdp"
+                                android:text="Sales &amp; Discounts" />
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:id="@+id/exclusive_offers_layout"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignTop="@id/discounts_offers_layout"
+                            android:layout_toEndOf="@+id/discounts_offers_layout"
+                            android:padding="@dimen/_10sdp">
+
+                            <ImageView
+                                android:id="@+id/exclusive_offers_image"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerHorizontal="true"
+                                android:src="@drawable/exclusive_promo_icon" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@id/exclusive_offers_image"
+                                android:layout_centerHorizontal="true"
+                                android:layout_marginTop="@dimen/_5sdp"
+                                android:text="Exclusive Offers" />
+                        </RelativeLayout>
                     </RelativeLayout>
                 </RelativeLayout>
             </androidx.cardview.widget.CardView>
