@@ -7,16 +7,17 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <TextView
             android:id="@+id/choose_medicine_type_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_10sdp"
-            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_20sdp"
             android:layout_marginEnd="@dimen/_10sdp"
             android:text="Medicine type:"
+            android:textColor="@color/colorPrimaryDark"
             android:textSize="@dimen/_14ssp" />
 
         <HorizontalScrollView
@@ -51,7 +52,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerHorizontal="true"
-                            android:src="@drawable/ic_medicine_placeholder_icon" />
+                            android:src="@drawable/tab_capsule_icon" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -167,9 +168,10 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/medicine_type_horizontal_view"
             android:layout_marginStart="@dimen/_10sdp"
-            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_20sdp"
             android:layout_marginEnd="@dimen/_10sdp"
             android:text="Medicine for:"
+            android:textColor="@color/colorPrimaryDark"
             android:textSize="@dimen/_14ssp" />
 
         <HorizontalScrollView
@@ -197,14 +199,16 @@
 
                     <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="@dimen/_50sdp">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:padding="@dimen/_10sdp"
-                            android:text="Cold, Cough &amp; Flu" />
+                            android:textSize="@dimen/_12ssp"
+                            android:text="Cold, Cough &amp; Flu"
+                            android:layout_centerInParent="true"/>
                     </RelativeLayout>
                 </androidx.cardview.widget.CardView>
 
@@ -220,14 +224,16 @@
 
                     <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="@dimen/_50sdp">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:padding="@dimen/_10sdp"
-                            android:text="Diabetes Care" />
+                            android:text="Diabetes Care"
+                            android:textSize="@dimen/_12ssp"
+                            android:layout_centerInParent="true"/>
                     </RelativeLayout>
                 </androidx.cardview.widget.CardView>
 
@@ -243,14 +249,16 @@
 
                     <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="@dimen/_50sdp">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:padding="@dimen/_10sdp"
-                            android:text="Child Care" />
+                            android:text="Child Care"
+                            android:textSize="@dimen/_12ssp"
+                            android:layout_centerInParent="true"/>
                     </RelativeLayout>
                 </androidx.cardview.widget.CardView>
 
@@ -266,14 +274,16 @@
 
                     <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="@dimen/_50sdp">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:padding="@dimen/_10sdp"
-                            android:text="Eye Care" />
+                            android:text="Eye Care"
+                            android:textSize="@dimen/_12ssp"
+                            android:layout_centerInParent="true"/>
                     </RelativeLayout>
                 </androidx.cardview.widget.CardView>
 
@@ -289,14 +299,16 @@
 
                     <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="@dimen/_50sdp">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:padding="@dimen/_10sdp"
-                            android:text="Vitamins &amp; Supplements" />
+                            android:text="Vitamins &amp; Supplements"
+                            android:textSize="@dimen/_12ssp"
+                            android:layout_centerInParent="true"/>
                     </RelativeLayout>
                 </androidx.cardview.widget.CardView>
             </RelativeLayout>
@@ -308,9 +320,10 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/medicine_for_horizontal_view"
             android:layout_marginStart="@dimen/_10sdp"
-            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_20sdp"
             android:layout_marginEnd="@dimen/_10sdp"
             android:text="Medicine from:"
+            android:textColor="@color/colorPrimaryDark"
             android:textSize="@dimen/_14ssp" />
 
         <HorizontalScrollView
@@ -326,6 +339,7 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+
                 <androidx.cardview.widget.CardView
                     android:id="@+id/square_card"
                     android:layout_width="wrap_content"
@@ -337,7 +351,8 @@
 
                     <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/_5sdp">
 
                         <ImageView
                             android:id="@+id/square_image"
@@ -347,19 +362,21 @@
                             android:src="@drawable/square" />
                     </RelativeLayout>
                 </androidx.cardview.widget.CardView>
+
                 <androidx.cardview.widget.CardView
                     android:id="@+id/popular_card"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/_5sdp"
-                    android:layout_toEndOf="@id/square_card"
                     android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_toEndOf="@id/square_card"
                     android:clickable="true"
                     android:focusable="true">
 
                     <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/_5sdp">
 
                         <ImageView
                             android:id="@+id/popular_image"
@@ -369,19 +386,21 @@
                             android:src="@drawable/popular" />
                     </RelativeLayout>
                 </androidx.cardview.widget.CardView>
+
                 <androidx.cardview.widget.CardView
                     android:id="@+id/aci_card"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/_5sdp"
-                    android:layout_toEndOf="@id/popular_card"
                     android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_toEndOf="@id/popular_card"
                     android:clickable="true"
                     android:focusable="true">
 
                     <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/_5sdp">
 
                         <ImageView
                             android:id="@+id/aci_image"
@@ -391,19 +410,21 @@
                             android:src="@drawable/aci" />
                     </RelativeLayout>
                 </androidx.cardview.widget.CardView>
+
                 <androidx.cardview.widget.CardView
                     android:id="@+id/ibnsina_card"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/_5sdp"
-                    android:layout_toEndOf="@id/aci_card"
                     android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_toEndOf="@id/aci_card"
                     android:clickable="true"
                     android:focusable="true">
 
                     <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/_5sdp">
 
                         <ImageView
                             android:id="@+id/ibnsina_image"
@@ -413,6 +434,109 @@
                             android:src="@drawable/ibnsina" />
                     </RelativeLayout>
                 </androidx.cardview.widget.CardView>
+            </RelativeLayout>
+        </HorizontalScrollView>
+
+        <HorizontalScrollView
+            android:id="@+id/functions_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/medicine_from_horizontal_view"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:scrollbars="none"
+            android:layout_centerHorizontal="true">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/functions_card"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/_5sdp"
+                    android:layout_marginStart="@dimen/_30sdp"
+                    android:clickable="true"
+                    android:focusable="true">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/_5sdp">
+
+                        <RelativeLayout
+                            android:id="@+id/all_products_layout"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="@dimen/_10sdp">
+
+                            <ImageView
+                                android:id="@+id/all_products_image"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerHorizontal="true"
+                                android:src="@drawable/all_medicines_icon" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@id/all_products_image"
+                                android:layout_centerHorizontal="true"
+                                android:layout_marginTop="@dimen/_5sdp"
+                                android:text="All Medicines" />
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:id="@+id/request_products_layout"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_toEndOf="@id/all_products_layout"
+                            android:layout_marginStart="@dimen/_10sdp"
+                            android:padding="@dimen/_10sdp">
+
+                            <ImageView
+                                android:id="@+id/request_products_image"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerHorizontal="true"
+                                android:src="@drawable/reques_product_icon" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@id/request_products_image"
+                                android:layout_centerHorizontal="true"
+                                android:layout_marginTop="@dimen/_5sdp"
+                                android:text="Request Medicine" />
+                        </RelativeLayout>
+                        <RelativeLayout
+                            android:id="@+id/favorites_layout"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_toEndOf="@id/request_products_layout"
+                            android:layout_marginStart="@dimen/_10sdp"
+                            android:padding="@dimen/_10sdp">
+
+                            <ImageView
+                                android:id="@+id/favorites_image"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerHorizontal="true"
+                                android:src="@drawable/favorites_icon" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@id/favorites_image"
+                                android:layout_centerHorizontal="true"
+                                android:layout_marginTop="@dimen/_5sdp"
+                                android:text="Favorites" />
+                        </RelativeLayout>
+                    </RelativeLayout>
+                </androidx.cardview.widget.CardView>
+
             </RelativeLayout>
         </HorizontalScrollView>
     </RelativeLayout>
