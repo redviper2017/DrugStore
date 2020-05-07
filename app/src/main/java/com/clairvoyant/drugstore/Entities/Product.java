@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey;
 
 import java.io.Serializable;
 
-@Entity(tableName = "product", indices = {@Index(value = {"genericName","brand","category","saleUnit","price","availableQty"})})
+@Entity(tableName = "product", indices = {@Index(value = "name", unique = true)})
 public class Product implements Serializable {
     @PrimaryKey(autoGenerate = true)
     private int id;
