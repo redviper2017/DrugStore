@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.clairvoyant.drugstore.Activities.AdminActivity;
+import com.clairvoyant.drugstore.Activities.BrandProductActivity;
 import com.clairvoyant.drugstore.Activities.PharmaProductActivity;
 import com.clairvoyant.drugstore.Database.DatabaseClient;
 import com.clairvoyant.drugstore.Entities.Product;
@@ -30,7 +31,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     private static final String TAG = "HomeFragment";
     List<Product> productList;
 
-    private CardView allPharmaProducts;
+    private CardView allPharmaProducts, aciProducts;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -47,9 +48,11 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
         allPharmaProducts = view.findViewById(R.id.all_pharma_products_category_card);
+        aciProducts = view.findViewById(R.id.aci_card);
 
 
         allPharmaProducts.setOnClickListener(this);
+        aciProducts.setOnClickListener(this);
 
         // Inflate the layout for this fragment
         return view;
@@ -84,13 +87,16 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
+        Intent intent = null;
         switch (v.getId()){
             case R.id.all_pharma_products_category_card:
-//                getProducts();
-                Toast.makeText(getContext(),"clicked!",Toast.LENGTH_LONG).show();
-                Intent intent = new Intent(getActivity(), PharmaProductActivity.class);
-                startActivity(intent);
+                intent = new Intent(getActivity(), PharmaProductActivity.class);
+                break;
+            case R.id.aci_card:
+                intent = new Intent(getActivity(), BrandProductActivity.class);
+                intent.putExtra("brand","aci");
                 break;
         }
+        startActivity(intent);
     }
 }
