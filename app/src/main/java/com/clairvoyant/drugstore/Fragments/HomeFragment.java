@@ -31,7 +31,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     private static final String TAG = "HomeFragment";
     List<Product> productList;
 
-    private CardView allPharmaProducts, aciProducts;
+    private CardView allPharmaProducts, aciProducts, acmeProducts, ibnsinaProducts, popularProducts, radiantProducts, squareProducts;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -49,40 +49,22 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
         allPharmaProducts = view.findViewById(R.id.all_pharma_products_category_card);
         aciProducts = view.findViewById(R.id.aci_card);
-
+        acmeProducts = view.findViewById(R.id.acme_card);
+        ibnsinaProducts = view.findViewById(R.id.ibnsina_card);
+        popularProducts = view.findViewById(R.id.popular_card);
+        radiantProducts = view.findViewById(R.id.radiant_card);
+        squareProducts = view.findViewById(R.id.square_card);
 
         allPharmaProducts.setOnClickListener(this);
         aciProducts.setOnClickListener(this);
+        acmeProducts.setOnClickListener(this);
+        ibnsinaProducts.setOnClickListener(this);
+        popularProducts.setOnClickListener(this);
+        radiantProducts.setOnClickListener(this);
+        squareProducts.setOnClickListener(this);
 
         // Inflate the layout for this fragment
         return view;
-    }
-
-    private void getProducts() {
-        productList = DatabaseClient.getInstance(getContext()).getAppDatabase()
-                .productDao().getAll();
-        Log.d(TAG,"inside getProducts() = "+"YES");
-        class GetProducts extends AsyncTask<Void, Void, List<Product>> {
-
-            @Override
-            protected List<Product> doInBackground(Void... voids) {
-                productList =  DatabaseClient
-                        .getInstance(Objects.requireNonNull(getActivity()).getApplicationContext())
-                        .getAppDatabase()
-                        .productDao()
-                        .getAll();
-                Log.d(TAG,"number of products inside HomeFragment = "+productList.size());
-                return productList;
-            }
-
-            @Override
-            protected void onPostExecute(List<Product> products) {
-                super.onPostExecute(products);
-            }
-        }
-
-        GetProducts gt = new GetProducts();
-        gt.execute();
     }
 
     @Override
@@ -95,6 +77,26 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             case R.id.aci_card:
                 intent = new Intent(getActivity(), BrandProductActivity.class);
                 intent.putExtra("brand","aci");
+                break;
+            case R.id.acme_card:
+                intent = new Intent(getActivity(), BrandProductActivity.class);
+                intent.putExtra("brand","acme");
+                break;
+            case R.id.ibnsina_card:
+                intent = new Intent(getActivity(), BrandProductActivity.class);
+                intent.putExtra("brand","ibn sina");
+                break;
+            case R.id.popular_card:
+                intent = new Intent(getActivity(), BrandProductActivity.class);
+                intent.putExtra("brand","popular");
+                break;
+            case R.id.radiant_card:
+                intent = new Intent(getActivity(), BrandProductActivity.class);
+                intent.putExtra("brand","radiant");
+                break;
+            case R.id.square_card:
+                intent = new Intent(getActivity(), BrandProductActivity.class);
+                intent.putExtra("brand","square");
                 break;
         }
         startActivity(intent);
