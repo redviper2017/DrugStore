@@ -32,11 +32,18 @@
                 android:text="lorem ipsum"
                 android:textSize="@dimen/_14ssp"
                 android:textColor="@color/colorAccent"/>
+            <TextView
+                android:id="@+id/product_generic_name_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/product_name_text"
+                android:text="Paracetamol"
+                android:textSize="@dimen/_12ssp" />
             <ImageView
                 android:id="@+id/taka_icon_image_view"
                 android:layout_width="@dimen/_15sdp"
                 android:layout_height="@dimen/_15sdp"
-                android:layout_below="@id/product_name_text"
+                android:layout_below="@id/product_generic_name_text"
                 android:layout_marginTop="@dimen/_5sdp"
                 android:src="@drawable/taka_icon"/>
 
@@ -44,7 +51,7 @@
                 android:id="@+id/product_price_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignTop="@id/taka_icon_image_view"
+                android:layout_alignTop="@+id/taka_icon_image_view"
                 android:layout_toEndOf="@id/taka_icon_image_view"
                 android:text="46.00 "
                 android:textSize="@dimen/_12ssp" />

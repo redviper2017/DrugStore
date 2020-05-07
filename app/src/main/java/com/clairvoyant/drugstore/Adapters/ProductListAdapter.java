@@ -45,20 +45,23 @@ public class ProductListAdapter extends RecyclerView.Adapter{
 
     private class ProductListHolder extends RecyclerView.ViewHolder{
 
-        private TextView nameText, priceText;
+        private TextView nameText, genericNameText, priceText;
 
         public ProductListHolder(@NonNull View itemView) {
             super(itemView);
 
             nameText = itemView.findViewById(R.id.product_name_text);
+            genericNameText = itemView.findViewById(R.id.product_generic_name_text);
             priceText = itemView.findViewById(R.id.product_price_text);
         }
 
         void bind(Product product){
             String name = product.getName();
+            String genericName = product.getGenericName();
             String price = String.valueOf(product.getPrice());
 
             nameText.setText(name);
+            genericNameText.setText(genericName);
             priceText.setText(price);
         }
     }
