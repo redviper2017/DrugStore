@@ -14,6 +14,8 @@ import com.clairvoyant.drugstore.Entities.Product;
 import com.clairvoyant.drugstore.R;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class PharmaProductActivity extends AppCompatActivity {
@@ -44,6 +46,14 @@ public class PharmaProductActivity extends AppCompatActivity {
             @Override
             protected void onPostExecute(List<Product> products) {
                 super.onPostExecute(products);
+
+                Collections.sort(products, new Comparator<Product>() {
+                    @Override
+                    public int compare(Product o1, Product o2) {
+                        return o1.getName().toLowerCase().compareTo(o2.getName().toLowerCase());
+                    }
+                });
+
                 ProductListAdapter adapter = new ProductListAdapter(getApplicationContext(), (ArrayList<Product>) products);
                 adapter.notifyDataSetChanged();
 
