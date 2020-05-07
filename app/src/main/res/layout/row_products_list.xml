@@ -6,8 +6,7 @@
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/_5sdp"
-        app:cardBackgroundColor="@color/colorIcons">
+        android:layout_margin="@dimen/_5sdp">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -19,7 +18,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:src="@drawable/ic_medicine_placeholder_icon"/>
+            android:src="@drawable/medicine_icon"/>
         <RelativeLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -30,7 +29,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="lorem ipsum"
-                android:textSize="@dimen/_14ssp"
+                android:textSize="@dimen/_12ssp"
                 android:textColor="@color/colorAccent"/>
             <TextView
                 android:id="@+id/product_generic_name_text"
@@ -38,7 +37,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/product_name_text"
                 android:text="Paracetamol"
-                android:textSize="@dimen/_12ssp" />
+                android:textSize="@dimen/_11ssp" />
             <ImageView
                 android:id="@+id/taka_icon_image_view"
                 android:layout_width="@dimen/_15sdp"

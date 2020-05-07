@@ -60,8 +60,8 @@ public class ProductListAdapter extends RecyclerView.Adapter{
             String genericName = product.getGenericName();
             String price = String.valueOf(product.getPrice());
 
-            nameText.setText(name);
-            genericNameText.setText(genericName);
+            nameText.setText(name.toUpperCase());
+            genericNameText.setText(genericName.toUpperCase());
             priceText.setText(price);
         }
     }
