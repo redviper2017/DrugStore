@@ -138,13 +138,14 @@ public class AdminActivity extends AppCompatActivity implements View.OnClickList
                 // read the data
                 MedicineData data = new MedicineData();
                 data.setName(tokens[0]);
-                data.setCode(tokens[1]);
-                data.setBrand(tokens[2]);
-                data.setCategory(tokens[3]);
-                data.setSaleUnit(tokens[4]);
-                data.setCost(Double.parseDouble(tokens[5]));
-                data.setPrice(Double.parseDouble(tokens[6]));
-                data.setAvailableQty(Integer.parseInt(tokens[7]));
+                data.setGenericName(tokens[1]);
+                data.setCode(tokens[2]);
+                data.setBrand(tokens[3]);
+                data.setCategory(tokens[4]);
+                data.setSaleUnit(tokens[5]);
+                data.setCost(Double.parseDouble(tokens[6]));
+                data.setPrice(Double.parseDouble(tokens[7]));
+                data.setAvailableQty(Integer.parseInt(tokens[8]));
                 medicineDataList.add(data);
                 Log.d("MainActivity", "just created: " + data);
             }
@@ -164,6 +165,7 @@ public class AdminActivity extends AppCompatActivity implements View.OnClickList
         for (int i=0; i<medicineDataList.size(); i++){
             Map<String, Object> product = new HashMap<>();
             product.put("name", medicineDataList.get(i).getName());
+            product.put("genericName", medicineDataList.get(i).getGenericName());
             product.put("code", medicineDataList.get(i).getCode());
             product.put("brand", medicineDataList.get(i).getBrand());
             product.put("category", medicineDataList.get(i).getCategory());

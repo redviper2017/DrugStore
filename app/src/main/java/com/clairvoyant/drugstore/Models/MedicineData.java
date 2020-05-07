@@ -4,12 +4,13 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 public class MedicineData implements Parcelable{
-    private String name, code, brand, category, saleUnit;
+    private String name, genericName, code, brand, category, saleUnit;
     private double cost, price;
     private int availableQty;
 
     public MedicineData(Parcel in) {
         name = in.readString();
+        genericName = in.readString();
         code = in.readString();
         brand = in.readString();
         category = in.readString();
@@ -41,6 +42,14 @@ public class MedicineData implements Parcelable{
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getGenericName() {
+        return genericName;
+    }
+
+    public void setGenericName(String genericName) {
+        this.genericName = genericName;
     }
 
     public String getCode() {
@@ -103,6 +112,7 @@ public class MedicineData implements Parcelable{
     public String toString() {
         return "MedicineData{" +
                 "name='" + name + '\'' +
+                "genericName='" + genericName + '\'' +
                 ", code='" + code + '\'' +
                 ", brand='" + brand + '\'' +
                 ", category='" + category + '\'' +
@@ -121,6 +131,7 @@ public class MedicineData implements Parcelable{
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(name);
+        dest.writeString(genericName);
         dest.writeString(code);
         dest.writeString(brand);
         dest.writeString(category);
