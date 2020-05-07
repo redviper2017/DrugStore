@@ -30,14 +30,15 @@
                 android:layout_height="wrap_content"
                 android:text="lorem ipsum"
                 android:textSize="@dimen/_12ssp"
-                android:textColor="@color/colorAccent"/>
+                android:textColor="@color/colorPrimaryDark"/>
             <TextView
                 android:id="@+id/product_generic_name_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/product_name_text"
                 android:text="Paracetamol"
-                android:textSize="@dimen/_11ssp" />
+                android:textSize="@dimen/_11ssp"
+                android:textColor="@color/colorPrimary"/>
             <ImageView
                 android:id="@+id/taka_icon_image_view"
                 android:layout_width="@dimen/_15sdp"

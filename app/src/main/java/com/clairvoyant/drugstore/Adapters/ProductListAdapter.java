@@ -61,7 +61,7 @@ public class ProductListAdapter extends RecyclerView.Adapter{
             String price = String.valueOf(product.getPrice());
 
             nameText.setText(name.toUpperCase());
-            genericNameText.setText(genericName.toUpperCase());
+            genericNameText.setText(genericName.toLowerCase());
             priceText.setText(price);
         }
     }
