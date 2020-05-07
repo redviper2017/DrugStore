@@ -1,5 +1,6 @@
 package com.clairvoyant.drugstore.Fragments;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
@@ -12,6 +13,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.clairvoyant.drugstore.Activities.AdminActivity;
+import com.clairvoyant.drugstore.Activities.PharmaProductActivity;
 import com.clairvoyant.drugstore.Database.DatabaseClient;
 import com.clairvoyant.drugstore.Entities.Product;
 import com.clairvoyant.drugstore.R;
@@ -85,6 +88,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             case R.id.all_pharma_products_category_card:
 //                getProducts();
                 Toast.makeText(getContext(),"clicked!",Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(getActivity(), PharmaProductActivity.class);
+                startActivity(intent);
                 break;
         }
     }
