@@ -1,6 +1,9 @@
 package com.clairvoyant.drugstore.Activities;
 
+import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -11,10 +14,19 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 
+import com.clairvoyant.drugstore.Database.DatabaseClient;
+import com.clairvoyant.drugstore.Entities.Product;
 import com.clairvoyant.drugstore.Fragments.HomeFragment;
+import com.clairvoyant.drugstore.Models.MedicineData;
 import com.clairvoyant.drugstore.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
+import java.util.ArrayList;
 import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
@@ -23,13 +35,21 @@ public class MainActivity extends AppCompatActivity {
     private ActionBarDrawerToggle actionBarDrawerToggle;
     private NavigationView navigationView;
     private FrameLayout fragmentHolder;
+    private static final String TAG = "MainActivity";
 
+    private ArrayList<MedicineData> productListFromServer = new ArrayList<>();
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if(actionBarDrawerToggle.onOptionsItemSelected(item))
             return true;
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        fetchDataFromFirestore();
     }
 
     @Override
@@ -81,5 +101,62 @@ public class MainActivity extends AppCompatActivity {
         }
         getSupportFragmentManager().beginTransaction()
                 .add(R.id.fragment_holder_main, fragment).commit();
+    }
+
+    private void fetchDataFromFirestore(){
+        // Access a Cloud Firestore instance from your Activity
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("products")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : Objects.requireNonNull(task.getResult())) {
+                                Log.d(TAG, "document = " + " => " + document.getData());
+
+                                MedicineData medicineData;
+                                medicineData  = document.toObject(MedicineData.class);
+                                Log.d(TAG,"medicine = "+medicineData);
+                                productListFromServer.add(medicineData);
+                                storeProductsToLocalDB(medicineData);
+                            }
+                        } else {
+                            Log.w(TAG, "Error getting documents.", task.getException());
+                        }
+                        Log.d(TAG,"number of products fetched in onStart() of Main Activity = " + productListFromServer.size());
+                    }
+                });
+    }
+
+    private void storeProductsToLocalDB(final MedicineData medicineData){
+        class SaveProduct extends AsyncTask<Void, Void, Void>{
+            @Override
+            protected Void doInBackground(Void... voids) {
+                Product product = new Product();
+                product.setName(medicineData.getName());
+                product.setGenericName(medicineData.getGenericName());
+                product.setBrand(medicineData.getBrand());
+                product.setCategory(medicineData.getCategory());
+                product.setSaleUnit(medicineData.getSaleUnit());
+                product.setPrice(String.valueOf(medicineData.getPrice()));
+                product.setAvailableQty(String.valueOf(medicineData.getAvailableQty()));
+
+                //adding to database
+                DatabaseClient.getInstance(getApplicationContext()).getAppDatabase()
+                        .productDao()
+                        .insert(product);
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(Void aVoid) {
+                super.onPostExecute(aVoid);
+                Log.d(TAG,"products saved to local db = "+"successfully");
+            }
+        }
+
+        SaveProduct saveProduct = new SaveProduct();
+        saveProduct.execute();
     }
 }

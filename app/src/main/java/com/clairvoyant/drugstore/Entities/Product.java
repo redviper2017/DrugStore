@@ -20,8 +20,6 @@ public class Product implements Serializable {
     private String category;
     @ColumnInfo(name = "saleUnit")
     private String saleUnit;
-    @ColumnInfo(name = "cost")
-    private String cost;
     @ColumnInfo(name = "price")
     private String price;
     @ColumnInfo(name = "availableQty")
@@ -73,14 +71,6 @@ public class Product implements Serializable {
 
     public void setSaleUnit(String saleUnit) {
         this.saleUnit = saleUnit;
-    }
-
-    public String getCost() {
-        return cost;
-    }
-
-    public void setCost(String cost) {
-        this.cost = cost;
     }
 
     public String getPrice() {

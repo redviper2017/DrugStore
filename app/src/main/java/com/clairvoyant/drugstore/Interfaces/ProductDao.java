@@ -1,5 +1,6 @@
 package com.clairvoyant.drugstore.Interfaces;
 
+import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
@@ -9,17 +10,17 @@ import com.clairvoyant.drugstore.Entities.Product;
 import com.google.android.gms.tasks.Task;
 
 import java.util.List;
-
+@Dao
 public interface ProductDao {
     @Query("SELECT * FROM product")
     List<Product> getAll();
 
     @Insert
-    void insert(Task task);
+    void insert(Product product);
 
     @Delete
-    void delete(Task task);
+    void delete(Product product);
 
     @Update
-    void update(Task task);
+    void update(Product product);
 }
