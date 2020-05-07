@@ -2,11 +2,12 @@ package com.clairvoyant.drugstore.Entities;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
 import java.io.Serializable;
 
-@Entity(tableName = "product")
+@Entity(tableName = "product", indices = {@Index(value = {"genericName","brand","category","saleUnit","price","availableQty"})})
 public class Product implements Serializable {
     @PrimaryKey(autoGenerate = true)
     private int id;

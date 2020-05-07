@@ -3,6 +3,7 @@ package com.clairvoyant.drugstore.Interfaces;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
+import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import androidx.room.Update;
 
@@ -15,7 +16,7 @@ public interface ProductDao {
     @Query("SELECT * FROM product")
     List<Product> getAll();
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(Product product);
 
     @Delete
