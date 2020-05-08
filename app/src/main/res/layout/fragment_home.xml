@@ -44,7 +44,8 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="@dimen/_5sdp"
                         android:clickable="true"
-                        android:focusable="true">
+                        android:focusable="true"
+                        android:foreground="?android:attr/selectableItemBackground">
 
                         <RelativeLayout
                             android:layout_width="wrap_content"
@@ -76,7 +77,8 @@
                         android:layout_marginStart="@dimen/_10sdp"
                         android:layout_toEndOf="@+id/capcule_card"
                         android:clickable="true"
-                        android:focusable="true">
+                        android:focusable="true"
+                        android:foreground="?android:attr/selectableItemBackground">
 
                         <RelativeLayout
                             android:layout_width="wrap_content"
@@ -108,7 +110,8 @@
                         android:layout_marginStart="@dimen/_10sdp"
                         android:layout_toEndOf="@+id/injection_card"
                         android:clickable="true"
-                        android:focusable="true">
+                        android:focusable="true"
+                        android:foreground="?android:attr/selectableItemBackground">
 
                         <RelativeLayout
                             android:layout_width="wrap_content"
@@ -140,7 +143,8 @@
                         android:layout_marginStart="@dimen/_10sdp"
                         android:layout_toEndOf="@+id/syrup_card"
                         android:clickable="true"
-                        android:focusable="true">
+                        android:focusable="true"
+                        android:foreground="?android:attr/selectableItemBackground">
 
                         <RelativeLayout
                             android:layout_width="wrap_content"
@@ -172,7 +176,8 @@
                         android:layout_marginStart="@dimen/_10sdp"
                         android:layout_toEndOf="@+id/drop_card"
                         android:clickable="true"
-                        android:focusable="true">
+                        android:focusable="true"
+                        android:foreground="?android:attr/selectableItemBackground">
 
                         <RelativeLayout
                             android:layout_width="wrap_content"
@@ -230,7 +235,8 @@
                         android:layout_margin="@dimen/_5sdp"
                         android:layout_marginStart="@dimen/_10sdp"
                         android:clickable="true"
-                        android:focusable="true">
+                        android:focusable="true"
+                        android:foreground="?android:attr/selectableItemBackground">
 
                         <RelativeLayout
                             android:layout_width="match_parent"
@@ -255,7 +261,8 @@
                         android:layout_marginStart="@dimen/_10sdp"
                         android:layout_toEndOf="@id/cold_card"
                         android:clickable="true"
-                        android:focusable="true">
+                        android:focusable="true"
+                        android:foreground="?android:attr/selectableItemBackground">
 
                         <RelativeLayout
                             android:layout_width="match_parent"
@@ -280,7 +287,8 @@
                         android:layout_marginStart="@dimen/_10sdp"
                         android:layout_toEndOf="@id/diabetes_care_card"
                         android:clickable="true"
-                        android:focusable="true">
+                        android:focusable="true"
+                        android:foreground="?android:attr/selectableItemBackground">
 
                         <RelativeLayout
                             android:layout_width="match_parent"
@@ -305,7 +313,8 @@
                         android:layout_marginStart="@dimen/_10sdp"
                         android:layout_toEndOf="@id/child_card"
                         android:clickable="true"
-                        android:focusable="true">
+                        android:focusable="true"
+                        android:foreground="?android:attr/selectableItemBackground">
 
                         <RelativeLayout
                             android:layout_width="match_parent"
@@ -330,7 +339,8 @@
                         android:layout_marginStart="@dimen/_10sdp"
                         android:layout_toEndOf="@id/eye_care_card"
                         android:clickable="true"
-                        android:focusable="true">
+                        android:focusable="true"
+                        android:foreground="?android:attr/selectableItemBackground">
 
                         <RelativeLayout
                             android:layout_width="match_parent"
@@ -382,7 +392,8 @@
                         android:layout_marginStart="@dimen/_10sdp"
                         android:layout_toEndOf="@id/radiant_card"
                         android:clickable="true"
-                        android:focusable="true">
+                        android:focusable="true"
+                        android:foreground="?android:attr/selectableItemBackground">
 
                         <RelativeLayout
                             android:layout_width="match_parent"
@@ -406,7 +417,8 @@
                         android:layout_marginStart="@dimen/_10sdp"
                         android:layout_toEndOf="@id/ibnsina_card"
                         android:clickable="true"
-                        android:focusable="true">
+                        android:focusable="true"
+                        android:foreground="?android:attr/selectableItemBackground">
 
                         <RelativeLayout
                             android:layout_width="match_parent"
@@ -429,7 +441,8 @@
                         android:layout_margin="@dimen/_5sdp"
                         android:layout_marginStart="@dimen/_10sdp"
                         android:clickable="true"
-                        android:focusable="true">
+                        android:focusable="true"
+                        android:foreground="?android:attr/selectableItemBackground">
 
                         <RelativeLayout
                             android:layout_width="match_parent"
@@ -453,7 +466,8 @@
                         android:layout_marginStart="@dimen/_10sdp"
                         android:layout_toEndOf="@id/beximco_card"
                         android:clickable="true"
-                        android:focusable="true">
+                        android:focusable="true"
+                        android:foreground="?android:attr/selectableItemBackground">
 
                         <RelativeLayout
                             android:layout_width="match_parent"
@@ -477,7 +491,8 @@
                         android:layout_marginStart="@dimen/_10sdp"
                         android:layout_toEndOf="@id/popular_card"
                         android:clickable="true"
-                        android:focusable="true">
+                        android:focusable="true"
+                        android:foreground="?android:attr/selectableItemBackground">
 
                         <RelativeLayout
                             android:layout_width="match_parent"
@@ -501,7 +516,8 @@
                         android:layout_marginStart="@dimen/_10sdp"
                         android:layout_toEndOf="@id/aci_card"
                         android:clickable="true"
-                        android:focusable="true">
+                        android:focusable="true"
+                        android:foreground="?android:attr/selectableItemBackground">
 
                         <RelativeLayout
                             android:layout_width="match_parent"
@@ -525,7 +541,8 @@
                         android:layout_marginStart="@dimen/_10sdp"
                         android:layout_toEndOf="@id/acme_card"
                         android:clickable="true"
-                        android:focusable="true">
+                        android:focusable="true"
+                        android:foreground="?android:attr/selectableItemBackground">
 
                         <RelativeLayout
                             android:layout_width="match_parent"
@@ -569,7 +586,8 @@
                     android:layout_margin="@dimen/_5sdp"
                     android:layout_weight="1"
                     android:clickable="true"
-                    android:focusable="true">
+                    android:focusable="true"
+                    android:foreground="?android:attr/selectableItemBackground">
 
                     <RelativeLayout
                         android:layout_width="wrap_content"
@@ -599,7 +617,10 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/_5sdp"
-                    android:layout_weight="1">
+                    android:layout_weight="1"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?android:attr/selectableItemBackground">
 
                     <RelativeLayout
                         android:layout_width="wrap_content"
@@ -642,7 +663,10 @@
                         android:id="@+id/request_products_layout"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:padding="@dimen/_10sdp">
+                        android:padding="@dimen/_10sdp"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:foreground="?android:attr/selectableItemBackground">
 
                         <ImageView
                             android:id="@+id/request_products_image"
@@ -666,7 +690,10 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/_10sdp"
                         android:layout_toEndOf="@id/request_products_layout"
-                        android:padding="@dimen/_10sdp">
+                        android:padding="@dimen/_10sdp"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:foreground="?android:attr/selectableItemBackground">
 
                         <ImageView
                             android:id="@+id/favorites_image"
@@ -690,7 +717,10 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/_10sdp"
                         android:layout_toEndOf="@id/favorites_layout"
-                        android:padding="@dimen/_10sdp">
+                        android:padding="@dimen/_10sdp"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:foreground="?android:attr/selectableItemBackground">
 
                         <ImageView
                             android:id="@+id/points_image"
@@ -718,7 +748,9 @@
                             android:id="@+id/discounts_offers_layout"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:foreground="?android:attr/selectableItemBackground"
                             android:padding="@dimen/_10sdp">
 
                             <ImageView
@@ -743,7 +775,10 @@
                             android:layout_height="wrap_content"
                             android:layout_alignTop="@id/discounts_offers_layout"
                             android:layout_toEndOf="@+id/discounts_offers_layout"
-                            android:padding="@dimen/_10sdp">
+                            android:padding="@dimen/_10sdp"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:foreground="?android:attr/selectableItemBackground">
 
                             <ImageView
                                 android:id="@+id/exclusive_offers_image"
