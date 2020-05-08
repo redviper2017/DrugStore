@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Objects;
 
 public class BrandProductActivity extends AppCompatActivity {
 
@@ -33,6 +34,9 @@ public class BrandProductActivity extends AppCompatActivity {
         setContentView(R.layout.product_list_layout);
 
         brand = getIntent().getStringExtra("brand");
+
+        Objects.requireNonNull(getSupportActionBar()).setTitle(brand.toUpperCase()+" Products");
+
         Log.d(TAG,"brand name in BrandProductActivity = "+brand);
 
         recyclerView = findViewById(R.id.product_list_layout_recyclerview);

@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Objects;
 
 public class PharmaProductActivity extends AppCompatActivity {
 
@@ -26,6 +27,9 @@ public class PharmaProductActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.product_list_layout);
+
+        Objects.requireNonNull(getSupportActionBar()).setTitle("Pharma Products:");
+
         recyclerView = findViewById(R.id.product_list_layout_recyclerview);
         getProducts();
     }

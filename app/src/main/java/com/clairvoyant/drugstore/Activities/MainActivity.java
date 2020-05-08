@@ -64,6 +64,8 @@ public class MainActivity extends AppCompatActivity {
         navigationView = findViewById(R.id.nav_view);
         fragmentHolder = findViewById(R.id.fragment_holder_main);
 
+        Objects.requireNonNull(getSupportActionBar()).setTitle("Home");
+
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.syncState();
 
