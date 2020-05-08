@@ -31,7 +31,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     private static final String TAG = "HomeFragment";
     List<Product> productList;
 
-    private CardView allPharmaProducts, aciProducts, acmeProducts, ibnsinaProducts, popularProducts, radiantProducts, squareProducts;
+    private CardView allPharmaProducts, aciProducts, acmeProducts, beximcoProducts, ibnsinaProducts, popularProducts, radiantProducts, squareProducts;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -50,6 +50,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         allPharmaProducts = view.findViewById(R.id.all_pharma_products_category_card);
         aciProducts = view.findViewById(R.id.aci_card);
         acmeProducts = view.findViewById(R.id.acme_card);
+        beximcoProducts = view.findViewById(R.id.beximco_card);
         ibnsinaProducts = view.findViewById(R.id.ibnsina_card);
         popularProducts = view.findViewById(R.id.popular_card);
         radiantProducts = view.findViewById(R.id.radiant_card);
@@ -58,6 +59,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         allPharmaProducts.setOnClickListener(this);
         aciProducts.setOnClickListener(this);
         acmeProducts.setOnClickListener(this);
+        beximcoProducts.setOnClickListener(this);
         ibnsinaProducts.setOnClickListener(this);
         popularProducts.setOnClickListener(this);
         radiantProducts.setOnClickListener(this);
@@ -97,6 +99,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             case R.id.square_card:
                 intent = new Intent(getActivity(), BrandProductActivity.class);
                 intent.putExtra("brand","square");
+                break;
+            case R.id.beximco_card:
+                intent = new Intent(getActivity(), BrandProductActivity.class);
+                intent.putExtra("brand","beximco");
                 break;
         }
         startActivity(intent);

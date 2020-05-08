@@ -451,7 +451,7 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="@dimen/_5sdp"
                         android:layout_marginStart="@dimen/_10sdp"
-                        android:layout_toEndOf="@id/acme_card"
+                        android:layout_toEndOf="@id/beximco_card"
                         android:clickable="true"
                         android:focusable="true">
 
@@ -514,6 +514,30 @@
                                 android:layout_height="@dimen/_50sdp"
                                 android:layout_centerHorizontal="true"
                                 android:src="@drawable/acme" />
+                        </RelativeLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/beximco_card"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/_5sdp"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_toEndOf="@id/acme_card"
+                        android:clickable="true"
+                        android:focusable="true">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="@dimen/_5sdp">
+
+                            <ImageView
+                                android:id="@+id/beximco_image"
+                                android:layout_width="@dimen/_100sdp"
+                                android:layout_height="@dimen/_50sdp"
+                                android:layout_centerHorizontal="true"
+                                android:src="@drawable/beximco" />
                         </RelativeLayout>
                     </androidx.cardview.widget.CardView>
                 </RelativeLayout>
