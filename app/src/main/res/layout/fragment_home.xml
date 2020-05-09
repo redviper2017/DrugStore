@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Fragments.HomeFragment">
 
     <androidx.core.widget.NestedScrollView
@@ -19,19 +20,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_10sdp"
-                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_10sdp"
                 android:layout_marginEnd="@dimen/_10sdp"
                 android:text="Medicine type:"
                 android:textColor="@color/colorPrimaryDark"
-                android:textSize="@dimen/_14ssp" />
+                android:textSize="@dimen/_12ssp" />
 
             <HorizontalScrollView
                 android:id="@+id/medicine_type_horizontal_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/choose_medicine_type_text"
-                android:layout_marginStart="@dimen/_5sdp"
-                android:layout_marginEnd="@dimen/_5sdp"
                 android:scrollbars="none">
 
                 <RelativeLayout
@@ -45,6 +44,7 @@
                         android:layout_margin="@dimen/_5sdp"
                         android:clickable="true"
                         android:focusable="true"
+                        app:cardElevation="@dimen/_1sdp"
                         android:foreground="?android:attr/selectableItemBackground">
 
                         <RelativeLayout
@@ -78,6 +78,7 @@
                         android:layout_toEndOf="@+id/capcule_card"
                         android:clickable="true"
                         android:focusable="true"
+                        app:cardElevation="@dimen/_1sdp"
                         android:foreground="?android:attr/selectableItemBackground">
 
                         <RelativeLayout
@@ -111,6 +112,7 @@
                         android:layout_toEndOf="@+id/injection_card"
                         android:clickable="true"
                         android:focusable="true"
+                        app:cardElevation="@dimen/_1sdp"
                         android:foreground="?android:attr/selectableItemBackground">
 
                         <RelativeLayout
@@ -144,6 +146,7 @@
                         android:layout_toEndOf="@+id/syrup_card"
                         android:clickable="true"
                         android:focusable="true"
+                        app:cardElevation="@dimen/_1sdp"
                         android:foreground="?android:attr/selectableItemBackground">
 
                         <RelativeLayout
@@ -177,6 +180,7 @@
                         android:layout_toEndOf="@+id/drop_card"
                         android:clickable="true"
                         android:focusable="true"
+                        app:cardElevation="@dimen/_1sdp"
                         android:foreground="?android:attr/selectableItemBackground">
 
                         <RelativeLayout
@@ -213,15 +217,13 @@
                 android:layout_marginEnd="@dimen/_10sdp"
                 android:text="Medicine for:"
                 android:textColor="@color/colorPrimaryDark"
-                android:textSize="@dimen/_14ssp" />
+                android:textSize="@dimen/_12ssp" />
 
             <HorizontalScrollView
                 android:id="@+id/medicine_for_horizontal_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/choose_medicine_for_text"
-                android:layout_marginStart="@dimen/_5sdp"
-                android:layout_marginEnd="@dimen/_5sdp"
                 android:scrollbars="none">
 
                 <RelativeLayout
@@ -236,6 +238,7 @@
                         android:layout_marginStart="@dimen/_10sdp"
                         android:clickable="true"
                         android:focusable="true"
+                        app:cardElevation="@dimen/_1sdp"
                         android:foreground="?android:attr/selectableItemBackground">
 
                         <RelativeLayout
@@ -262,6 +265,7 @@
                         android:layout_toEndOf="@id/cold_card"
                         android:clickable="true"
                         android:focusable="true"
+                        app:cardElevation="@dimen/_1sdp"
                         android:foreground="?android:attr/selectableItemBackground">
 
                         <RelativeLayout
@@ -288,6 +292,7 @@
                         android:layout_toEndOf="@id/diabetes_care_card"
                         android:clickable="true"
                         android:focusable="true"
+                        app:cardElevation="@dimen/_1sdp"
                         android:foreground="?android:attr/selectableItemBackground">
 
                         <RelativeLayout
@@ -314,6 +319,7 @@
                         android:layout_toEndOf="@id/child_card"
                         android:clickable="true"
                         android:focusable="true"
+                        app:cardElevation="@dimen/_1sdp"
                         android:foreground="?android:attr/selectableItemBackground">
 
                         <RelativeLayout
@@ -340,6 +346,7 @@
                         android:layout_toEndOf="@id/eye_care_card"
                         android:clickable="true"
                         android:focusable="true"
+                        app:cardElevation="@dimen/_1sdp"
                         android:foreground="?android:attr/selectableItemBackground">
 
                         <RelativeLayout
@@ -369,15 +376,13 @@
                 android:layout_marginEnd="@dimen/_10sdp"
                 android:text="Medicine from:"
                 android:textColor="@color/colorPrimaryDark"
-                android:textSize="@dimen/_14ssp" />
+                android:textSize="@dimen/_12ssp" />
 
             <HorizontalScrollView
                 android:id="@+id/medicine_from_horizontal_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/choose_brand_text"
-                android:layout_marginStart="@dimen/_5sdp"
-                android:layout_marginEnd="@dimen/_5sdp"
                 android:scrollbars="none">
 
                 <RelativeLayout
@@ -393,6 +398,7 @@
                         android:layout_toEndOf="@id/radiant_card"
                         android:clickable="true"
                         android:focusable="true"
+                        app:cardElevation="@dimen/_1sdp"
                         android:foreground="?android:attr/selectableItemBackground">
 
                         <RelativeLayout
@@ -418,6 +424,7 @@
                         android:layout_toEndOf="@id/ibnsina_card"
                         android:clickable="true"
                         android:focusable="true"
+                        app:cardElevation="@dimen/_1sdp"
                         android:foreground="?android:attr/selectableItemBackground">
 
                         <RelativeLayout
@@ -442,6 +449,7 @@
                         android:layout_marginStart="@dimen/_10sdp"
                         android:clickable="true"
                         android:focusable="true"
+                        app:cardElevation="@dimen/_1sdp"
                         android:foreground="?android:attr/selectableItemBackground">
 
                         <RelativeLayout
@@ -467,6 +475,7 @@
                         android:layout_toEndOf="@id/beximco_card"
                         android:clickable="true"
                         android:focusable="true"
+                        app:cardElevation="@dimen/_1sdp"
                         android:foreground="?android:attr/selectableItemBackground">
 
                         <RelativeLayout
@@ -492,6 +501,7 @@
                         android:layout_toEndOf="@id/popular_card"
                         android:clickable="true"
                         android:focusable="true"
+                        app:cardElevation="@dimen/_1sdp"
                         android:foreground="?android:attr/selectableItemBackground">
 
                         <RelativeLayout
@@ -517,6 +527,7 @@
                         android:layout_toEndOf="@id/aci_card"
                         android:clickable="true"
                         android:focusable="true"
+                        app:cardElevation="@dimen/_1sdp"
                         android:foreground="?android:attr/selectableItemBackground">
 
                         <RelativeLayout
@@ -542,6 +553,7 @@
                         android:layout_toEndOf="@id/acme_card"
                         android:clickable="true"
                         android:focusable="true"
+                        app:cardElevation="@dimen/_1sdp"
                         android:foreground="?android:attr/selectableItemBackground">
 
                         <RelativeLayout
@@ -570,14 +582,13 @@
                 android:layout_marginEnd="@dimen/_10sdp"
                 android:text="All Products:"
                 android:textColor="@color/colorPrimaryDark"
-                android:textSize="@dimen/_14ssp" />
+                android:textSize="@dimen/_12ssp" />
 
             <LinearLayout
                 android:id="@+id/all_product_category_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/all_product_category_text"
-                android:padding="@dimen/_5sdp">
+                android:layout_below="@id/all_product_category_text">
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/all_pharma_products_category_card"
@@ -587,6 +598,7 @@
                     android:layout_weight="1"
                     android:clickable="true"
                     android:focusable="true"
+                    app:cardElevation="@dimen/_1sdp"
                     android:foreground="?android:attr/selectableItemBackground">
 
                     <RelativeLayout
@@ -620,6 +632,7 @@
                     android:layout_weight="1"
                     android:clickable="true"
                     android:focusable="true"
+                    app:cardElevation="@dimen/_1sdp"
                     android:foreground="?android:attr/selectableItemBackground">
 
                     <RelativeLayout
@@ -652,9 +665,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/all_product_category_layout"
-                android:layout_marginStart="@dimen/_10sdp"
-                android:layout_marginEnd="@dimen/_10sdp"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:layout_marginEnd="@dimen/_5sdp"
                 android:layout_marginTop="@dimen/_5sdp"
+                app:cardElevation="@dimen/_1sdp"
                 android:layout_marginBottom="@dimen/_5sdp">
 
                 <RelativeLayout
