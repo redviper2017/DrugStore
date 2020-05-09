@@ -35,9 +35,9 @@ public class TypeProductActivity extends AppCompatActivity {
 
         if (Objects.requireNonNull(type).equals("Liquid")){
             Objects.requireNonNull(getSupportActionBar()).setTitle("Syrups & Suspensions");
+        }else {
+            Objects.requireNonNull(getSupportActionBar()).setTitle(type + "s");
         }
-
-        Objects.requireNonNull(getSupportActionBar()).setTitle(type+"s");
 
         recyclerView = findViewById(R.id.product_list_layout_recyclerview);
         getProducts();

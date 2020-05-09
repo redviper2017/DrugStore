@@ -19,7 +19,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_10sdp"
-                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_5sdp"
                 android:layout_marginEnd="@dimen/_10sdp"
                 android:text="Medicine type:"
                 android:textColor="@color/colorPrimaryDark"
@@ -131,7 +131,7 @@
                                 android:layout_below="@id/image_syrup"
                                 android:layout_centerHorizontal="true"
                                 android:layout_marginTop="@dimen/_5sdp"
-                                android:text="Liquid" />
+                                android:text="Syrups &amp; Suspensions" />
                         </RelativeLayout>
                     </androidx.cardview.widget.CardView>
 
@@ -209,7 +209,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/medicine_type_horizontal_view"
                 android:layout_marginStart="@dimen/_10sdp"
-                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_5sdp"
                 android:layout_marginEnd="@dimen/_10sdp"
                 android:text="Medicine for:"
                 android:textColor="@color/colorPrimaryDark"
@@ -365,7 +365,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/medicine_for_horizontal_view"
                 android:layout_marginStart="@dimen/_10sdp"
-                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_5sdp"
                 android:layout_marginEnd="@dimen/_10sdp"
                 android:text="Medicine from:"
                 android:textColor="@color/colorPrimaryDark"
@@ -566,9 +566,9 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/medicine_from_horizontal_view"
                 android:layout_marginStart="@dimen/_10sdp"
-                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_5sdp"
                 android:layout_marginEnd="@dimen/_10sdp"
-                android:text="All Prodducts:"
+                android:text="All Products:"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="@dimen/_14ssp" />
 
@@ -652,7 +652,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/all_product_category_layout"
-                android:layout_margin="@dimen/_10sdp">
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginBottom="@dimen/_5sdp">
 
                 <RelativeLayout
                     android:layout_width="wrap_content"
