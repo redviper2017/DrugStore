@@ -1,5 +1,6 @@
 package com.clairvoyant.drugstore.Activities;
 
+import android.app.assist.AssistStructure;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -8,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -39,10 +41,18 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
 
     private ArrayList<MedicineData> productListFromServer = new ArrayList<>();
+    private TextView textCartItemCount;
+    private double mCartItemCount;
+
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if(actionBarDrawerToggle.onOptionsItemSelected(item))
             return true;
+
+        switch (item.getItemId()){
+            case R.id.action_cart:
+                return true;
+        }
 
         return super.onOptionsItemSelected(item);
     }
@@ -59,6 +69,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         setFragment("Home");
+//        setupBadge();
 
         drawerLayout = findViewById(R.id.drawer_layout_main);
         actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.Open, R.string.Close);
@@ -96,6 +107,13 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.actions_menu, menu);
+
+        MenuItem menuItem = menu.findItem(R.id.action_cart);
+        View actionView = menuItem.getActionView();
+        textCartItemCount = (TextView) actionView.findViewById(R.id.cart_badge);
+
+        setupBadge();
+
         return true;
     }
 
@@ -167,5 +185,20 @@ public class MainActivity extends AppCompatActivity {
 
         SaveProduct saveProduct = new SaveProduct();
         saveProduct.execute();
+    }
+
+    private void setupBadge() {
+        if (textCartItemCount != null) {
+            if (mCartItemCount == 0) {
+                if (textCartItemCount.getVisibility() != View.GONE) {
+                    textCartItemCount.setVisibility(View.GONE);
+                }
+            } else {
+                textCartItemCount.setText(String.valueOf(Math.min(mCartItemCount, 99)));
+                if (textCartItemCount.getVisibility() != View.VISIBLE) {
+                    textCartItemCount.setVisibility(View.VISIBLE);
+                }
+            }
+        }
     }
 }
