@@ -65,7 +65,7 @@
                                 android:layout_below="@id/image_capsule"
                                 android:layout_centerHorizontal="true"
                                 android:layout_marginTop="@dimen/_5sdp"
-                                android:text="Capsule/Tablets" />
+                                android:text="Capsule &amp; Tablets" />
                         </RelativeLayout>
                     </androidx.cardview.widget.CardView>
 
