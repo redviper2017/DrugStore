@@ -83,7 +83,9 @@ public class AdminActivity extends AppCompatActivity implements View.OnClickList
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.products_card:
-                fetchDataFromFirestore();
+                Intent intent = new Intent(AdminActivity.this,ProductsActivity.class);
+                intent.putExtra("ProductType","all");
+                startActivity(intent);
                 break;
         }
     }
@@ -205,33 +207,5 @@ public class AdminActivity extends AppCompatActivity implements View.OnClickList
                         }
                     });
         }
-    }
-    private void fetchDataFromFirestore(){
-        // Access a Cloud Firestore instance from your Activity
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        db.collection("products")
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            for (QueryDocumentSnapshot document : Objects.requireNonNull(task.getResult())) {
-                                Log.d(TAG, "document = " + " => " + document.getData());
-
-                                MedicineData medicineData;
-                                medicineData  = document.toObject(MedicineData.class);
-                                Log.d(TAG,"medicine = "+medicineData);
-                                productListFromServer.add(medicineData);
-                            }
-
-                            Intent intent = new Intent(AdminActivity.this,ProductsActivity.class);
-                            Log.d(TAG,"is product list empty = "+productListFromServer);
-                            intent.putParcelableArrayListExtra("Products",productListFromServer);
-                            startActivity(intent);
-                        } else {
-                            Log.w(TAG, "Error getting documents.", task.getException());
-                        }
-                    }
-                });
     }
 }

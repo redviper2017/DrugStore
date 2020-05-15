@@ -1,28 +1,21 @@
 package com.clairvoyant.drugstore.Fragments;
 
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Toast;
-
-import com.clairvoyant.drugstore.Activities.AdminActivity;
 import com.clairvoyant.drugstore.Activities.BrandProductActivity;
 import com.clairvoyant.drugstore.Activities.PharmaProductActivity;
-import com.clairvoyant.drugstore.Activities.TypeProductActivity;
-import com.clairvoyant.drugstore.Database.DatabaseClient;
+import com.clairvoyant.drugstore.Activities.ProductsActivity;
 import com.clairvoyant.drugstore.Entities.Product;
 import com.clairvoyant.drugstore.R;
 
 import java.util.List;
-import java.util.Objects;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -88,57 +81,58 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         Intent intent = null;
         switch (v.getId()){
             case R.id.capcule_card:
-                intent = new Intent(getActivity(), TypeProductActivity.class);
-                intent.putExtra("type","Capsules and Tablet");
+                intent = new Intent(getActivity(), ProductsActivity.class);
+                intent.putExtra("ProductType","capsulesAndTablets");
                 break;
             case R.id.injection_card:
-                intent = new Intent(getActivity(), TypeProductActivity.class);
-                intent.putExtra("type","Injection");
+                intent = new Intent(getActivity(), ProductsActivity.class);
+                intent.putExtra("ProductType","injections");
                 break;
             case R.id.syrup_card:
-                intent = new Intent(getActivity(), TypeProductActivity.class);
-                intent.putExtra("type","Liquid");
+                intent = new Intent(getActivity(), ProductsActivity.class);
+                intent.putExtra("ProductType","liquids");
                 break;
             case R.id.drop_card:
-                intent = new Intent(getActivity(), TypeProductActivity.class);
-                intent.putExtra("type","Drop");
+                intent = new Intent(getActivity(), ProductsActivity.class);
+                intent.putExtra("ProductType","drops");
                 break;
             case R.id.topical_card:
-                intent = new Intent(getActivity(), TypeProductActivity.class);
-                intent.putExtra("type","Topical");
+                intent = new Intent(getActivity(), ProductsActivity.class);
+                intent.putExtra("ProductType","topicals");
                 break;
 
             case R.id.aci_card:
-                intent = new Intent(getActivity(), BrandProductActivity.class);
-                intent.putExtra("brand","aci");
+                intent = new Intent(getActivity(), ProductsActivity.class);
+                intent.putExtra("ProductType","aci");
                 break;
             case R.id.acme_card:
-                intent = new Intent(getActivity(), BrandProductActivity.class);
-                intent.putExtra("brand","acme");
+                intent = new Intent(getActivity(), ProductsActivity.class);
+                intent.putExtra("ProductType","acme");
                 break;
             case R.id.ibnsina_card:
-                intent = new Intent(getActivity(), BrandProductActivity.class);
-                intent.putExtra("brand","ibn sina");
+                intent = new Intent(getActivity(), ProductsActivity.class);
+                intent.putExtra("ProductType","ibn sina");
                 break;
             case R.id.popular_card:
-                intent = new Intent(getActivity(), BrandProductActivity.class);
-                intent.putExtra("brand","popular");
+                intent = new Intent(getActivity(), ProductsActivity.class);
+                intent.putExtra("ProductType","popular");
                 break;
             case R.id.radiant_card:
-                intent = new Intent(getActivity(), BrandProductActivity.class);
-                intent.putExtra("brand","radiant");
+                intent = new Intent(getActivity(), ProductsActivity.class);
+                intent.putExtra("ProductType","radiant");
                 break;
             case R.id.square_card:
-                intent = new Intent(getActivity(), BrandProductActivity.class);
-                intent.putExtra("brand","square");
+                intent = new Intent(getActivity(), ProductsActivity.class);
+                intent.putExtra("ProductType","square");
                 break;
             case R.id.beximco_card:
-                intent = new Intent(getActivity(), BrandProductActivity.class);
-                intent.putExtra("brand","beximco");
+                intent = new Intent(getActivity(), ProductsActivity.class);
+                intent.putExtra("ProductType","beximco");
                 break;
 
             case R.id.all_pharma_products_category_card:
-                intent = new Intent(getActivity(), PharmaProductActivity.class);
+                intent = new Intent(getActivity(), ProductsActivity.class);
+                intent.putExtra("ProductType","pharma");
                 break;
         }
         startActivity(intent);
