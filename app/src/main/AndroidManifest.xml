@@ -14,9 +14,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activities.TypeProductActivity"></activity>
-        <activity android:name=".Activities.BrandProductActivity" />
-        <activity android:name=".Activities.PharmaProductActivity" />
         <activity android:name=".Activities.ProductsActivity">
 <!--            <intent-filter>-->
 <!--                <action android:name="android.intent.action.MAIN" />-->

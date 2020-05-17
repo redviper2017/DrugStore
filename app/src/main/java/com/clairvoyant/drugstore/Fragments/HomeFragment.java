@@ -9,8 +9,6 @@ import android.view.ViewGroup;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
-import com.clairvoyant.drugstore.Activities.BrandProductActivity;
-import com.clairvoyant.drugstore.Activities.PharmaProductActivity;
 import com.clairvoyant.drugstore.Activities.ProductsActivity;
 import com.clairvoyant.drugstore.Entities.Product;
 import com.clairvoyant.drugstore.R;
