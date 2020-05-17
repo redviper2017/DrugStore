@@ -127,13 +127,22 @@ public class ProductsActivity extends AppCompatActivity {
                             productList.add(products.get(i));
                             Objects.requireNonNull(getSupportActionBar()).setTitle("Pharma Products");
                             break;
-                        case "capsulesAndTablets":
-                        case "injections":
-                        case "liquids":
-                        case "drops":
-                        case "topicals":
-                            if (intentTag.toLowerCase().contains(products.get(i).getCategory().toLowerCase())) {
+                        case "Capsules & Tablets":
+                        case "Injections":
+                        case "Syrups & Suspensions":
+                        case "Drops":
+                        case "Topicals":
+                            if (intentTag.equals("Syrups & Suspensions")){
+                                String tag = "Liquid";
+                                if (tag.toLowerCase().contains(products.get(i).getCategory().toLowerCase())){
+                                    Log.d(TAG,"category in ProductsActivity= "+products.get(i).getCategory().toLowerCase());
+                                    Objects.requireNonNull(getSupportActionBar()).setTitle(intentTag);
+                                    productList.add(products.get(i));
+                                }
+                            }
+                            else if (intentTag.toLowerCase().contains(products.get(i).getCategory().toLowerCase())) {
                                 Log.d(TAG,"category in ProductsActivity= "+products.get(i).getCategory().toLowerCase());
+                                Objects.requireNonNull(getSupportActionBar()).setTitle(intentTag);
                                 productList.add(products.get(i));
                             }
                             break;

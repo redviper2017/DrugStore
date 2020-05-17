@@ -82,23 +82,23 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         switch (v.getId()){
             case R.id.capcule_card:
                 intent = new Intent(getActivity(), ProductsActivity.class);
-                intent.putExtra("ProductType","capsulesAndTablets");
+                intent.putExtra("ProductType","Capsules & Tablets");
                 break;
             case R.id.injection_card:
                 intent = new Intent(getActivity(), ProductsActivity.class);
-                intent.putExtra("ProductType","injections");
+                intent.putExtra("ProductType","Injections");
                 break;
             case R.id.syrup_card:
                 intent = new Intent(getActivity(), ProductsActivity.class);
-                intent.putExtra("ProductType","liquids");
+                intent.putExtra("ProductType","Syrups & Suspensions");
                 break;
             case R.id.drop_card:
                 intent = new Intent(getActivity(), ProductsActivity.class);
-                intent.putExtra("ProductType","drops");
+                intent.putExtra("ProductType","Drops");
                 break;
             case R.id.topical_card:
                 intent = new Intent(getActivity(), ProductsActivity.class);
-                intent.putExtra("ProductType","topicals");
+                intent.putExtra("ProductType","Topicals");
                 break;
 
             case R.id.aci_card:
