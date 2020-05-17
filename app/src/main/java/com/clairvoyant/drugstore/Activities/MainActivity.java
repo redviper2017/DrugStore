@@ -1,7 +1,5 @@
 package com.clairvoyant.drugstore.Activities;
 
-import android.app.assist.AssistStructure;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -106,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.actions_menu, menu);
+        getMenuInflater().inflate(R.menu.actions_menu_main, menu);
 
         MenuItem menuItem = menu.findItem(R.id.action_cart);
         View actionView = menuItem.getActionView();

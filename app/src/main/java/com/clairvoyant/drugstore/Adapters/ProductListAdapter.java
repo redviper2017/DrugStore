@@ -5,6 +5,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -16,15 +18,19 @@ import com.clairvoyant.drugstore.Models.MedicineData;
 import com.clairvoyant.drugstore.R;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
-public class ProductListAdapter extends RecyclerView.Adapter{
+public class ProductListAdapter extends RecyclerView.Adapter implements Filterable {
     private Context context;
     private ArrayList<Product> productList;
+    private ArrayList<Product> productListAll;
+//    private ArrayList<Product> productListFiltered;
     private static final String TAG = "ProductAdapter";
 
     public ProductListAdapter(Context context, ArrayList<Product> productList) {
         this.context = context;
         this.productList = productList;
+        productListAll = new ArrayList<>(productList);
     }
 
     @NonNull
@@ -44,6 +50,43 @@ public class ProductListAdapter extends RecyclerView.Adapter{
     public int getItemCount() {
         return productList.size();
     }
+
+    @Override
+    public Filter getFilter() {
+        return filter;
+    }
+
+    Filter filter = new Filter() {
+        //runs on a background thread
+        @Override
+        protected FilterResults performFiltering(CharSequence charSequence) {
+            ArrayList<Product> productListFiltered = new ArrayList<>();
+            if (charSequence.toString().isEmpty()){
+                Log.d(TAG,"Search text is empty = "+"YES");
+                Log.d(TAG,"product list size in search = "+productList.size());
+                productListFiltered.addAll(productListAll);
+            }else {
+                Log.d(TAG,"Search text is empty = "+"NO");
+                Log.d(TAG,"product list size in search = "+productList.size());
+                for (Product product: productListAll){
+                    if (product.getName().toLowerCase().contains(charSequence.toString().toLowerCase())){
+                        productListFiltered.add(product);
+                    }
+                }
+            }
+            FilterResults filterResults = new FilterResults();
+            filterResults.values = productListFiltered;
+
+            return filterResults;
+        }
+        //runs on a ui thread
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults filterResults) {
+            productList.clear();
+            productList.addAll((Collection<? extends Product>) filterResults.values);
+            notifyDataSetChanged();
+        }
+    };
 
     private class ProductListHolder extends RecyclerView.ViewHolder{
 
