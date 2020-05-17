@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.clairvoyant.drugstore.Entities.Product;
 import com.clairvoyant.drugstore.R;
+import com.google.android.material.card.MaterialCardView;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -109,7 +110,7 @@ public class ProductListAdapter extends RecyclerView.Adapter implements Filterab
 
     private class ProductListHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        private TextView nameText, brandNameText, genericNameText, priceText,numberOfProductTitleText, numberOfProductText;
+        private TextView nameText, brandNameText, genericNameText, priceText,numberOfProductTitleText, numberOfProductText, addToCartFinalButton;
         private ImageView image, addToCartIconButton, addProductButton, removeProductButton;
         private LinearLayout addRemoveProductLayout;
 
@@ -127,6 +128,7 @@ public class ProductListAdapter extends RecyclerView.Adapter implements Filterab
             removeProductButton = itemView.findViewById(R.id.remove_product_button);
             numberOfProductTitleText = itemView.findViewById(R.id.number_of_product_title_text);
             numberOfProductText = itemView.findViewById(R.id.number_of_product_text);
+            addToCartFinalButton = itemView.findViewById(R.id.add_to_cart_final_card);
 
             addToCartIconButton.setOnClickListener(this);
             addRemoveProductLayout.setOnClickListener(this);
@@ -176,6 +178,7 @@ public class ProductListAdapter extends RecyclerView.Adapter implements Filterab
                     addToCartIconButton.setVisibility(View.GONE);
                     addRemoveProductLayout.setVisibility(View.VISIBLE);
                     numberOfProductTitleText.setVisibility(View.VISIBLE);
+                    addToCartFinalButton.setVisibility(View.VISIBLE);
                     break;
                 case R.id.add_product_button:
                     int number = Integer.parseInt(numberOfProductText.getText().toString());
@@ -190,6 +193,7 @@ public class ProductListAdapter extends RecyclerView.Adapter implements Filterab
                             number1 = 1;
                             addRemoveProductLayout.setVisibility(View.GONE);
                             numberOfProductTitleText.setVisibility(View.GONE);
+                            addToCartFinalButton.setVisibility(View.GONE);
                             addToCartIconButton.setVisibility(View.VISIBLE);
                         }
                     }
