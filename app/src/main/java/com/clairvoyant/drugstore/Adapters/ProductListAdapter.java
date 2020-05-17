@@ -8,10 +8,13 @@ import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.room.util.StringUtil;
 
 import com.clairvoyant.drugstore.Entities.Product;
 import com.clairvoyant.drugstore.Models.MedicineData;
@@ -24,7 +27,7 @@ public class ProductListAdapter extends RecyclerView.Adapter implements Filterab
     private Context context;
     private ArrayList<Product> productList;
     private ArrayList<Product> productListAll;
-//    private ArrayList<Product> productListFiltered;
+    //    private ArrayList<Product> productListFiltered;
     private static final String TAG = "ProductAdapter";
 
     public ProductListAdapter(Context context, ArrayList<Product> productList) {
@@ -36,7 +39,7 @@ public class ProductListAdapter extends RecyclerView.Adapter implements Filterab
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_products_list,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_products_list, parent, false);
         return new ProductListAdapter.ProductListHolder(view);
     }
 
@@ -61,15 +64,15 @@ public class ProductListAdapter extends RecyclerView.Adapter implements Filterab
         @Override
         protected FilterResults performFiltering(CharSequence charSequence) {
             ArrayList<Product> productListFiltered = new ArrayList<>();
-            if (charSequence.toString().isEmpty()){
-                Log.d(TAG,"Search text is empty = "+"YES");
-                Log.d(TAG,"product list size in search = "+productList.size());
+            if (charSequence.toString().isEmpty()) {
+                Log.d(TAG, "Search text is empty = " + "YES");
+                Log.d(TAG, "product list size in search = " + productList.size());
                 productListFiltered.addAll(productListAll);
-            }else {
-                Log.d(TAG,"Search text is empty = "+"NO");
-                Log.d(TAG,"product list size in search = "+productList.size());
-                for (Product product: productListAll){
-                    if (product.getName().toLowerCase().contains(charSequence.toString().toLowerCase())){
+            } else {
+                Log.d(TAG, "Search text is empty = " + "NO");
+                Log.d(TAG, "product list size in search = " + productList.size());
+                for (Product product : productListAll) {
+                    if (product.getName().toLowerCase().contains(charSequence.toString().toLowerCase())) {
                         productListFiltered.add(product);
                     }
                 }
@@ -79,6 +82,7 @@ public class ProductListAdapter extends RecyclerView.Adapter implements Filterab
 
             return filterResults;
         }
+
         //runs on a ui thread
         @Override
         protected void publishResults(CharSequence constraint, FilterResults filterResults) {
@@ -88,31 +92,65 @@ public class ProductListAdapter extends RecyclerView.Adapter implements Filterab
         }
     };
 
-    private class ProductListHolder extends RecyclerView.ViewHolder{
+    public static String toCamelCase(final String init) {
+        if (init == null)
+            return null;
 
-        private TextView nameText, genericNameText, priceText;
-        private ImageView image;
+        final StringBuilder ret = new StringBuilder(init.length());
+
+        for (final String word : init.split(" ")) {
+            if (!word.isEmpty()) {
+                ret.append(Character.toUpperCase(word.charAt(0)));
+                ret.append(word.substring(1).toLowerCase());
+            }
+            if (!(ret.length() == init.length()))
+                ret.append(" ");
+        }
+
+        return ret.toString();
+    }
+
+    private class ProductListHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+
+        private TextView nameText, brandNameText, genericNameText, priceText;
+        private ImageView image, addToCartIconButton, addProductButton, removeProductButton;
+        private LinearLayout addRemoveProductLayout;
+        private TextView numberOfProductText;
 
         public ProductListHolder(@NonNull View itemView) {
             super(itemView);
 
             nameText = itemView.findViewById(R.id.product_name_text);
+            brandNameText = itemView.findViewById(R.id.product_brand_name_text);
             genericNameText = itemView.findViewById(R.id.product_generic_name_text);
             priceText = itemView.findViewById(R.id.product_price_text);
             image = itemView.findViewById(R.id.product_image_view);
+            addToCartIconButton = itemView.findViewById(R.id.add_to_cart_icon_image_view);
+            addRemoveProductLayout = itemView.findViewById(R.id.linear_layout_add_remove_product);
+            addProductButton = itemView.findViewById(R.id.add_product_button);
+            removeProductButton = itemView.findViewById(R.id.remove_product_button);
+            numberOfProductText = itemView.findViewById(R.id.number_of_product_text);
+
+            addToCartIconButton.setOnClickListener(this);
+            addRemoveProductLayout.setOnClickListener(this);
+            addProductButton.setOnClickListener(this);
+            removeProductButton.setOnClickListener(this);
         }
 
-        void bind(Product product){
+        void bind(Product product) {
             String name = product.getName();
+            String brandName = toCamelCase(product.getBrand());
+            Log.d(TAG, "brand name in camel case = " + brandName);
             String genericName = product.getGenericName();
             String price = String.valueOf(product.getPrice());
 
             nameText.setText(name.toUpperCase());
+            brandNameText.setText(brandName);
             genericNameText.setText(genericName.toLowerCase());
             priceText.setText(price);
 
-            Log.d(TAG,"product type = "+product.getCategory().toLowerCase());
-            switch (product.getCategory().toLowerCase()){
+            Log.d(TAG, "product type = " + product.getCategory().toLowerCase());
+            switch (product.getCategory().toLowerCase()) {
                 case "tablet":
                     image.setImageResource(R.drawable.tablet_icon);
                     break;
@@ -130,6 +168,33 @@ public class ProductListAdapter extends RecyclerView.Adapter implements Filterab
                     break;
                 case "topical":
                     image.setImageResource(R.drawable.topical_icon);
+                    break;
+            }
+        }
+
+        @Override
+        public void onClick(View view) {
+            switch (view.getId()) {
+                case R.id.add_to_cart_icon_image_view:
+                    addToCartIconButton.setVisibility(View.GONE);
+                    addRemoveProductLayout.setVisibility(View.VISIBLE);
+                    break;
+                case R.id.add_product_button:
+                    int number = Integer.parseInt(numberOfProductText.getText().toString());
+                    number++;
+                    numberOfProductText.setText(String.valueOf(number));
+                    break;
+                case R.id.remove_product_button:
+                    int number1 = Integer.parseInt(numberOfProductText.getText().toString());
+                    if (number1 != 0) {
+                        number1--;
+                        if (number1 == 0){
+                            addRemoveProductLayout.setVisibility(View.GONE);
+                            addToCartIconButton.setVisibility(View.VISIBLE);
+                        }
+                    }
+
+                    numberOfProductText.setText(String.valueOf(number1));
                     break;
             }
         }

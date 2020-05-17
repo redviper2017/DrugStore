@@ -1,61 +1,127 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="wrap_content">
+
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/_5sdp">
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingTop="@dimen/_10sdp"
-        android:paddingBottom="@dimen/_10sdp">
-        <ImageView
-            android:id="@+id/product_image_view"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:src="@drawable/medicine_icon"/>
-        <RelativeLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="3"
-            android:layout_gravity="center_vertical">
-            <TextView
-                android:id="@+id/product_name_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="lorem ipsum"
-                android:textSize="@dimen/_12ssp"
-                android:textColor="@color/colorPrimaryDark"/>
-            <TextView
-                android:id="@+id/product_generic_name_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/product_name_text"
-                android:text="Paracetamol"
-                android:textSize="@dimen/_11ssp"
-                android:textColor="@color/colorPrimary"/>
-            <ImageView
-                android:id="@+id/taka_icon_image_view"
-                android:layout_width="@dimen/_15sdp"
-                android:layout_height="@dimen/_15sdp"
-                android:layout_below="@id/product_generic_name_text"
-                android:layout_marginTop="@dimen/_5sdp"
-                android:src="@drawable/taka_icon"/>
 
-            <TextView
-                android:id="@+id/product_price_text"
-                android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="@dimen/_10sdp"
+            android:paddingBottom="@dimen/_10sdp">
+
+            <ImageView
+                android:id="@+id/product_image_view"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_alignTop="@+id/taka_icon_image_view"
-                android:layout_toEndOf="@id/taka_icon_image_view"
-                android:text="46.00 "
-                android:textSize="@dimen/_12ssp" />
-        </RelativeLayout>
-    </LinearLayout>
+                android:layout_weight="1"
+                android:src="@drawable/medicine_icon" />
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="3">
+
+                <TextView
+                    android:id="@+id/product_name_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="lorem ipsum"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="@dimen/_12ssp" />
+
+                <TextView
+                    android:id="@+id/product_brand_name_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/product_name_text"
+                    android:text="Square Pharmaceuticals Ltd."
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/_11ssp" />
+
+                <TextView
+                    android:id="@+id/product_generic_name_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/product_brand_name_text"
+                    android:text="Paracetamol"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/_11ssp"
+                    android:textStyle="italic" />
+
+                <ImageView
+                    android:id="@+id/taka_icon_image_view"
+                    android:layout_width="@dimen/_15sdp"
+                    android:layout_height="@dimen/_15sdp"
+                    android:layout_below="@id/product_generic_name_text"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:src="@drawable/taka_icon" />
+
+                <TextView
+                    android:id="@+id/product_price_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@+id/taka_icon_image_view"
+                    android:layout_toEndOf="@id/taka_icon_image_view"
+                    android:text="46.00 "
+                    android:textSize="@dimen/_12ssp" />
+
+                <ImageView
+                    android:id="@+id/add_to_cart_icon_image_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@+id/product_price_text"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:src="@drawable/add_to_cart_icon" />
+
+                <LinearLayout
+                    android:id="@+id/linear_layout_add_remove_product"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@+id/product_price_text"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:visibility="gone">
+
+                    <ImageView
+                        android:id="@+id/remove_product_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/minus_icon"
+                        android:clickable="true"
+                        android:focusable="true"/>
+
+                    <TextView
+                        android:id="@+id/number_of_product_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="1"
+                        android:textColor="#000"
+                        android:textSize="@dimen/_15ssp"
+                        android:textStyle="bold"
+                        android:layout_marginStart="@dimen/_5sdp"
+                        android:layout_marginEnd="@dimen/_5sdp"/>
+
+                    <ImageView
+                        android:id="@+id/add_product_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/plus_icon"
+                        android:clickable="true"
+                        android:focusable="true"/>
+
+                </LinearLayout>
+            </RelativeLayout>
+        </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
 </RelativeLayout>
