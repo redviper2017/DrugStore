@@ -9,15 +9,12 @@ import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.Switch;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.room.util.StringUtil;
 
 import com.clairvoyant.drugstore.Entities.Product;
-import com.clairvoyant.drugstore.Models.MedicineData;
 import com.clairvoyant.drugstore.R;
 
 import java.util.ArrayList;
@@ -112,10 +109,9 @@ public class ProductListAdapter extends RecyclerView.Adapter implements Filterab
 
     private class ProductListHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        private TextView nameText, brandNameText, genericNameText, priceText;
+        private TextView nameText, brandNameText, genericNameText, priceText,numberOfProductTitleText, numberOfProductText;
         private ImageView image, addToCartIconButton, addProductButton, removeProductButton;
         private LinearLayout addRemoveProductLayout;
-        private TextView numberOfProductText;
 
         public ProductListHolder(@NonNull View itemView) {
             super(itemView);
@@ -129,6 +125,7 @@ public class ProductListAdapter extends RecyclerView.Adapter implements Filterab
             addRemoveProductLayout = itemView.findViewById(R.id.linear_layout_add_remove_product);
             addProductButton = itemView.findViewById(R.id.add_product_button);
             removeProductButton = itemView.findViewById(R.id.remove_product_button);
+            numberOfProductTitleText = itemView.findViewById(R.id.number_of_product_title_text);
             numberOfProductText = itemView.findViewById(R.id.number_of_product_text);
 
             addToCartIconButton.setOnClickListener(this);
@@ -178,6 +175,7 @@ public class ProductListAdapter extends RecyclerView.Adapter implements Filterab
                 case R.id.add_to_cart_icon_image_view:
                     addToCartIconButton.setVisibility(View.GONE);
                     addRemoveProductLayout.setVisibility(View.VISIBLE);
+                    numberOfProductTitleText.setVisibility(View.VISIBLE);
                     break;
                 case R.id.add_product_button:
                     int number = Integer.parseInt(numberOfProductText.getText().toString());
@@ -189,7 +187,9 @@ public class ProductListAdapter extends RecyclerView.Adapter implements Filterab
                     if (number1 != 0) {
                         number1--;
                         if (number1 == 0){
+                            number1 = 1;
                             addRemoveProductLayout.setVisibility(View.GONE);
+                            numberOfProductTitleText.setVisibility(View.GONE);
                             addToCartIconButton.setVisibility(View.VISIBLE);
                         }
                     }
