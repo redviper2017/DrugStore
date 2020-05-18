@@ -21,7 +21,7 @@
             android:scrollbars="vertical" />
     </androidx.core.widget.NestedScrollView>
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/subtotal_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -30,18 +30,19 @@
         android:padding="@dimen/_3sdp">
 
         <TextView
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginStart="@dimen/_7sdp"
-            android:layout_weight="2"
-            android:text="Subtotal" />
+            android:text="Subtotal"
+            android:layout_centerVertical="true"/>
 
         <RelativeLayout
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_weight=".5">
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="@dimen/_7sdp"
+            android:layout_centerVertical="true">
 
             <ImageView
                 android:id="@+id/taka_icon_image_add_to_cart"
@@ -59,29 +60,32 @@
                 android:text="269"
                 android:textSize="@dimen/_14ssp" />
         </RelativeLayout>
-    </LinearLayout>
+    </RelativeLayout>
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/delivery_fee__layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_above="@id/checkout_button"
         android:orientation="horizontal"
-        android:padding="@dimen/_3sdp">
+        android:padding="@dimen/_3sdp"
+        android:layout_marginBottom="@dimen/_10sdp">
 
         <TextView
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginStart="@dimen/_7sdp"
             android:layout_weight="2"
-            android:text="Delivery Fee" />
+            android:text="Delivery Fee"
+            android:layout_centerVertical="true"/>
 
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginEnd="@dimen/_20sdp">
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="@dimen/_7sdp"
+            android:layout_centerVertical="true">
 
             <ImageView
                 android:id="@+id/taka_1_icon_image_add_to_cart"
@@ -98,5 +102,23 @@
                 android:text="50"
                 android:textSize="@dimen/_14ssp" />
         </RelativeLayout>
-    </LinearLayout>
+    </RelativeLayout>
+    <androidx.cardview.widget.CardView
+        android:id="@+id/checkout_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        app:cardElevation="@dimen/_10sdp">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Continue to checkout"
+        android:textColor="@android:color/white"
+        android:textAllCaps="true"
+        android:background="@color/colorPrimary"
+        android:textAlignment="center"
+        android:padding="@dimen/_10sdp"
+        android:clickable="true"
+        android:focusable="true" />
+    </androidx.cardview.widget.CardView>
 </RelativeLayout>
