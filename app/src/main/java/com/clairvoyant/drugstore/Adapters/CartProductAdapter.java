@@ -101,7 +101,8 @@ public class CartProductAdapter extends RecyclerView.Adapter {
                     ((AddToCartActivity) context).changeSubtotalText(Double.parseDouble(subTotal));
                     subtotal += Double.parseDouble(priceText.getText().toString());
                     numberOfProductText.setText(String.valueOf(number));
-                    ((AddToCartActivity) context).addProductToCartInLocalDb(nameText.getText().toString(),Double.parseDouble(priceText.getText().toString()), Integer.parseInt(numberOfProductText.getText().toString()));
+
+                    ((AddToCartActivity) context).addProductToCartInLocalDb(nameText.getText().toString(),Double.parseDouble(priceText.getText().toString()),Integer.parseInt(numberOfProductText.getText().toString()));
                     break;
                 case R.id.remove_product_button:
                     int number1 = Integer.parseInt(numberOfProductText.getText().toString());
@@ -113,7 +114,14 @@ public class CartProductAdapter extends RecyclerView.Adapter {
                         @SuppressLint("DefaultLocale") String subTotal1 = String.format("%.2f", (subtotal - Double.parseDouble(priceText.getText().toString())));
                         ((AddToCartActivity) context).changeSubtotalText(Double.parseDouble(subTotal1));
                         subtotal -= Double.parseDouble(priceText.getText().toString());
-                        ((AddToCartActivity) context).addProductToCartInLocalDb(nameText.getText().toString(),Double.parseDouble(priceText.getText().toString()), Integer.parseInt(numberOfProductText.getText().toString()));
+
+                        CartProduct product1 = new CartProduct();
+                        product1.setType(cartProductArrayList.get(getAdapterPosition()).getType());
+                        product1.setName(nameText.getText().toString());
+                        product1.setPrice(Double.parseDouble(priceText.getText().toString()));
+                        product1.setSelectedQty(Integer.parseInt(numberOfProductText.getText().toString()));
+
+                        ((AddToCartActivity) context).updateCartInLocalDb(product1);
                     }else {
                         ((AddToCartActivity) context).showRemoveProductDialog(getAdapterPosition());
                     }

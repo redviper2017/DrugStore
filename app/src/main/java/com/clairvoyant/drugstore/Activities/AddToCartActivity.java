@@ -165,6 +165,7 @@ public class AddToCartActivity extends AppCompatActivity {
     public void removeProductFromCartInLocalDb(final CartProduct cartProduct){
         Log.d(TAG,"removeProductFromCartInLocalDb method called = "+"YES");
 
+        @SuppressLint("StaticFieldLeak")
         class RemoveProductFromCart extends AsyncTask<Void, Void, Void>{
 
             @Override
@@ -185,5 +186,26 @@ public class AddToCartActivity extends AppCompatActivity {
 
         RemoveProductFromCart removeProductFromCart = new RemoveProductFromCart();
         removeProductFromCart.execute();
+    }
+
+    public void updateCartInLocalDb(final CartProduct cartProduct){
+        Log.d(TAG,"updateCartInLocalDb method called = "+"YES");
+        class UpdateCart extends AsyncTask<Void,Void,Void>{
+
+            @Override
+            protected Void doInBackground(Void... voids) {
+
+                DatabaseClient.getInstance(getApplicationContext()).getAppDatabase()
+                        .cartDao()
+                        .update(cartProduct);
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(Void aVoid) {
+                super.onPostExecute(aVoid);
+                Log.d(TAG,"products update in cart in db = "+"successfully");
+            }
+        }
     }
 }
