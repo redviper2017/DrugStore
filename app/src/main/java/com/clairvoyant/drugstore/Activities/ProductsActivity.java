@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -16,6 +17,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.clairvoyant.drugstore.Adapters.ProductListAdapter;
 import com.clairvoyant.drugstore.Database.DatabaseClient;
@@ -88,6 +90,16 @@ public class ProductsActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.actions_menu,menu);
+
+        MenuItem cartItem = menu.findItem(R.id.action_cart);
+        View view = cartItem.getActionView();
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(ProductsActivity.this,AddToCartActivity.class));
+            }
+        });
+
         MenuItem item = menu.findItem(R.id.action_search);
         SearchView searchView = (SearchView) item.getActionView();
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -224,12 +236,14 @@ public class ProductsActivity extends AppCompatActivity {
 
     public void addProductToCartInLocalDb(final String product, final double price, final int quantity){
         Log.d(TAG,"addProductToCartInLocalDb method called = "+"YES");
+        @SuppressLint("StaticFieldLeak")
         class AddProductToCart extends AsyncTask<Void, Void, Void>{
 
             @Override
             protected Void doInBackground(Void... voids) {
                 CartProduct cartProduct = new CartProduct();
                 cartProduct.setName(product);
+                cartProduct.setType(product);
                 cartProduct.setPrice(price);
                 cartProduct.setSelectedQty(quantity);
 

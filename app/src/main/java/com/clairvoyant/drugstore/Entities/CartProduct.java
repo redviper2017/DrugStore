@@ -13,6 +13,8 @@ public class CartProduct implements Serializable {
     private int id;
     @ColumnInfo(name = "name")
     private String name;
+    @ColumnInfo(name = "type")
+    private String type;
     @ColumnInfo(name = "price")
     private double price;
     @ColumnInfo(name = "selectedQty")
@@ -48,5 +50,13 @@ public class CartProduct implements Serializable {
 
     public void setSelectedQty(int selectedQty) {
         this.selectedQty = selectedQty;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }

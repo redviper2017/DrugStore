@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activities.AddToCartActivity">
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nested_scrollview_cart"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/subtotal_layout"
+        android:fillViewport="true">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/car_product_list_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbarSize="@dimen/_5sdp"
+            android:scrollbars="vertical" />
+    </androidx.core.widget.NestedScrollView>
+
+    <LinearLayout
+        android:id="@+id/subtotal_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/delivery_fee__layout"
+        android:orientation="horizontal"
+        android:padding="@dimen/_3sdp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="@dimen/_7sdp"
+            android:layout_weight="2"
+            android:text="Subtotal" />
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight=".5">
+
+            <ImageView
+                android:id="@+id/taka_icon_image_add_to_cart"
+                android:layout_width="@dimen/_20sdp"
+                android:layout_height="@dimen/_20sdp"
+                android:layout_weight="1"
+                android:src="@drawable/taka_icon" />
+
+            <TextView
+                android:id="@+id/subtotal_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@+id/taka_icon_image_add_to_cart"
+                android:layout_weight="1"
+                android:text="269"
+                android:textSize="@dimen/_14ssp" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/delivery_fee__layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        android:padding="@dimen/_3sdp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="@dimen/_7sdp"
+            android:layout_weight="2"
+            android:text="Delivery Fee" />
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginEnd="@dimen/_20sdp">
+
+            <ImageView
+                android:id="@+id/taka_1_icon_image_add_to_cart"
+                android:layout_width="@dimen/_20sdp"
+                android:layout_height="@dimen/_20sdp"
+                android:layout_weight="1"
+                android:src="@drawable/taka_icon" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@+id/taka_1_icon_image_add_to_cart"
+                android:layout_weight="1"
+                android:text="50"
+                android:textSize="@dimen/_14ssp" />
+        </RelativeLayout>
+    </LinearLayout>
+</RelativeLayout>

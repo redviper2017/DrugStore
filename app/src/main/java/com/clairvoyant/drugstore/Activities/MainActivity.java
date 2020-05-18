@@ -1,5 +1,6 @@
 package com.clairvoyant.drugstore.Activities;
 
+import android.annotation.SuppressLint;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -48,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
             return true;
 
         switch (item.getItemId()){
-            case R.id.action_cart:
+            case R.id.action_cart_main:
                 return true;
         }
 
@@ -106,7 +107,7 @@ public class MainActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.actions_menu_main, menu);
 
-        MenuItem menuItem = menu.findItem(R.id.action_cart);
+        MenuItem menuItem = menu.findItem(R.id.action_cart_main);
         View actionView = menuItem.getActionView();
         textCartItemCount = (TextView) actionView.findViewById(R.id.cart_badge);
 
@@ -155,6 +156,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void storeProductsToLocalDB(final MedicineData medicineData){
+        @SuppressLint("StaticFieldLeak")
         class SaveProduct extends AsyncTask<Void, Void, Void>{
             @Override
             protected Void doInBackground(Void... voids) {
