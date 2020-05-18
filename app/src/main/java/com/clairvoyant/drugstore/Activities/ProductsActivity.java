@@ -19,6 +19,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.clairvoyant.drugstore.Adapters.CartProductAdapter;
 import com.clairvoyant.drugstore.Adapters.ProductListAdapter;
 import com.clairvoyant.drugstore.Database.DatabaseClient;
 import com.clairvoyant.drugstore.Entities.Product;
@@ -85,6 +86,7 @@ public class ProductsActivity extends AppCompatActivity {
             }
         });
         getProducts();
+
     }
 
     @Override
@@ -117,8 +119,8 @@ public class ProductsActivity extends AppCompatActivity {
         MenuItem menuItem = menu.findItem(R.id.action_cart);
         View actionView = menuItem.getActionView();
         textCartItemCount = (TextView) actionView.findViewById(R.id.cart_badge);
-
-        setupBadge(0);
+        getCartProducts();
+//        setupBadge(0);
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -218,15 +220,17 @@ public class ProductsActivity extends AppCompatActivity {
     }
 
     public void setupBadge(int num) {
-        Log.d(TAG,"setupBadge method called = "+"YES");
-        mCartItemCount += num;
+        mCartItemCount = num;
+        Log.d(TAG,"setupBadge method called = "+num);
         if (textCartItemCount != null) {
             if (mCartItemCount == 0) {
+                Log.d(TAG,"mCartItemCount is equal to zero = "+"YES");
                 if (textCartItemCount.getVisibility() != View.GONE) {
                     textCartItemCount.setVisibility(View.GONE);
                 }
             } else {
-                textCartItemCount.setText(String.valueOf(Math.min(mCartItemCount, 99)));
+                Log.d(TAG,"mCartItemCount is equal to zero = "+"NO");
+                textCartItemCount.setText(String.valueOf(num));
                 if (textCartItemCount.getVisibility() != View.VISIBLE) {
                     textCartItemCount.setVisibility(View.VISIBLE);
                 }
@@ -262,5 +266,42 @@ public class ProductsActivity extends AppCompatActivity {
 
         AddProductToCart addProductToCart = new AddProductToCart();
         addProductToCart.execute();
+    }
+
+    public List<CartProduct> getCartProducts() {
+        @SuppressLint("StaticFieldLeak")
+        class GetCartProducts extends AsyncTask<Void, Void, List<CartProduct>> {
+
+            @Override
+            protected List<CartProduct> doInBackground(Void... voids) {
+                List<CartProduct> cartProductList = DatabaseClient
+                        .getInstance(getApplicationContext())
+                        .getAppDatabase()
+                        .cartDao()
+                        .getAll();
+//                cardProducts.addAll(cartProductList);
+                return cartProductList;
+            }
+
+            @Override
+            protected void onPostExecute(List<CartProduct> cartProducts) {
+                super.onPostExecute(cartProducts);
+                Collections.sort(cartProducts, new Comparator<CartProduct>() {
+                    @Override
+                    public int compare(CartProduct o1, CartProduct o2) {
+                        return o1.getName().toLowerCase().compareTo(o2.getName().toLowerCase());
+                    }
+                });
+                int totalNumberOfProducts = 0;
+                for (int i = 0; i < cartProducts.size(); i++)
+                    totalNumberOfProducts += cartProducts.get(i).getSelectedQty();
+                Log.d(TAG, "total number of products added to cart = " + totalNumberOfProducts);
+                setupBadge(totalNumberOfProducts);
+            }
+        }
+
+        GetCartProducts gcp = new GetCartProducts();
+        gcp.execute();
+        return null;
     }
 }

@@ -17,9 +17,7 @@ import android.widget.TextView;
 import com.clairvoyant.drugstore.Adapters.CartProductAdapter;
 import com.clairvoyant.drugstore.Database.DatabaseClient;
 import com.clairvoyant.drugstore.Entities.CartProduct;
-import com.clairvoyant.drugstore.Entities.Product;
 import com.clairvoyant.drugstore.R;
-import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -31,6 +29,7 @@ public class AddToCartActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     public TextView subtotalText;
+    private RelativeLayout contentLayout, noContentLayout;
 
     private List<CartProduct> cardProducts = new ArrayList<>();
 
@@ -43,23 +42,25 @@ public class AddToCartActivity extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.car_product_list_view);
         subtotalText = findViewById(R.id.subtotal_text);
+        contentLayout = findViewById(R.id.content_relative_layout_cart_activity);
+        noContentLayout = findViewById(R.id.no_content_relative_layout_cart_activity);
+
         Objects.requireNonNull(getSupportActionBar()).setTitle("Your Cart");
         getCartProducts();
     }
 
-    private void getCartProducts() {
+    public void getCartProducts() {
         @SuppressLint("StaticFieldLeak")
         class GetCartProducts extends AsyncTask<Void, Void, List<CartProduct>> {
 
             @Override
             protected List<CartProduct> doInBackground(Void... voids) {
-                List<CartProduct> cartProductList = DatabaseClient
+                //                cardProducts.addAll(cartProductList);
+                return DatabaseClient
                         .getInstance(getApplicationContext())
                         .getAppDatabase()
                         .cartDao()
                         .getAll();
-                cardProducts.addAll(cartProductList);
-                return cartProductList;
             }
 
             @Override
@@ -75,12 +76,16 @@ public class AddToCartActivity extends AppCompatActivity {
                 for (int i = 0; i < cartProducts.size(); i++)
                     totalNumberOfProducts += cartProducts.get(i).getSelectedQty();
                 Log.d(TAG, "total number of products added to cart = " + totalNumberOfProducts);
+                if (totalNumberOfProducts != 0) {
+                    CartProductAdapter cartProductAdapter = new CartProductAdapter(AddToCartActivity.this, (ArrayList<CartProduct>) cartProducts);
+                    cartProductAdapter.notifyDataSetChanged();
 
-                CartProductAdapter cartProductAdapter = new CartProductAdapter(AddToCartActivity.this, (ArrayList<CartProduct>) cartProducts);
-                cartProductAdapter.notifyDataSetChanged();
-
-                recyclerView.setAdapter(cartProductAdapter);
-                recyclerView.setLayoutManager(new LinearLayoutManager(AddToCartActivity.this));
+                    recyclerView.setAdapter(cartProductAdapter);
+                    recyclerView.setLayoutManager(new LinearLayoutManager(AddToCartActivity.this));
+                }else {
+                    contentLayout.setVisibility(View.GONE);
+                    noContentLayout.setVisibility(View.VISIBLE);
+                }
             }
         }
 
