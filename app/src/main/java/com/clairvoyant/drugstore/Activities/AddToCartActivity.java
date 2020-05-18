@@ -115,9 +115,9 @@ public class AddToCartActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int id) {
                         // User clicked OK button
                     Log.d(TAG,"position of item to be removed = "+position);
+                    removeProductFromCartInLocalDb(productList.get(position));
                     productList.remove(position);
                     cartProductAdapter.notifyItemRemoved(position);
-                    addProductToCartInLocalDb();
                     }
                 })
                 .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -160,5 +160,30 @@ public class AddToCartActivity extends AppCompatActivity {
 
         AddProductToCart addProductToCart = new AddProductToCart();
         addProductToCart.execute();
+    }
+
+    public void removeProductFromCartInLocalDb(final CartProduct cartProduct){
+        Log.d(TAG,"removeProductFromCartInLocalDb method called = "+"YES");
+
+        class RemoveProductFromCart extends AsyncTask<Void, Void, Void>{
+
+            @Override
+            protected Void doInBackground(Void... voids) {
+
+                DatabaseClient.getInstance(getApplicationContext()).getAppDatabase()
+                        .cartDao()
+                        .delete(cartProduct);
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(Void aVoid) {
+                super.onPostExecute(aVoid);
+                Log.d(TAG,"products removed from cart in db = "+"successfully");
+            }
+        }
+
+        RemoveProductFromCart removeProductFromCart = new RemoveProductFromCart();
+        removeProductFromCart.execute();
     }
 }
