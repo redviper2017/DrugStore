@@ -92,7 +92,7 @@
                         android:layout_marginStart="@dimen/_5sdp"
                         android:layout_marginEnd="@dimen/_5sdp"
                         android:text="1"
-                        android:textColor="#000"
+                        android:textColor="@color/colorPrimary"
                         android:textSize="@dimen/_15ssp"
                         android:textStyle="bold" />
 

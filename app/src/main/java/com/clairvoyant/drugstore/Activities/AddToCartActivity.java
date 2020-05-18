@@ -1,13 +1,17 @@
 package com.clairvoyant.drugstore.Activities;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
+import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.clairvoyant.drugstore.Adapters.CartProductAdapter;
@@ -15,6 +19,7 @@ import com.clairvoyant.drugstore.Database.DatabaseClient;
 import com.clairvoyant.drugstore.Entities.CartProduct;
 import com.clairvoyant.drugstore.Entities.Product;
 import com.clairvoyant.drugstore.R;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -27,6 +32,8 @@ public class AddToCartActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     public TextView subtotalText;
 
+    private List<CartProduct> cardProducts = new ArrayList<>();
+
     private static final String TAG = "AddToCartActivity";
 
     @Override
@@ -36,14 +43,13 @@ public class AddToCartActivity extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.car_product_list_view);
         subtotalText = findViewById(R.id.subtotal_text);
-
         Objects.requireNonNull(getSupportActionBar()).setTitle("Your Cart");
         getCartProducts();
     }
 
-    private void getCartProducts(){
+    private void getCartProducts() {
         @SuppressLint("StaticFieldLeak")
-        class GetCartProducts extends AsyncTask<Void, Void, List<CartProduct>>{
+        class GetCartProducts extends AsyncTask<Void, Void, List<CartProduct>> {
 
             @Override
             protected List<CartProduct> doInBackground(Void... voids) {
@@ -52,6 +58,7 @@ public class AddToCartActivity extends AppCompatActivity {
                         .getAppDatabase()
                         .cartDao()
                         .getAll();
+                cardProducts.addAll(cartProductList);
                 return cartProductList;
             }
 
@@ -65,11 +72,11 @@ public class AddToCartActivity extends AppCompatActivity {
                     }
                 });
                 int totalNumberOfProducts = 0;
-                for (int i=0; i<cartProducts.size(); i++)
+                for (int i = 0; i < cartProducts.size(); i++)
                     totalNumberOfProducts += cartProducts.get(i).getSelectedQty();
-                Log.d(TAG,"total number of products added to cart = "+totalNumberOfProducts);
+                Log.d(TAG, "total number of products added to cart = " + totalNumberOfProducts);
 
-                CartProductAdapter cartProductAdapter = new CartProductAdapter(AddToCartActivity.this,(ArrayList<CartProduct>) cartProducts);
+                CartProductAdapter cartProductAdapter = new CartProductAdapter(AddToCartActivity.this, (ArrayList<CartProduct>) cartProducts);
                 cartProductAdapter.notifyDataSetChanged();
 
                 recyclerView.setAdapter(cartProductAdapter);
@@ -81,7 +88,32 @@ public class AddToCartActivity extends AppCompatActivity {
         gcp.execute();
     }
 
-    public void changeSubtotalText(double subtotal){
+    public void changeSubtotalText(double subtotal) {
         subtotalText.setText(String.valueOf(subtotal));
+    }
+
+    public void showRemoveProductDialog() {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder
+                .setCancelable(false)
+                .setTitle("Remove Product")
+                .setMessage("Remove this product from my cart?")
+                // Add the buttons
+                .setPositiveButton("Remove", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        // User clicked OK button
+
+                    }
+                })
+                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        // User cancelled the dialog
+                        dialog.cancel();
+                    }
+                });
+
+        // Create the AlertDialog
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 }

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/relativelayout_cart"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -35,6 +36,8 @@
             android:layout_gravity="center"
             android:layout_marginStart="@dimen/_7sdp"
             android:text="Subtotal"
+            android:textSize="@dimen/_14ssp"
+            android:textColor="@android:color/black"
             android:layout_centerVertical="true"/>
 
         <RelativeLayout
@@ -46,8 +49,8 @@
 
             <ImageView
                 android:id="@+id/taka_icon_image_add_to_cart"
-                android:layout_width="@dimen/_20sdp"
-                android:layout_height="@dimen/_20sdp"
+                android:layout_width="@dimen/_17sdp"
+                android:layout_height="@dimen/_17sdp"
                 android:layout_weight="1"
                 android:src="@drawable/taka_icon" />
 
@@ -58,6 +61,7 @@
                 android:layout_toEndOf="@+id/taka_icon_image_add_to_cart"
                 android:layout_weight="1"
                 android:text="269"
+                android:textColor="@android:color/black"
                 android:textSize="@dimen/_14ssp" />
         </RelativeLayout>
     </RelativeLayout>
@@ -78,6 +82,8 @@
             android:layout_marginStart="@dimen/_7sdp"
             android:layout_weight="2"
             android:text="Delivery Fee"
+            android:textSize="@dimen/_14ssp"
+            android:textColor="@android:color/black"
             android:layout_centerVertical="true"/>
 
         <RelativeLayout
@@ -100,6 +106,7 @@
                 android:layout_toEndOf="@+id/taka_1_icon_image_add_to_cart"
                 android:layout_weight="1"
                 android:text="50"
+                android:textColor="@android:color/black"
                 android:textSize="@dimen/_14ssp" />
         </RelativeLayout>
     </RelativeLayout>
@@ -114,10 +121,11 @@
         android:layout_height="wrap_content"
         android:text="Continue to checkout"
         android:textColor="@android:color/white"
+        android:textSize="@dimen/_12ssp"
         android:textAllCaps="true"
         android:background="@color/colorPrimary"
         android:textAlignment="center"
-        android:padding="@dimen/_10sdp"
+        android:padding="@dimen/_15sdp"
         android:clickable="true"
         android:focusable="true" />
     </androidx.cardview.widget.CardView>
