@@ -32,7 +32,7 @@
         android:id="@+id/subtotal_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@id/delivery_fee__layout"
+        android:layout_above="@id/delivery_fee_layout"
         android:orientation="horizontal"
         android:padding="@dimen/_3sdp">
 
@@ -73,7 +73,7 @@
     </RelativeLayout>
 
     <RelativeLayout
-        android:id="@+id/delivery_fee__layout"
+        android:id="@+id/delivery_fee_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@id/checkout_button"
@@ -107,6 +107,7 @@
                 android:src="@drawable/taka_icon" />
 
             <TextView
+                android:id="@+id/deliver_fee_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_toEndOf="@+id/taka_1_icon_image_add_to_cart"

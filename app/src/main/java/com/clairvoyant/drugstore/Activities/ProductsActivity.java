@@ -41,14 +41,14 @@ public class ProductsActivity extends AppCompatActivity {
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle actionBarDrawerToggle;
     private NavigationView navigationView;
-    private TextView textCartItemCount;
+    public TextView textCartItemCount;
 
     private ProductListAdapter adapter;
 
     private String intentTag;
 
     private ArrayList<Product> productList = new ArrayList<>();
-    private int mCartItemCount;
+    private int mCartItemCount = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,7 +86,6 @@ public class ProductsActivity extends AppCompatActivity {
             }
         });
         getProducts();
-
     }
 
     @Override
@@ -220,7 +219,7 @@ public class ProductsActivity extends AppCompatActivity {
     }
 
     public void setupBadge(int num) {
-        mCartItemCount = num;
+        mCartItemCount = Integer.parseInt(textCartItemCount.getText().toString()) + num;
         Log.d(TAG,"setupBadge method called = "+num);
         if (textCartItemCount != null) {
             if (mCartItemCount == 0) {
@@ -230,7 +229,7 @@ public class ProductsActivity extends AppCompatActivity {
                 }
             } else {
                 Log.d(TAG,"mCartItemCount is equal to zero = "+"NO");
-                textCartItemCount.setText(String.valueOf(num));
+                textCartItemCount.setText(String.valueOf(mCartItemCount));
                 if (textCartItemCount.getVisibility() != View.VISIBLE) {
                     textCartItemCount.setVisibility(View.VISIBLE);
                 }

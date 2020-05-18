@@ -28,7 +28,7 @@ import java.util.Objects;
 public class AddToCartActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
-    public TextView subtotalText;
+    public TextView subtotalText, deliveryText;
     private RelativeLayout contentLayout, noContentLayout;
 
     private List<CartProduct> cardProducts = new ArrayList<>();
@@ -42,6 +42,7 @@ public class AddToCartActivity extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.car_product_list_view);
         subtotalText = findViewById(R.id.subtotal_text);
+        deliveryText = findViewById(R.id.deliver_fee_text);
         contentLayout = findViewById(R.id.content_relative_layout_cart_activity);
         noContentLayout = findViewById(R.id.no_content_relative_layout_cart_activity);
 
@@ -77,6 +78,7 @@ public class AddToCartActivity extends AppCompatActivity {
                     totalNumberOfProducts += cartProducts.get(i).getSelectedQty();
                 Log.d(TAG, "total number of products added to cart = " + totalNumberOfProducts);
                 if (totalNumberOfProducts != 0) {
+                    deliveryText.setText("50");
                     CartProductAdapter cartProductAdapter = new CartProductAdapter(AddToCartActivity.this, (ArrayList<CartProduct>) cartProducts);
                     cartProductAdapter.notifyDataSetChanged();
 
@@ -120,5 +122,35 @@ public class AddToCartActivity extends AppCompatActivity {
         // Create the AlertDialog
         AlertDialog dialog = builder.create();
         dialog.show();
+    }
+
+    public void addProductToCartInLocalDb(final String product, final double price, final int quantity){
+        Log.d(TAG,"addProductToCartInLocalDb method called = "+"YES");
+        @SuppressLint("StaticFieldLeak")
+        class AddProductToCart extends AsyncTask<Void, Void, Void>{
+
+            @Override
+            protected Void doInBackground(Void... voids) {
+                CartProduct cartProduct = new CartProduct();
+                cartProduct.setName(product);
+                cartProduct.setType(product);
+                cartProduct.setPrice(price);
+                cartProduct.setSelectedQty(quantity);
+
+                DatabaseClient.getInstance(getApplicationContext()).getAppDatabase()
+                        .cartDao()
+                        .insert(cartProduct);
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(Void aVoid) {
+                super.onPostExecute(aVoid);
+                Log.d(TAG,"products saved to cart in db = "+"successfully");
+            }
+        }
+
+        AddProductToCart addProductToCart = new AddProductToCart();
+        addProductToCart.execute();
     }
 }

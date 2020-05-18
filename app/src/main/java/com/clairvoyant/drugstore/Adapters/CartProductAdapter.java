@@ -14,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.clairvoyant.drugstore.Activities.AddToCartActivity;
+import com.clairvoyant.drugstore.Activities.ProductsActivity;
 import com.clairvoyant.drugstore.Entities.CartProduct;
 import com.clairvoyant.drugstore.Models.MedicineData;
 import com.clairvoyant.drugstore.R;
@@ -100,6 +101,7 @@ public class CartProductAdapter extends RecyclerView.Adapter {
                     ((AddToCartActivity) context).changeSubtotalText(Double.parseDouble(subTotal));
                     subtotal += Double.parseDouble(priceText.getText().toString());
                     numberOfProductText.setText(String.valueOf(number));
+                    ((AddToCartActivity) context).addProductToCartInLocalDb(nameText.getText().toString(),Double.parseDouble(priceText.getText().toString()), Integer.parseInt(numberOfProductText.getText().toString()));
                     break;
                 case R.id.remove_product_button:
                     int number1 = Integer.parseInt(numberOfProductText.getText().toString());
@@ -111,6 +113,7 @@ public class CartProductAdapter extends RecyclerView.Adapter {
                         @SuppressLint("DefaultLocale") String subTotal1 = String.format("%.2f", (subtotal - Double.parseDouble(priceText.getText().toString())));
                         ((AddToCartActivity) context).changeSubtotalText(Double.parseDouble(subTotal1));
                         subtotal -= Double.parseDouble(priceText.getText().toString());
+                        ((AddToCartActivity) context).addProductToCartInLocalDb(nameText.getText().toString(),Double.parseDouble(priceText.getText().toString()), Integer.parseInt(numberOfProductText.getText().toString()));
                     }else {
                         ((AddToCartActivity) context).showRemoveProductDialog();
                     }
