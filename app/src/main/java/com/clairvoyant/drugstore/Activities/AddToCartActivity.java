@@ -30,6 +30,9 @@ public class AddToCartActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     public TextView subtotalText, deliveryText;
     private RelativeLayout contentLayout, noContentLayout;
+    List<CartProduct> productList;
+
+    CartProductAdapter cartProductAdapter;
 
     private List<CartProduct> cardProducts = new ArrayList<>();
 
@@ -73,13 +76,15 @@ public class AddToCartActivity extends AppCompatActivity {
                         return o1.getName().toLowerCase().compareTo(o2.getName().toLowerCase());
                     }
                 });
+                productList = cartProducts;
+
                 int totalNumberOfProducts = 0;
                 for (int i = 0; i < cartProducts.size(); i++)
                     totalNumberOfProducts += cartProducts.get(i).getSelectedQty();
                 Log.d(TAG, "total number of products added to cart = " + totalNumberOfProducts);
                 if (totalNumberOfProducts != 0) {
                     deliveryText.setText("50");
-                    CartProductAdapter cartProductAdapter = new CartProductAdapter(AddToCartActivity.this, (ArrayList<CartProduct>) cartProducts);
+                    cartProductAdapter = new CartProductAdapter(AddToCartActivity.this, (ArrayList<CartProduct>) productList);
                     cartProductAdapter.notifyDataSetChanged();
 
                     recyclerView.setAdapter(cartProductAdapter);
@@ -99,7 +104,7 @@ public class AddToCartActivity extends AppCompatActivity {
         subtotalText.setText(String.valueOf(subtotal));
     }
 
-    public void showRemoveProductDialog() {
+    public void showRemoveProductDialog(final int position) {
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder
                 .setCancelable(false)
@@ -109,7 +114,10 @@ public class AddToCartActivity extends AppCompatActivity {
                 .setPositiveButton("Remove", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         // User clicked OK button
-
+                    Log.d(TAG,"position of item to be removed = "+position);
+                    productList.remove(position);
+                    cartProductAdapter.notifyItemRemoved(position);
+                    addProductToCartInLocalDb();
                     }
                 })
                 .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {

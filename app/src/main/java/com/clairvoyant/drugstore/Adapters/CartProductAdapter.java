@@ -115,7 +115,7 @@ public class CartProductAdapter extends RecyclerView.Adapter {
                         subtotal -= Double.parseDouble(priceText.getText().toString());
                         ((AddToCartActivity) context).addProductToCartInLocalDb(nameText.getText().toString(),Double.parseDouble(priceText.getText().toString()), Integer.parseInt(numberOfProductText.getText().toString()));
                     }else {
-                        ((AddToCartActivity) context).showRemoveProductDialog();
+                        ((AddToCartActivity) context).showRemoveProductDialog(getAdapterPosition());
                     }
                     break;
             }

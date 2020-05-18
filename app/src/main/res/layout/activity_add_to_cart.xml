@@ -132,7 +132,7 @@
             android:clickable="true"
             android:focusable="true"
             android:padding="@dimen/_15sdp"
-            android:text="Continue to checkout"
+            android:text="Proceed to checkout"
             android:textAlignment="center"
             android:textAllCaps="true"
             android:textColor="@android:color/white"
