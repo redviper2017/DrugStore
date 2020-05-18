@@ -9,23 +9,20 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
+import android.view.View;
+import android.widget.TextView;
 
-import com.clairvoyant.drugstore.Adapters.ProductAdapter;
 import com.clairvoyant.drugstore.Adapters.ProductListAdapter;
 import com.clairvoyant.drugstore.Database.DatabaseClient;
 import com.clairvoyant.drugstore.Entities.Product;
-import com.clairvoyant.drugstore.Models.MedicineData;
+import com.clairvoyant.drugstore.Entities.CartProduct;
 import com.clairvoyant.drugstore.R;
 import com.google.android.material.navigation.NavigationView;
-import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -41,12 +38,14 @@ public class ProductsActivity extends AppCompatActivity {
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle actionBarDrawerToggle;
     private NavigationView navigationView;
+    private TextView textCartItemCount;
 
     private ProductListAdapter adapter;
 
     private String intentTag;
 
     private ArrayList<Product> productList = new ArrayList<>();
+    private int mCartItemCount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,6 +102,11 @@ public class ProductsActivity extends AppCompatActivity {
                 return false;
             }
         });
+        MenuItem menuItem = menu.findItem(R.id.action_cart);
+        View actionView = menuItem.getActionView();
+        textCartItemCount = (TextView) actionView.findViewById(R.id.cart_badge);
+
+        setupBadge(0);
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -189,7 +193,7 @@ public class ProductsActivity extends AppCompatActivity {
                 }
                 Log.d(TAG, "number of products = " + productList.size());
 
-                adapter = new ProductListAdapter(getApplicationContext(), productList);
+                adapter = new ProductListAdapter(ProductsActivity.this, productList);
                 adapter.notifyDataSetChanged();
 
                 recyclerView.setAdapter(adapter);
@@ -199,5 +203,50 @@ public class ProductsActivity extends AppCompatActivity {
 
         GetProducts gp = new GetProducts();
         gp.execute();
+    }
+
+    public void setupBadge(int num) {
+        Log.d(TAG,"setupBadge method called = "+"YES");
+        mCartItemCount += num;
+        if (textCartItemCount != null) {
+            if (mCartItemCount == 0) {
+                if (textCartItemCount.getVisibility() != View.GONE) {
+                    textCartItemCount.setVisibility(View.GONE);
+                }
+            } else {
+                textCartItemCount.setText(String.valueOf(Math.min(mCartItemCount, 99)));
+                if (textCartItemCount.getVisibility() != View.VISIBLE) {
+                    textCartItemCount.setVisibility(View.VISIBLE);
+                }
+            }
+        }
+    }
+
+    public void addProductToCartInLocalDb(final String product, final double price, final int quantity){
+        Log.d(TAG,"addProductToCartInLocalDb method called = "+"YES");
+        class AddProductToCart extends AsyncTask<Void, Void, Void>{
+
+            @Override
+            protected Void doInBackground(Void... voids) {
+                CartProduct cartProduct = new CartProduct();
+                cartProduct.setName(product);
+                cartProduct.setPrice(price);
+                cartProduct.setSelectedQty(quantity);
+
+                DatabaseClient.getInstance(getApplicationContext()).getAppDatabase()
+                        .cartDao()
+                        .insert(cartProduct);
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(Void aVoid) {
+                super.onPostExecute(aVoid);
+                Log.d(TAG,"products saved to cart in db = "+"successfully");
+            }
+        }
+
+        AddProductToCart addProductToCart = new AddProductToCart();
+        addProductToCart.execute();
     }
 }

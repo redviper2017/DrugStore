@@ -139,14 +139,16 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/linear_layout_add_remove_product"
                     android:layout_alignEnd="@id/number_of_product_title_text"
-                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_15sdp"
                     android:background="@color/colorPrimary"
-                    android:padding="@dimen/_5sdp"
-                    android:text="Add to cart"
+                    android:padding="@dimen/_7sdp"
+                    android:text="Add to cartProduct"
                     android:textAlignment="center"
                     android:textAllCaps="true"
                     android:textColor="@android:color/white"
-                    android:visibility="gone" />
+                    android:visibility="gone"
+                    android:clickable="true"
+                    android:focusable="true"/>
             </RelativeLayout>
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>

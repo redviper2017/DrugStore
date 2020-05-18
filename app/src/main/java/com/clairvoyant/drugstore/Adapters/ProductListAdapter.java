@@ -14,6 +14,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.clairvoyant.drugstore.Activities.ProductsActivity;
 import com.clairvoyant.drugstore.Entities.Product;
 import com.clairvoyant.drugstore.R;
 import com.google.android.material.card.MaterialCardView;
@@ -131,6 +132,7 @@ public class ProductListAdapter extends RecyclerView.Adapter implements Filterab
             addToCartFinalButton = itemView.findViewById(R.id.add_to_cart_final_card);
 
             addToCartIconButton.setOnClickListener(this);
+            addToCartFinalButton.setOnClickListener(this);
             addRemoveProductLayout.setOnClickListener(this);
             addProductButton.setOnClickListener(this);
             removeProductButton.setOnClickListener(this);
@@ -177,6 +179,7 @@ public class ProductListAdapter extends RecyclerView.Adapter implements Filterab
                 case R.id.add_to_cart_icon_image_view:
                     addToCartIconButton.setVisibility(View.GONE);
                     addRemoveProductLayout.setVisibility(View.VISIBLE);
+                    numberOfProductText.setText("1");
                     numberOfProductTitleText.setVisibility(View.VISIBLE);
                     addToCartFinalButton.setVisibility(View.VISIBLE);
                     break;
@@ -199,6 +202,17 @@ public class ProductListAdapter extends RecyclerView.Adapter implements Filterab
                     }
 
                     numberOfProductText.setText(String.valueOf(number1));
+                    break;
+                case R.id.add_to_cart_final_card:
+                    Log.d(TAG,"final add to cart clicked = "+"YES");
+
+                    ((ProductsActivity) context).setupBadge(Integer.parseInt(numberOfProductText.getText().toString()));
+                    ((ProductsActivity) context).addProductToCartInLocalDb(nameText.getText().toString(),Double.parseDouble(priceText.getText().toString()), Integer.parseInt(numberOfProductText.getText().toString()));
+
+                    addRemoveProductLayout.setVisibility(View.GONE);
+                    numberOfProductTitleText.setVisibility(View.GONE);
+                    addToCartFinalButton.setVisibility(View.GONE);
+                    addToCartIconButton.setVisibility(View.VISIBLE);
                     break;
             }
         }
