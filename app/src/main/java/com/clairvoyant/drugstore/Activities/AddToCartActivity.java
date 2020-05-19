@@ -117,7 +117,15 @@ public class AddToCartActivity extends AppCompatActivity {
                     Log.d(TAG,"position of item to be removed = "+position);
                     removeProductFromCartInLocalDb(productList.get(position));
                     productList.remove(position);
-                    cartProductAdapter.notifyItemRemoved(position);
+
+                    if (productList.size()!=0)
+                        cartProductAdapter.notifyItemRemoved(position);
+                    else {
+                        contentLayout.setVisibility(View.GONE);
+                        noContentLayout.setVisibility(View.VISIBLE);
+                        subtotalText.setText("0.00");
+                        deliveryText.setText("0.00");
+                    }
                     }
                 })
                 .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -189,7 +197,8 @@ public class AddToCartActivity extends AppCompatActivity {
     }
 
     public void updateCartInLocalDb(final CartProduct cartProduct){
-        Log.d(TAG,"updateCartInLocalDb method called = "+"YES");
+        Log.d(TAG,"updateCartInLocalDb method called with product named = "+ cartProduct.getSelectedQty());
+        @SuppressLint("StaticFieldLeak")
         class UpdateCart extends AsyncTask<Void,Void,Void>{
 
             @Override
@@ -207,5 +216,7 @@ public class AddToCartActivity extends AppCompatActivity {
                 Log.d(TAG,"products update in cart in db = "+"successfully");
             }
         }
+        UpdateCart updateCart = new UpdateCart();
+        updateCart.execute();
     }
 }
