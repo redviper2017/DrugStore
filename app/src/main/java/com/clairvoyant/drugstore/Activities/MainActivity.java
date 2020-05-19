@@ -1,6 +1,7 @@
 package com.clairvoyant.drugstore.Activities;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -17,6 +18,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 
 import com.clairvoyant.drugstore.Database.DatabaseClient;
+import com.clairvoyant.drugstore.Entities.CartProduct;
 import com.clairvoyant.drugstore.Entities.Product;
 import com.clairvoyant.drugstore.Fragments.HomeFragment;
 import com.clairvoyant.drugstore.Models.MedicineData;
@@ -29,6 +31,9 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
@@ -41,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
 
     private ArrayList<MedicineData> productListFromServer = new ArrayList<>();
     private TextView textCartItemCount;
-    private double mCartItemCount;
+    private int mCartItemCount = 0;
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
@@ -60,6 +65,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         fetchDataFromFirestore();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        invalidateOptionsMenu();
     }
 
     @Override
@@ -107,11 +118,17 @@ public class MainActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.actions_menu_main, menu);
 
-        MenuItem menuItem = menu.findItem(R.id.action_cart_main);
-        View actionView = menuItem.getActionView();
+        MenuItem cartItem = menu.findItem(R.id.action_cart_main);
+        View actionView = cartItem.getActionView();
+        actionView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this,AddToCartActivity.class));
+            }
+        });
         textCartItemCount = (TextView) actionView.findViewById(R.id.cart_badge);
 
-        setupBadge();
+        getCartProducts();
 
         return true;
     }
@@ -187,18 +204,59 @@ public class MainActivity extends AppCompatActivity {
         saveProduct.execute();
     }
 
-    private void setupBadge() {
+    public void setupBadge(int num) {
+        mCartItemCount = Integer.parseInt(textCartItemCount.getText().toString()) + num;
+        Log.d(TAG,"setupBadge method called = "+num);
         if (textCartItemCount != null) {
             if (mCartItemCount == 0) {
+                Log.d(TAG,"mCartItemCount is equal to zero = "+"YES");
                 if (textCartItemCount.getVisibility() != View.GONE) {
                     textCartItemCount.setVisibility(View.GONE);
                 }
             } else {
-                textCartItemCount.setText(String.valueOf(Math.min(mCartItemCount, 99)));
+                Log.d(TAG,"mCartItemCount is equal to zero = "+"NO");
+                textCartItemCount.setText(String.valueOf(mCartItemCount));
                 if (textCartItemCount.getVisibility() != View.VISIBLE) {
                     textCartItemCount.setVisibility(View.VISIBLE);
                 }
             }
         }
+    }
+
+    public List<CartProduct> getCartProducts() {
+        @SuppressLint("StaticFieldLeak")
+        class GetCartProducts extends AsyncTask<Void, Void, List<CartProduct>> {
+
+            @Override
+            protected List<CartProduct> doInBackground(Void... voids) {
+                List<CartProduct> cartProductList = DatabaseClient
+                        .getInstance(getApplicationContext())
+                        .getAppDatabase()
+                        .cartDao()
+                        .getAll();
+//                cardProducts.addAll(cartProductList);
+                return cartProductList;
+            }
+
+            @Override
+            protected void onPostExecute(List<CartProduct> cartProducts) {
+                super.onPostExecute(cartProducts);
+                Collections.sort(cartProducts, new Comparator<CartProduct>() {
+                    @Override
+                    public int compare(CartProduct o1, CartProduct o2) {
+                        return o1.getName().toLowerCase().compareTo(o2.getName().toLowerCase());
+                    }
+                });
+                int totalNumberOfProducts = 0;
+                for (int i = 0; i < cartProducts.size(); i++)
+                    totalNumberOfProducts += cartProducts.get(i).getSelectedQty();
+                Log.d(TAG, "total number of products added to cart = " + totalNumberOfProducts);
+                setupBadge(totalNumberOfProducts);
+            }
+        }
+
+        GetCartProducts gcp = new GetCartProducts();
+        gcp.execute();
+        return null;
     }
 }

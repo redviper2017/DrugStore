@@ -690,7 +690,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerHorizontal="true"
-                            android:src="@drawable/reques_product_icon" />
+                            android:src="@drawable/request_product_icon" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -698,7 +698,7 @@
                             android:layout_below="@id/request_products_image"
                             android:layout_centerHorizontal="true"
                             android:layout_marginTop="@dimen/_5sdp"
-                            android:text="Request Medicine" />
+                            android:text="Request Product" />
                     </RelativeLayout>
 
                     <RelativeLayout

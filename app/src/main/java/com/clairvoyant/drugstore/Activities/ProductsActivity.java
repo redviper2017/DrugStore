@@ -115,9 +115,8 @@ public class ProductsActivity extends AppCompatActivity {
                 return false;
             }
         });
-        MenuItem menuItem = menu.findItem(R.id.action_cart);
-        View actionView = menuItem.getActionView();
-        textCartItemCount = (TextView) actionView.findViewById(R.id.cart_badge);
+
+        textCartItemCount = (TextView) view.findViewById(R.id.cart_badge);
         getCartProducts();
 //        setupBadge(0);
         return super.onCreateOptionsMenu(menu);
