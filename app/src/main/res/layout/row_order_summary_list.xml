@@ -2,7 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="@dimen/_10sdp">
+    android:layout_margin="@dimen/_10sdp"
+    android:paddingTop="@dimen/_5sdp"
+    android:paddingBottom="@dimen/_5sdp">
 
     <TextView
         android:id="@+id/product_name_text_order_summary"
@@ -32,7 +34,6 @@
             android:id="@+id/product_price_text_order_summary"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:text="213"
             android:textSize="@dimen/_12ssp"
             android:layout_marginStart="@dimen/_2sdp"/>

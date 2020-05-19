@@ -100,8 +100,9 @@ public class CheckoutActivity extends AppCompatActivity {
             TextView quantity = convertView.findViewById(R.id.product_quantity_text_order_summary);
 
             name.setText(cartProduct.getName());
-            price.setText(String.valueOf(cartProduct.getPrice()));
-            quantity.setText(String.valueOf(cartProduct.getSelectedQty()));
+            String priceTotal = String.format("%.2f",(Double.parseDouble(String.valueOf(cartProduct.getPrice())) * cartProduct.getSelectedQty()));
+            price.setText(String.valueOf(priceTotal));
+            quantity.setText(String.valueOf("Qty "+cartProduct.getSelectedQty()));
             return convertView;
         }
     }
