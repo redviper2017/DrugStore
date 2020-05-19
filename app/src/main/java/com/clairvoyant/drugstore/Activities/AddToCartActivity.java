@@ -2,17 +2,20 @@ package com.clairvoyant.drugstore.Activities;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.clairvoyant.drugstore.Adapters.CartProductAdapter;
 import com.clairvoyant.drugstore.Database.DatabaseClient;
@@ -30,6 +33,7 @@ public class AddToCartActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     public TextView subtotalText, deliveryText;
     private RelativeLayout contentLayout, noContentLayout;
+    private CardView proceedCheckoutButton;
     List<CartProduct> productList;
 
     CartProductAdapter cartProductAdapter;
@@ -42,7 +46,7 @@ public class AddToCartActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_to_cart);
-
+        proceedCheckoutButton = findViewById(R.id.checkout_button);
         recyclerView = findViewById(R.id.car_product_list_view);
         subtotalText = findViewById(R.id.subtotal_text);
         deliveryText = findViewById(R.id.deliver_fee_text);
@@ -51,6 +55,14 @@ public class AddToCartActivity extends AppCompatActivity {
 
         Objects.requireNonNull(getSupportActionBar()).setTitle("Your Cart");
         getCartProducts();
+
+        proceedCheckoutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getApplicationContext(),"Clicked!",Toast.LENGTH_LONG).show();
+                startActivity(new Intent(AddToCartActivity.this,CheckoutActivity.class));
+            }
+        });
     }
 
     public void getCartProducts() {
