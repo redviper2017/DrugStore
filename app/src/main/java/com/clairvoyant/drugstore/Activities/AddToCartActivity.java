@@ -89,7 +89,7 @@ public class AddToCartActivity extends AppCompatActivity {
 
                     recyclerView.setAdapter(cartProductAdapter);
                     recyclerView.setLayoutManager(new LinearLayoutManager(AddToCartActivity.this));
-                }else {
+                } else {
                     contentLayout.setVisibility(View.GONE);
                     noContentLayout.setVisibility(View.VISIBLE);
                 }
@@ -104,7 +104,7 @@ public class AddToCartActivity extends AppCompatActivity {
         subtotalText.setText(String.valueOf(subtotal));
     }
 
-    public void showRemoveProductDialog(final int position) {
+    public void showRemoveProductDialog(final int position, final double price) {
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder
                 .setCancelable(false)
@@ -114,18 +114,19 @@ public class AddToCartActivity extends AppCompatActivity {
                 .setPositiveButton("Remove", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         // User clicked OK button
-                    Log.d(TAG,"position of item to be removed = "+position);
-                    removeProductFromCartInLocalDb(productList.get(position));
-                    productList.remove(position);
+                        Log.d(TAG, "position of item to be removed = " + position);
+                        removeProductFromCartInLocalDb(productList.get(position));
+                        productList.remove(position);
 
-                    if (productList.size()!=0)
-                        cartProductAdapter.notifyItemRemoved(position);
-                    else {
-                        contentLayout.setVisibility(View.GONE);
-                        noContentLayout.setVisibility(View.VISIBLE);
-                        subtotalText.setText("0.00");
-                        deliveryText.setText("0.00");
-                    }
+                        if (productList.size() != 0) {
+                            cartProductAdapter.notifyItemRemoved(position);
+                            subtotalText.setText(String.valueOf(Double.parseDouble(subtotalText.getText().toString()) - price));
+                        } else {
+                            contentLayout.setVisibility(View.GONE);
+                            noContentLayout.setVisibility(View.VISIBLE);
+                            subtotalText.setText("0.00");
+                            deliveryText.setText("0.00");
+                        }
                     }
                 })
                 .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -140,10 +141,10 @@ public class AddToCartActivity extends AppCompatActivity {
         dialog.show();
     }
 
-    public void addProductToCartInLocalDb(final String product, final double price, final int quantity){
-        Log.d(TAG,"addProductToCartInLocalDb method called = "+"YES");
+    public void addProductToCartInLocalDb(final String product, final double price, final int quantity) {
+        Log.d(TAG, "addProductToCartInLocalDb method called = " + "YES");
         @SuppressLint("StaticFieldLeak")
-        class AddProductToCart extends AsyncTask<Void, Void, Void>{
+        class AddProductToCart extends AsyncTask<Void, Void, Void> {
 
             @Override
             protected Void doInBackground(Void... voids) {
@@ -162,7 +163,7 @@ public class AddToCartActivity extends AppCompatActivity {
             @Override
             protected void onPostExecute(Void aVoid) {
                 super.onPostExecute(aVoid);
-                Log.d(TAG,"products saved to cart in db = "+"successfully");
+                Log.d(TAG, "products saved to cart in db = " + "successfully");
             }
         }
 
@@ -170,11 +171,11 @@ public class AddToCartActivity extends AppCompatActivity {
         addProductToCart.execute();
     }
 
-    public void removeProductFromCartInLocalDb(final CartProduct cartProduct){
-        Log.d(TAG,"removeProductFromCartInLocalDb method called = "+"YES");
+    public void removeProductFromCartInLocalDb(final CartProduct cartProduct) {
+        Log.d(TAG, "removeProductFromCartInLocalDb method called = " + "YES");
 
         @SuppressLint("StaticFieldLeak")
-        class RemoveProductFromCart extends AsyncTask<Void, Void, Void>{
+        class RemoveProductFromCart extends AsyncTask<Void, Void, Void> {
 
             @Override
             protected Void doInBackground(Void... voids) {
@@ -188,7 +189,7 @@ public class AddToCartActivity extends AppCompatActivity {
             @Override
             protected void onPostExecute(Void aVoid) {
                 super.onPostExecute(aVoid);
-                Log.d(TAG,"products removed from cart in db = "+"successfully");
+                Log.d(TAG, "products removed from cart in db = " + "successfully");
             }
         }
 
@@ -196,10 +197,10 @@ public class AddToCartActivity extends AppCompatActivity {
         removeProductFromCart.execute();
     }
 
-    public void updateCartInLocalDb(final CartProduct cartProduct){
-        Log.d(TAG,"updateCartInLocalDb method called with product named = "+ cartProduct.getSelectedQty());
+    public void updateCartInLocalDb(final CartProduct cartProduct) {
+        Log.d(TAG, "updateCartInLocalDb method called with product named = " + cartProduct.getSelectedQty());
         @SuppressLint("StaticFieldLeak")
-        class UpdateCart extends AsyncTask<Void,Void,Void>{
+        class UpdateCart extends AsyncTask<Void, Void, Void> {
 
             @Override
             protected Void doInBackground(Void... voids) {
@@ -213,7 +214,7 @@ public class AddToCartActivity extends AppCompatActivity {
             @Override
             protected void onPostExecute(Void aVoid) {
                 super.onPostExecute(aVoid);
-                Log.d(TAG,"products update in cart in db = "+"successfully");
+                Log.d(TAG, "products update in cart in db = " + "successfully");
             }
         }
         UpdateCart updateCart = new UpdateCart();

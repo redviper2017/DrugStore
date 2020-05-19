@@ -121,9 +121,9 @@ public class CartProductAdapter extends RecyclerView.Adapter {
                         product1.setPrice(Double.parseDouble(priceText.getText().toString()));
                         product1.setSelectedQty(Integer.parseInt(numberOfProductText.getText().toString()));
 
-                        ((AddToCartActivity) context).updateCartInLocalDb(product1);
+                        ((AddToCartActivity) context).addProductToCartInLocalDb(nameText.getText().toString(),Double.parseDouble(priceText.getText().toString()),Integer.parseInt(numberOfProductText.getText().toString()));
                     }else {
-                        ((AddToCartActivity) context).showRemoveProductDialog(getAdapterPosition());
+                        ((AddToCartActivity) context).showRemoveProductDialog(getAdapterPosition(), Double.parseDouble(priceText.getText().toString()));
                     }
                     break;
             }

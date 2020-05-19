@@ -303,4 +303,10 @@ public class ProductsActivity extends AppCompatActivity {
         gcp.execute();
         return null;
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        invalidateOptionsMenu();
+    }
 }
