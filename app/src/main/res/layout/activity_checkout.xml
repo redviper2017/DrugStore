@@ -5,13 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Activities.CheckoutActivity">
-
-    <androidx.core.widget.NestedScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@id/place_order_card"
-        android:fillViewport="true">
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -30,7 +23,7 @@
         <androidx.cardview.widget.CardView
             android:id="@+id/order_summary_card"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_200sdp"
+            android:layout_height="@dimen/_150sdp"
             android:layout_below="@id/order_summary_title"
             android:layout_marginStart="@dimen/_10sdp"
             android:layout_marginTop="@dimen/_10sdp"
@@ -42,7 +35,8 @@
                 android:id="@+id/order_summary_list"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_margin="@dimen/_10sdp"
+                android:paddingStart="@dimen/_10sdp"
+
                 android:divider="@android:color/white" />
         </androidx.cardview.widget.CardView>
 
@@ -52,7 +46,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/total_price_text"
             android:layout_marginStart="@dimen/_10sdp"
-            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_10sdp"
             android:text="Delivery Address"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="@dimen/_12ssp" />
@@ -177,7 +171,6 @@
             android:textSize="@dimen/_14ssp"
             android:textStyle="bold" />
     </RelativeLayout>
-    </androidx.core.widget.NestedScrollView>
 
     <androidx.cardview.widget.CardView
         android:id="@+id/place_order_card"
