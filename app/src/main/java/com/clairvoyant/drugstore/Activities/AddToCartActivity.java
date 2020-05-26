@@ -59,7 +59,7 @@ public class AddToCartActivity extends AppCompatActivity {
         proceedCheckoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getApplicationContext(),"Clicked!",Toast.LENGTH_LONG).show();
+//                Toast.makeText(getApplicationContext(),"Clicked!",Toast.LENGTH_LONG).show();
                 startActivity(new Intent(AddToCartActivity.this,CheckoutActivity.class));
             }
         });

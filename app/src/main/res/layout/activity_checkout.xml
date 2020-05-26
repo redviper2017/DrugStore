@@ -9,7 +9,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true">
+        android:layout_marginTop="@dimen/_10sdp">
 
         <TextView
             android:id="@+id/order_summary_title"
@@ -62,6 +62,7 @@
             app:cardElevation="@dimen/_1sdp">
 
             <EditText
+                android:id="@+id/delivery_address_text"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
         </androidx.cardview.widget.CardView>
@@ -117,16 +118,9 @@
             android:layout_marginEnd="@dimen/_20sdp"
             android:layout_alignParentEnd="true"
             android:text="1130"
+            android:textColor="@android:color/holo_red_dark"
             android:textSize="@dimen/_14ssp"
             android:textStyle="bold"/>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_2sdp"
-            android:layout_below="@id/total_title_price_text"
-            android:layout_alignStart="@id/total_price_icon"
-            android:layout_marginEnd="@dimen/_10sdp"
-            android:background="@color/colorPrimaryDark"
-            android:layout_marginTop="@dimen/_5sdp"/>
     </RelativeLayout>
 
     <androidx.cardview.widget.CardView
@@ -134,14 +128,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?android:attr/selectableItemBackground"
         app:cardElevation="@dimen/_10sdp">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/colorPrimary"
-            android:clickable="true"
-            android:focusable="true"
             android:padding="@dimen/_15sdp"
             android:text="Place Order"
             android:textAlignment="center"
