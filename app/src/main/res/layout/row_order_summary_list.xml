@@ -1,31 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/_10sdp"
     android:paddingTop="@dimen/_5sdp"
+    android:paddingStart="@dimen/_10sdp"
+    android:paddingEnd="@dimen/_10sdp"
     android:paddingBottom="@dimen/_5sdp">
 
     <TextView
         android:id="@+id/product_name_text_order_summary"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="2"
+        android:layout_alignParentStart="true"
         android:text="Napa Extra"
         android:textSize="@dimen/_12ssp"/>
 
     <TextView
         android:id="@+id/product_quantity_text_order_summary"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
         android:layout_weight="1"
         android:text="Qty 12"
-        android:textSize="@dimen/_12ssp"/>
+        android:textSize="@dimen/_12ssp"
+        android:layout_marginStart="@dimen/_40sdp"/>
 
     <LinearLayout
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="1">
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="@dimen/_40sdp">
         <ImageView
             android:layout_width="@dimen/_15sdp"
             android:layout_height="@dimen/_15sdp"
@@ -38,4 +44,4 @@
             android:textSize="@dimen/_12ssp"
             android:layout_marginStart="@dimen/_2sdp"/>
     </LinearLayout>
-</LinearLayout>
+</RelativeLayout>

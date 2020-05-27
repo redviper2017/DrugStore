@@ -6,37 +6,38 @@
     android:layout_height="match_parent"
     tools:context=".Activities.CheckoutActivity">
 
+    <TextView
+        android:id="@+id/order_summary_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginBottom="@dimen/_10sdp"
+        android:text="Order Summary"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="@dimen/_12ssp" />
+
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <TextView
-            android:id="@+id/order_summary_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_10sdp"
-            android:layout_marginBottom="@dimen/_10sdp"
-            android:layout_above="@id/order_summary_card"
-            android:text="Order Summary"
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="@dimen/_12ssp" />
+        android:layout_height="wrap_content"
+        android:layout_below="@id/order_summary_title">
 
         <androidx.cardview.widget.CardView
             android:id="@+id/order_summary_card"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_180sdp"
+            android:layout_height="@dimen/_150sdp"
             android:layout_above="@+id/total_title_price_text"
-            android:layout_marginStart="@dimen/_10sdp"
-            android:layout_marginEnd="@dimen/_10sdp"
+            android:layout_alignParentTop="true"
+            android:layout_margin="@dimen/_10sdp"
+
             app:cardElevation="@dimen/_1sdp">
 
             <ListView
                 android:id="@+id/order_summary_list"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:divider="@android:color/white"
-
-                android:paddingStart="@dimen/_10sdp" />
+                android:divider="@android:color/white" />
         </androidx.cardview.widget.CardView>
 
         <TextView
@@ -109,6 +110,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
+                        android:layout_marginBottom="@dimen/_5sdp"
                         android:text="bKash"
                         android:textSize="@dimen/_14ssp" />
                 </LinearLayout>
@@ -117,18 +119,38 @@
             <androidx.cardview.widget.CardView
                 android:id="@+id/bkash_trx_card"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/_100sdp"
+                android:layout_alignTop="@id/bkash_payment_card"
+                android:layout_alignBottom="@id/bkash_payment_card"
                 android:layout_marginStart="@dimen/_10sdp"
                 android:layout_marginEnd="@dimen/_10sdp"
                 android:layout_toEndOf="@id/bkash_payment_card">
 
-                <EditText
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_5sdp"
-                    android:layout_marginEnd="@dimen/_5sdp"
-                    android:hint="Enter your bKash Trx ID here"
-                    android:textSize="@dimen/_12ssp" />
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_5sdp"
+                        android:layout_marginEnd="@dimen/_5sdp"
+                        android:text="For bKash payment, first pay your bill with bKash then insert the TrxID below:"
+                        android:textSize="@dimen/_12ssp" />
+
+                    <EditText
+                        android:id="@+id/bkash_trx_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_5sdp"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:layout_marginEnd="@dimen/_5sdp"
+                        android:hint="bKash TrxID"
+                        android:maxLines="1"
+                        android:minLines="1"
+                        android:textSize="@dimen/_12ssp" />
+                </LinearLayout>
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
@@ -139,10 +161,10 @@
                 android:layout_marginStart="@dimen/_10sdp"
                 android:layout_marginTop="@dimen/_5sdp"
                 android:layout_marginEnd="@dimen/_10sdp"
+                android:layout_marginBottom="@dimen/_10sdp"
                 android:clickable="true"
                 android:focusable="true"
-                android:foreground="?android:attr/selectableItemBackground"
-                android:layout_marginBottom="@dimen/_10sdp">
+                android:foreground="?android:attr/selectableItemBackground">
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -161,6 +183,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
+                        android:layout_marginBottom="@dimen/_5sdp"
                         android:text="cash on delivery"
                         android:textSize="@dimen/_14ssp" />
                 </LinearLayout>
@@ -168,11 +191,12 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/place_order_card"
-                android:layout_width="@dimen/_150sdp"
+                android:layout_width="@dimen/_120sdp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
+                android:layout_marginTop="@dimen/_20sdp"
                 android:layout_marginEnd="@dimen/_10sdp"
+                android:layout_alignBottom="@id/cash_payment_card"
                 android:layout_marginBottom="@dimen/_10sdp"
                 android:clickable="true"
                 android:focusable="true"
