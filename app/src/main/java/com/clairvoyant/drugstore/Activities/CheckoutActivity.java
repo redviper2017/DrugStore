@@ -1,11 +1,9 @@
 package com.clairvoyant.drugstore.Activities;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
-import androidx.recyclerview.widget.LinearLayoutManager;
-
 import android.annotation.SuppressLint;
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -18,20 +16,22 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.clairvoyant.drugstore.Adapters.CartProductAdapter;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
+
 import com.clairvoyant.drugstore.Database.DatabaseClient;
 import com.clairvoyant.drugstore.Entities.CartProduct;
 import com.clairvoyant.drugstore.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -72,6 +72,7 @@ public class CheckoutActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 paymentMethod = "bkash";
+                createDialog(paymentMethod);
             }
         });
         cashPaymentButton.setOnClickListener(new View.OnClickListener() {
@@ -187,6 +188,40 @@ public class CheckoutActivity extends AppCompatActivity {
         }
     }
 
+    public void createDialog(String dialogFor){
+        String dialogTitle = null;
+        String dialogMessage = null;
+        switch (dialogFor){
+            case "bkash":
+                dialogTitle = "Our bKash number";
+                dialogMessage = "01789710097";
+                break;
+        }
+        final String finalDialogMessage = dialogMessage;
+        new MaterialAlertDialogBuilder(this)
+                .setTitle(dialogTitle)
+                .setMessage(dialogMessage)
+                .setPositiveButton(R.string.copy, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        ClipboardManager manager = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
+                        ClipData clipData = ClipData.newPlainText("text", finalDialogMessage);
+                        if (manager != null) {
+                            manager.setPrimaryClip(clipData);
+                        }
+                        Toast.makeText(getApplicationContext(), "bKash number copied to clipboard!", Toast.LENGTH_LONG).show();
+                    }
+                })
+                .setNegativeButton(R.string.done, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                })
+                .setIcon(R.drawable.bkash_icon)
+                .setCancelable(false)
+                .show();
+    }
 
     class CustomListAdapter extends BaseAdapter {
 
