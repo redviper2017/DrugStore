@@ -191,6 +191,7 @@
             android:textAlignment="center"
             android:textAllCaps="true"
             android:textColor="@android:color/white"
-            android:textSize="@dimen/_12ssp" />
+            android:textSize="@dimen/_12ssp"
+            android:textStyle="bold"/>
     </androidx.cardview.widget.CardView>
 </RelativeLayout>

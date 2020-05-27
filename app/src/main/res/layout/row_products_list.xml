@@ -43,7 +43,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/product_name_text"
                     android:text="Square Pharmaceuticals Ltd."
-                    android:textColor="@color/colorPrimary"
+
                     android:textSize="@dimen/_11ssp" />
 
                 <TextView
@@ -52,7 +52,6 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/product_brand_name_text"
                     android:text="Paracetamol"
-                    android:textColor="@color/colorPrimary"
                     android:textSize="@dimen/_11ssp"
                     android:textStyle="italic" />
 
@@ -119,7 +118,6 @@
                         android:layout_marginStart="@dimen/_5sdp"
                         android:layout_marginEnd="@dimen/_5sdp"
                         android:text="1"
-                        android:textColor="@color/colorPrimary"
                         android:textSize="@dimen/_15ssp"
                         android:textStyle="bold" />
 
