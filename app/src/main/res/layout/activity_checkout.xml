@@ -5,17 +5,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Activities.CheckoutActivity">
+
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_10sdp">
+        android:layout_height="wrap_content">
 
         <TextView
             android:id="@+id/order_summary_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_10sdp"
-            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:layout_above="@id/order_summary_card"
             android:text="Order Summary"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="@dimen/_12ssp" />
@@ -23,30 +24,28 @@
         <androidx.cardview.widget.CardView
             android:id="@+id/order_summary_card"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_150sdp"
-            android:layout_below="@id/order_summary_title"
+            android:layout_height="@dimen/_180sdp"
+            android:layout_above="@+id/total_title_price_text"
             android:layout_marginStart="@dimen/_10sdp"
-            android:layout_marginTop="@dimen/_10sdp"
             android:layout_marginEnd="@dimen/_10sdp"
-            android:layout_marginBottom="@dimen/_10sdp"
             app:cardElevation="@dimen/_1sdp">
 
             <ListView
                 android:id="@+id/order_summary_list"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:paddingStart="@dimen/_10sdp"
+                android:divider="@android:color/white"
 
-                android:divider="@android:color/white" />
+                android:paddingStart="@dimen/_10sdp" />
         </androidx.cardview.widget.CardView>
 
         <TextView
             android:id="@+id/delivery_address_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/total_price_text"
+            android:layout_above="@id/deliver_address_card"
             android:layout_marginStart="@dimen/_10sdp"
-            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginTop="-2dp"
             android:text="Delivery Address"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="@dimen/_12ssp" />
@@ -55,10 +54,11 @@
             android:id="@+id/deliver_address_card"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_50sdp"
-            android:layout_below="@id/delivery_address_title"
+            android:layout_above="@id/payment_method_title"
             android:layout_marginStart="@dimen/_10sdp"
             android:layout_marginTop="@dimen/_10sdp"
             android:layout_marginEnd="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
             app:cardElevation="@dimen/_1sdp">
 
             <EditText
@@ -71,79 +71,134 @@
             android:id="@+id/payment_method_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/deliver_address_card"
+            android:layout_above="@id/linear_layout_paymentoptions"
             android:layout_marginStart="@dimen/_10sdp"
-            android:layout_marginTop="@dimen/_20sdp"
             android:text="Payment Method"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="@dimen/_12ssp" />
 
-        <LinearLayout
+        <RelativeLayout
+            android:id="@+id/linear_layout_paymentoptions"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/payment_method_title"
-            android:layout_marginStart="@dimen/_10sdp"
-            android:layout_marginEnd="@dimen/_10sdp">
+            android:layout_alignParentBottom="true">
+
             <androidx.cardview.widget.CardView
                 android:id="@+id/bkash_payment_card"
-                android:layout_width="0dp"
+                android:layout_width="@dimen/_100sdp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
                 android:clickable="true"
                 android:focusable="true"
-                android:layout_margin="@dimen/_10sdp"
                 android:foreground="?android:attr/selectableItemBackground">
+
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_gravity="center">
+                    android:layout_gravity="center"
+                    android:orientation="vertical">
+
                     <ImageView
-                        android:layout_width="@dimen/_100sdp"
-                        android:layout_height="@dimen/_100sdp"
-                        android:src="@drawable/bkash_icon"/>
+                        android:layout_width="@dimen/_70sdp"
+                        android:layout_height="@dimen/_70sdp"
+                        android:src="@drawable/bkash_icon" />
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center"
                         android:text="bKash"
-                        android:textSize="@dimen/_14ssp"
-                        android:layout_gravity="center"/>
+                        android:textSize="@dimen/_14ssp" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/bkash_trx_card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:layout_toEndOf="@id/bkash_payment_card">
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:layout_marginEnd="@dimen/_5sdp"
+                    android:hint="Enter your bKash Trx ID here"
+                    android:textSize="@dimen/_12ssp" />
+            </androidx.cardview.widget.CardView>
+
             <androidx.cardview.widget.CardView
                 android:id="@+id/cash_payment_card"
-                android:layout_width="0dp"
+                android:layout_width="@dimen/_100sdp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_below="@id/bkash_payment_card"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
                 android:clickable="true"
                 android:focusable="true"
                 android:foreground="?android:attr/selectableItemBackground"
-                android:layout_margin="@dimen/_10sdp">
+                android:layout_marginBottom="@dimen/_10sdp">
+
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_gravity="center">
-                <ImageView
-                    android:id="@+id/cash_image"
-                    android:layout_width="@dimen/_80sdp"
-                    android:layout_height="@dimen/_100sdp"
-                    android:src="@drawable/cash_icon"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="cash on delivery"
-                    android:textSize="@dimen/_14ssp"
-                    android:layout_gravity="center"/>
+                    android:layout_gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/cash_image"
+                        android:layout_width="@dimen/_50sdp"
+                        android:layout_height="@dimen/_70sdp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/cash_icon" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="cash on delivery"
+                        android:textSize="@dimen/_14ssp" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
-        </LinearLayout>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/place_order_card"
+                android:layout_width="@dimen/_150sdp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:layout_marginBottom="@dimen/_10sdp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:attr/selectableItemBackground"
+                app:cardCornerRadius="@dimen/_30sdp"
+                app:cardElevation="@dimen/_10sdp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorPrimary"
+                    android:padding="@dimen/_15sdp"
+                    android:text="Place Order"
+                    android:textAlignment="center"
+                    android:textAllCaps="true"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/_12ssp"
+                    android:textStyle="bold" />
+            </androidx.cardview.widget.CardView>
+        </RelativeLayout>
 
         <TextView
             android:id="@+id/total_title_price_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/order_summary_card"
+            android:layout_above="@id/delivery_address_title"
             android:layout_toStartOf="@id/total_price_icon"
             android:text="Total:"
             android:textColor="@color/colorPrimaryDark"
@@ -154,7 +209,7 @@
             android:id="@+id/total_price_icon"
             android:layout_width="@dimen/_18sdp"
             android:layout_height="@dimen/_18sdp"
-            android:layout_below="@+id/order_summary_card"
+            android:layout_alignTop="@+id/total_title_price_text"
             android:layout_marginStart="@dimen/_5sdp"
             android:layout_toStartOf="@id/total_price_text"
             android:src="@drawable/taka_icon" />
@@ -163,7 +218,7 @@
             android:id="@+id/total_price_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/order_summary_card"
+            android:layout_alignTop="@id/total_title_price_text"
             android:layout_alignParentEnd="true"
             android:layout_marginEnd="@dimen/_20sdp"
             android:text="1130"
@@ -171,27 +226,4 @@
             android:textSize="@dimen/_14ssp"
             android:textStyle="bold" />
     </RelativeLayout>
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/place_order_card"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:clickable="true"
-        android:focusable="true"
-        android:foreground="?android:attr/selectableItemBackground"
-        app:cardElevation="@dimen/_10sdp">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/colorPrimary"
-            android:padding="@dimen/_15sdp"
-            android:text="Place Order"
-            android:textAlignment="center"
-            android:textAllCaps="true"
-            android:textColor="@android:color/white"
-            android:textSize="@dimen/_12ssp"
-            android:textStyle="bold"/>
-    </androidx.cardview.widget.CardView>
 </RelativeLayout>
