@@ -124,6 +124,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this,AddToCartActivity.class));
+                finish();
             }
         });
         textCartItemCount = (TextView) actionView.findViewById(R.id.cart_badge);

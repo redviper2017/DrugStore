@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -13,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -47,6 +49,7 @@ public class CheckoutActivity extends AppCompatActivity {
     private double totalPrice;
     private String paymentMethod;
     private String bkashTrxID;
+    private ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,13 +62,15 @@ public class CheckoutActivity extends AppCompatActivity {
         deliveryAddressText = findViewById(R.id.delivery_address_text);
         totalPriceText = findViewById(R.id.total_price_text);
         bkashTrxText = findViewById(R.id.bkash_trx_text);
+        progressBar = findViewById(R.id.determinateBar);
 
         getCartProducts();
         confirmOrderButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (cartProductsFinal != null)
+                if (cartProductsFinal != null) {
                     storeOrderToFirestore();
+                }
             }
         });
         bkashPaymentButton.setOnClickListener(new View.OnClickListener() {
@@ -121,7 +126,7 @@ public class CheckoutActivity extends AppCompatActivity {
     }
 
     public void storeOrderToFirestore() {
-        Map<String, Object> nestedFinalOrder = new HashMap<>();
+        final Map<String, Object> nestedFinalOrder = new HashMap<>();
 
         if (TextUtils.isEmpty(paymentMethod))
             Toast.makeText(getApplicationContext(), "Select a payment method first!", Toast.LENGTH_SHORT).show();
@@ -138,89 +143,113 @@ public class CheckoutActivity extends AppCompatActivity {
             } else {
                 nestedFinalOrder.put("paymentWith", paymentMethod);
             }
-        }
-        SimpleDateFormat dateformat = new SimpleDateFormat("dd/MMM/yyyy hh:mm aa");
-        String orderDate = dateformat.format(Calendar.getInstance().getTime());
 
-        Log.d(TAG, "order date = " + orderDate);
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        //Create new order in Firestore
-        Log.d(TAG, "final ordered products list size = " + cartProductsFinal.size());
+            SimpleDateFormat dateformat = new SimpleDateFormat("dd/MMM/yyyy hh:mm aa");
+            String orderDate = dateformat.format(Calendar.getInstance().getTime());
 
-        int i = 1;
+            Log.d(TAG, "order date = " + orderDate);
+            FirebaseFirestore db = FirebaseFirestore.getInstance();
+            //Create new order in Firestore
+            Log.d(TAG, "final ordered products list size = " + cartProductsFinal.size());
 
-
-        for (CartProduct cartProduct : cartProductsFinal) {
-            double orderPriceProduct = cartProduct.getPrice() * cartProduct.getSelectedQty();
-            Map<String, Object> finalOrder = new HashMap<>();
-            finalOrder.put("id", cartProduct.getId());
-            finalOrder.put("name", cartProduct.getName());
-            finalOrder.put("price", cartProduct.getPrice());
-            finalOrder.put("quantity", cartProduct.getSelectedQty());
-            finalOrder.put("productId", cartProduct.getId());
-            finalOrder.put("total", orderPriceProduct);
+            int i = 1;
 
 
-            nestedFinalOrder.put(String.valueOf("product:" + i), finalOrder);
-            i++;
-        }
-        nestedFinalOrder.put("time", orderDate);
-        nestedFinalOrder.put("subTotal", totalPriceText.getText().toString());
+            for (CartProduct cartProduct : cartProductsFinal) {
+                double orderPriceProduct = cartProduct.getPrice() * cartProduct.getSelectedQty();
+                Map<String, Object> finalOrder = new HashMap<>();
+                finalOrder.put("id", cartProduct.getId());
+                finalOrder.put("name", cartProduct.getName());
+                finalOrder.put("price", cartProduct.getPrice());
+                finalOrder.put("quantity", cartProduct.getSelectedQty());
+                finalOrder.put("productId", cartProduct.getId());
+                finalOrder.put("total", orderPriceProduct);
 
-        if (!TextUtils.isEmpty(deliveryAddressText.getText().toString())) {
-            nestedFinalOrder.put("address", deliveryAddressText.getText().toString());
-            db.collection("orders").document()
-                    .set(nestedFinalOrder)
-                    .addOnSuccessListener(new OnSuccessListener<Void>() {
-                        @Override
-                        public void onSuccess(Void aVoid) {
-                            Log.d(TAG, "DocumentSnapshot successfully written!");
-                        }
-                    }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-                    Log.w(TAG, "Error writing document", e);
-                }
-            });
-        } else {
-            deliveryAddressText.setError("Enter a delivery address");
-            deliveryAddressText.requestFocus();
+
+                nestedFinalOrder.put(String.valueOf("product:" + i), finalOrder);
+                i++;
+            }
+            nestedFinalOrder.put("time", orderDate);
+            nestedFinalOrder.put("subTotal", totalPriceText.getText().toString());
+            nestedFinalOrder.put("orderStatus", "pending");
+
+            if (!TextUtils.isEmpty(deliveryAddressText.getText().toString())) {
+                nestedFinalOrder.put("address", deliveryAddressText.getText().toString());
+                progressBar.setVisibility(View.VISIBLE);
+                db.collection("orders").document()
+                        .set(nestedFinalOrder)
+                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                Log.d(TAG, "DocumentSnapshot successfully written!");
+
+                                createDialog("orderPlaced");
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(TAG, "Error writing document", e);
+                    }
+                });
+
+            } else {
+                deliveryAddressText.setError("Enter a delivery address");
+                deliveryAddressText.requestFocus();
+            }
         }
     }
 
     public void createDialog(String dialogFor){
+        MaterialAlertDialogBuilder dialogBuilder = new MaterialAlertDialogBuilder(this);
         String dialogTitle = null;
         String dialogMessage = null;
         switch (dialogFor){
             case "bkash":
                 dialogTitle = "Our bKash number";
                 dialogMessage = "01789710097";
+                final String finalDialogMessage = dialogMessage;
+                dialogBuilder
+                        .setTitle(dialogTitle)
+                        .setMessage(dialogMessage)
+                        .setPositiveButton(R.string.copy, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                ClipboardManager manager = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
+                                ClipData clipData = ClipData.newPlainText("text", finalDialogMessage);
+                                if (manager != null) {
+                                    manager.setPrimaryClip(clipData);
+                                }
+                                Toast.makeText(getApplicationContext(), "bKash number copied to clipboard!", Toast.LENGTH_LONG).show();
+                            }
+                        })
+                        .setNegativeButton(R.string.done, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        })
+                        .setIcon(R.drawable.bkash_icon)
+                        .setCancelable(false)
+                        .show();
                 break;
+            case "orderPlaced":
+                progressBar.setVisibility(View.GONE);
+                dialogTitle = "Order placed successfully";
+                dialogMessage = "Thank you! Your order has been placed successfully, soon you will get a call from us for confirmation.";
+                final String finalDialogMessage1 = dialogMessage;
+                dialogBuilder
+                        .setTitle(dialogTitle)
+                        .setMessage(dialogMessage)
+                        .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                startActivity(new Intent(CheckoutActivity.this,MainActivity.class));
+                            }
+                        })
+                        .setIcon(R.drawable.orderplacement_icon)
+                        .setCancelable(false)
+                        .show();
         }
-        final String finalDialogMessage = dialogMessage;
-        new MaterialAlertDialogBuilder(this)
-                .setTitle(dialogTitle)
-                .setMessage(dialogMessage)
-                .setPositiveButton(R.string.copy, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        ClipboardManager manager = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
-                        ClipData clipData = ClipData.newPlainText("text", finalDialogMessage);
-                        if (manager != null) {
-                            manager.setPrimaryClip(clipData);
-                        }
-                        Toast.makeText(getApplicationContext(), "bKash number copied to clipboard!", Toast.LENGTH_LONG).show();
-                    }
-                })
-                .setNegativeButton(R.string.done, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                })
-                .setIcon(R.drawable.bkash_icon)
-                .setCancelable(false)
-                .show();
     }
 
     class CustomListAdapter extends BaseAdapter {
