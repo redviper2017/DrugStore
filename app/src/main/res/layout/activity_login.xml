@@ -34,17 +34,18 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/outlinedCodeTextField"
-        android:layout_below="@+id/getCodeButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/_10sdp"
         android:hint="verification code"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:visibility="gone">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/codeEditText"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:inputType="number"/>
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -56,5 +57,6 @@
         android:layout_marginStart="@dimen/_10sdp"
         android:layout_marginEnd="@dimen/_10sdp"
         android:text="Login"
-        style="?attr/materialButtonOutlinedStyle" />
+        style="?attr/materialButtonOutlinedStyle"
+        android:visibility="gone"/>
 </RelativeLayout>

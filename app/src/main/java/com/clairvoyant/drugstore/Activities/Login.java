@@ -3,7 +3,9 @@ package com.clairvoyant.drugstore.Activities;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -12,7 +14,10 @@ import android.widget.Toast;
 import com.clairvoyant.drugstore.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.gms.tasks.TaskExecutors;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.FirebaseException;
 import com.google.firebase.FirebaseTooManyRequestsException;
 import com.google.firebase.auth.AuthResult;
@@ -26,13 +31,13 @@ import java.util.concurrent.TimeUnit;
 
 public class Login extends AppCompatActivity implements View.OnClickListener {
 
+    private static final String TAG = "Login";
     private TextInputEditText phoneText, codeText;
     private Button getCodeButton, loginButton;
-
+    TextInputLayout codeLayout, phonelayout;
     private FirebaseAuth mAuth;
-    private PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallbacks;
     private String mVerificationId;
-    private PhoneAuthProvider.ForceResendingToken mResendToken;
+    PhoneAuthProvider.ForceResendingToken mResendToken;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,96 +49,124 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         getCodeButton = findViewById(R.id.getCodeButton);
         loginButton   = findViewById(R.id.loginButton);
 
+        codeLayout = findViewById(R.id.outlinedCodeTextField);
+        phonelayout = findViewById(R.id.outlinedPhoneTextField);
+
         mAuth = FirebaseAuth.getInstance();
         mAuth.setLanguageCode("en");
 
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+        if (user != null) {
+            // User is signed in.
+            Toast.makeText(getApplicationContext(),"user: "+user.getDisplayName()+" is logged in",Toast.LENGTH_LONG).show();
+        } else {
+            // No user is signed in.
+            Toast.makeText(getApplicationContext(),"no user is logged in",Toast.LENGTH_LONG).show();
+        }
         getCodeButton.setOnClickListener(this);
+        loginButton.setOnClickListener(this);
 
-        mCallbacks = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
-            @Override
-            public void onVerificationCompleted(@NonNull PhoneAuthCredential credential) {
-                // This callback will be invoked in two situations:
-                // 1 - Instant verification. In some cases the phone number can be instantly
-                //     verified without needing to send or enter a verification code.
-                // 2 - Auto-retrieval. On some devices Google Play services can automatically
-                //     detect the incoming verification SMS and perform verification without
-                //     user action.
-
-                Log.d("LoginActivity", "onVerificationCompleted:" + credential.getSmsCode());
-                signInWithPhoneAuthCredential(credential);
-            }
-
-            @Override
-            public void onVerificationFailed(@NonNull FirebaseException e) {
-                // This callback is invoked in an invalid request for verification is made,
-                // for instance if the the phone number format is not valid.
-                Log.w("LoginActivity", "onVerificationFailed", e);
-                if (e instanceof FirebaseAuthInvalidCredentialsException) {
-                    // Invalid request
-                    Log.d("LoginActivity","verification failed with message: "+"invalid request");
-                } else if (e instanceof FirebaseTooManyRequestsException) {
-                    // The SMS quota for the project has been exceeded
-                    Log.d("LoginActivity","verification failed with message: "+"sms quota for the project has been exceeded");
-                }
-                Toast.makeText(getApplicationContext(),"phone number verification failed, please try again",Toast.LENGTH_LONG).show();
-            }
-
-            @Override
-            public void onCodeSent(@NonNull String verificationId, @NonNull PhoneAuthProvider.ForceResendingToken token) {
-                super.onCodeSent(verificationId, token);
-
-                // The SMS verification code has been sent to the provided phone number, we
-                // now need to ask the user to enter the code and then construct a credential
-                // by combining the code with a verification ID.
-                Log.d("LoginActivity", "onCodeSent:" + verificationId);
-
-                // Save verification ID and resending token so we can use them later
-                mVerificationId = verificationId;
-                mResendToken = token;
-
-            }
-        };
     }
 
     @Override
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.getCodeButton:
-                PhoneAuthProvider.getInstance().verifyPhoneNumber(
-                        phoneText.getText().toString(),        // Phone number to verify
-                        1,                 // Timeout duration
-                        TimeUnit.MINUTES,   // Unit of timeout
-                        this,               // Activity (for callback binding)
-                        mCallbacks);        // OnVerificationStateChangedCallbacks
+                if (TextUtils.isEmpty(phoneText.getText())){
+                    phoneText.setError("Enter a phone number first!");
+                    phoneText.requestFocus();
+                }else {
+                    sendVerificationCode(phoneText.getText().toString().trim());
+                }
                 break;
             case R.id.loginButton:
+                if (codeLayout.getVisibility() == View.VISIBLE) {
+                    if (TextUtils.isEmpty(codeText.getText())){
+                        codeText.setError("Enter the verification code that you have just received!");
+                        codeText.requestFocus();
+                    }else
+                        verifyVerificationCode(codeText.getText().toString().trim());
+                }
                 break;
             default:
                 view.clearFocus();
         }
     }
 
+    private void sendVerificationCode(String mobile) {
+        Log.d(TAG,"inside sendVerificationCode = "+"YES");
+        PhoneAuthProvider.getInstance().verifyPhoneNumber(
+                "+88" + mobile,
+                60,
+                TimeUnit.SECONDS,
+                TaskExecutors.MAIN_THREAD,
+                mCallbacks);
+    }
+
+    private PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallbacks = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
+        @Override
+        public void onVerificationCompleted(@NonNull PhoneAuthCredential phoneAuthCredential) {
+            Log.d(TAG,"inside OnVerificationStateChangedCallbacks = "+"YES");
+        }
+
+        @Override
+        public void onVerificationFailed(@NonNull FirebaseException e) {
+            Toast.makeText(Login.this, e.getMessage(), Toast.LENGTH_LONG).show();
+        }
+
+        @Override
+        public void onCodeSent(@NonNull String s, @NonNull PhoneAuthProvider.ForceResendingToken forceResendingToken) {
+            super.onCodeSent(s, forceResendingToken);
+            mVerificationId = s;
+            mResendToken = forceResendingToken;
+            Log.d(TAG,"mVerificationId = "+s);
+            codeLayout.setVisibility(View.VISIBLE);
+            loginButton.setVisibility(View.VISIBLE);
+            phonelayout.setVisibility(View.GONE);
+            getCodeButton.setVisibility(View.GONE);
+        }
+    };
+
+    private void verifyVerificationCode(String otp) {
+        //creating the credential
+        PhoneAuthCredential credential = PhoneAuthProvider.getCredential(mVerificationId, otp);
+
+        //signing the user
+        signInWithPhoneAuthCredential(credential);
+    }
+
     private void signInWithPhoneAuthCredential(PhoneAuthCredential credential) {
         mAuth.signInWithCredential(credential)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                .addOnCompleteListener(Login.this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            Log.d("LoginActivity", "signInWithCredential:success");
+                            //verification successful we will start the profile activity
+                            Intent intent = new Intent(Login.this, MainActivity.class);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            startActivity(intent);
 
-                            FirebaseUser user = task.getResult().getUser();
-                            Log.d("LoginActivity","user = "+user.getPhoneNumber());
-                            // ...
                         } else {
-                            // Sign in failed, display a message and update the UI
-                            Log.w("LoginActivity", "signInWithCredential:failure", task.getException());
+
+                            //verification unsuccessful.. display an error message
+
+                            String message = "Somthing is wrong, we will fix it soon...";
+
                             if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
-                                // The verification code entered was invalid
+                                message = "Invalid code entered...";
                             }
+
+                            Snackbar snackbar = Snackbar.make(findViewById(R.id.parent), message, Snackbar.LENGTH_LONG);
+                            snackbar.setAction("Dismiss", new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+
+                                }
+                            });
+                            snackbar.show();
                         }
                     }
-
                 });
     }
 }
