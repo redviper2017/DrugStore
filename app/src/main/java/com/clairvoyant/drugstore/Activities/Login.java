@@ -55,15 +55,15 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         mAuth = FirebaseAuth.getInstance();
         mAuth.setLanguageCode("en");
 
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-
-        if (user != null) {
-            // User is signed in.
-            Toast.makeText(getApplicationContext(),"user: "+user.getDisplayName()+" is logged in",Toast.LENGTH_LONG).show();
-        } else {
-            // No user is signed in.
-            Toast.makeText(getApplicationContext(),"no user is logged in",Toast.LENGTH_LONG).show();
-        }
+//        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+//
+//        if (user != null) {
+//            // User is signed in.
+//            Toast.makeText(getApplicationContext(),"user: "+user.getDisplayName()+" is logged in",Toast.LENGTH_LONG).show();
+//        } else {
+//            // No user is signed in.
+//            Toast.makeText(getApplicationContext(),"no user is logged in",Toast.LENGTH_LONG).show();
+//        }
         getCodeButton.setOnClickListener(this);
         loginButton.setOnClickListener(this);
 
@@ -142,6 +142,8 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
+//                            String user = task.getResult().getUser().getPhoneNumber();
+//                            Log.d(TAG,"user = "+user);
                             //verification successful we will start the profile activity
                             Intent intent = new Intent(Login.this, MainActivity.class);
                             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);

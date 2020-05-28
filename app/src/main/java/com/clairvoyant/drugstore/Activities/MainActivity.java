@@ -1,6 +1,9 @@
 package com.clairvoyant.drugstore.Activities;
 
 import android.annotation.SuppressLint;
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -10,6 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -25,7 +29,10 @@ import com.clairvoyant.drugstore.Models.MedicineData;
 import com.clairvoyant.drugstore.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -77,6 +84,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+        if (user == null) {
+            // User is signed in.
+            startActivity(new Intent(MainActivity.this,Login.class));
+        }
 
         setFragment("Home");
 //        setupBadge();
@@ -104,6 +117,7 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.nav_contact_us:
                         break;
                     case R.id.nav_sign_out:
+                        createDialog("signout");
                         break;
                     default:
                         return true;
@@ -259,5 +273,45 @@ public class MainActivity extends AppCompatActivity {
         GetCartProducts gcp = new GetCartProducts();
         gcp.execute();
         return null;
+    }
+
+    public void createDialog(String dialogFor){
+        MaterialAlertDialogBuilder dialogBuilder = new MaterialAlertDialogBuilder(this);
+        String dialogTitle = null;
+        String dialogMessage = null;
+        String buttonPos = null;
+        String buttonNeg = null;
+        switch (dialogFor) {
+            case "signout":
+                dialogTitle = "Sign Out";
+                dialogMessage = "Are you sure, you want to sign out?";
+                buttonPos = "YES";
+                buttonNeg = "CANCEL";
+                break;
+        }
+
+        dialogBuilder
+                .setTitle(dialogTitle)
+                .setMessage(dialogMessage)
+                .setPositiveButton(buttonPos, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        signOut();
+                    }
+                })
+                .setNegativeButton(buttonNeg, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                })
+                .setIcon(R.drawable.logout_icon)
+                .setCancelable(false)
+                .show();
+    }
+
+    public void signOut(){
+        FirebaseAuth.getInstance().signOut();
+        startActivity(new Intent(MainActivity.this,Login.class));
     }
 }

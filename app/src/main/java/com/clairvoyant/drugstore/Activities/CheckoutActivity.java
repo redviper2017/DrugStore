@@ -236,7 +236,6 @@ public class CheckoutActivity extends AppCompatActivity {
                 progressBar.setVisibility(View.GONE);
                 dialogTitle = "Order placed successfully";
                 dialogMessage = "Thank you! Your order has been placed successfully, soon you will get a call from us for confirmation.";
-                final String finalDialogMessage1 = dialogMessage;
                 dialogBuilder
                         .setTitle(dialogTitle)
                         .setMessage(dialogMessage)
