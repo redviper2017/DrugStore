@@ -3,12 +3,15 @@ package com.clairvoyant.drugstore.Activities;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.Manifest;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.clairvoyant.drugstore.R;
@@ -27,14 +30,16 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthProvider;
 
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 public class Login extends AppCompatActivity implements View.OnClickListener {
 
     private static final String TAG = "Login";
-    private TextInputEditText phoneText, codeText;
+    private TextInputEditText nameText, phoneText, codeText;
     private Button getCodeButton, loginButton;
-    TextInputLayout codeLayout, phonelayout;
+    TextInputLayout nameLayout, codeLayout, phonelayout;
+    private ProgressBar progressBarVerify,progressBarLogin;
     private FirebaseAuth mAuth;
     private String mVerificationId;
     PhoneAuthProvider.ForceResendingToken mResendToken;
@@ -44,29 +49,30 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        nameText      = findViewById(R.id.nameEditText);
         phoneText     = findViewById(R.id.phoneEditText);
         codeText      = findViewById(R.id.codeEditText);
         getCodeButton = findViewById(R.id.getCodeButton);
         loginButton   = findViewById(R.id.loginButton);
+        nameLayout    = findViewById(R.id.outlinedNameTextField);
+        codeLayout    = findViewById(R.id.outlinedCodeTextField);
+        phonelayout   = findViewById(R.id.outlinedPhoneTextField);
 
-        codeLayout = findViewById(R.id.outlinedCodeTextField);
-        phonelayout = findViewById(R.id.outlinedPhoneTextField);
+        progressBarVerify = findViewById(R.id.progressBarVerify);
+        progressBarLogin = findViewById(R.id.progressBarLogin);
 
         mAuth = FirebaseAuth.getInstance();
         mAuth.setLanguageCode("en");
 
-//        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-//
-//        if (user != null) {
-//            // User is signed in.
-//            Toast.makeText(getApplicationContext(),"user: "+user.getDisplayName()+" is logged in",Toast.LENGTH_LONG).show();
-//        } else {
-//            // No user is signed in.
-//            Toast.makeText(getApplicationContext(),"no user is logged in",Toast.LENGTH_LONG).show();
-//        }
         getCodeButton.setOnClickListener(this);
         loginButton.setOnClickListener(this);
 
+//        Objects.requireNonNull(getSupportActionBar()).setTitle("Login");
+    }
+
+    @Override
+    public void onBackPressed() {
+        finishAffinity();
     }
 
     @Override
@@ -95,6 +101,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     }
 
     private void sendVerificationCode(String mobile) {
+        progressBarVerify.setVisibility(View.VISIBLE);
         Log.d(TAG,"inside sendVerificationCode = "+"YES");
         PhoneAuthProvider.getInstance().verifyPhoneNumber(
                 "+88" + mobile,
@@ -123,12 +130,15 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
             Log.d(TAG,"mVerificationId = "+s);
             codeLayout.setVisibility(View.VISIBLE);
             loginButton.setVisibility(View.VISIBLE);
+            nameLayout.setVisibility(View.GONE);
             phonelayout.setVisibility(View.GONE);
             getCodeButton.setVisibility(View.GONE);
+            progressBarVerify.setVisibility(View.GONE);
         }
     };
 
     private void verifyVerificationCode(String otp) {
+        progressBarLogin.setVisibility(View.VISIBLE);
         //creating the credential
         PhoneAuthCredential credential = PhoneAuthProvider.getCredential(mVerificationId, otp);
 
@@ -144,6 +154,8 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                         if (task.isSuccessful()) {
 //                            String user = task.getResult().getUser().getPhoneNumber();
 //                            Log.d(TAG,"user = "+user);
+
+                            progressBarLogin.setVisibility(View.GONE);
                             //verification successful we will start the profile activity
                             Intent intent = new Intent(Login.this, MainActivity.class);
                             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);

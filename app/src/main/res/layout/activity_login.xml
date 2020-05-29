@@ -1,62 +1,116 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
     tools:context=".Activities.Login">
+
+
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/outlinedPhoneTextField"
+        android:id="@+id/outlinedNameTextField"
+        style="@style/CustomMaterialTextInputLayoutStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/_10sdp"
-        android:hint="phone"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:hint="Name">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/nameEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableEnd="@drawable/person_icon_black"
+            android:drawableTint="@color/colorPrimary" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/outlinedPhoneTextField"
+        style="@style/CustomMaterialTextInputLayoutStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/outlinedNameTextField"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:hint="Phone">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/phoneEditText"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:drawableEnd="@drawable/telephone_icon" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:id="@+id/getCodeButton"
-        android:layout_below="@id/outlinedPhoneTextField"
+        style="?attr/materialButtonOutlinedStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@id/outlinedPhoneTextField"
         android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_30sdp"
         android:layout_marginEnd="@dimen/_10sdp"
+        android:padding="@dimen/_15sdp"
         android:text="Verify Number"
-        style="?attr/materialButtonOutlinedStyle" />
+        android:textColor="@color/colorPrimaryDark"
+        app:strokeColor="@color/colorPrimary"
+        app:strokeWidth="1dp" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/outlinedCodeTextField"
+        style="@style/CustomMaterialTextInputLayoutStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/_10sdp"
         android:hint="verification code"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:visibility="gone">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/codeEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="number"/>
+            android:inputType="number" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:id="@+id/loginButton"
-        android:layout_below="@id/outlinedCodeTextField"
+        style="@style/CustomMaterialOutlinedButtonStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@id/outlinedCodeTextField"
         android:layout_marginStart="@dimen/_10sdp"
         android:layout_marginEnd="@dimen/_10sdp"
+        android:padding="@dimen/_15sdp"
         android:text="Login"
-        style="?attr/materialButtonOutlinedStyle"
-        android:visibility="gone"/>
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="@dimen/_14ssp"
+        android:visibility="gone"
+        app:strokeColor="@color/colorPrimary"
+        app:strokeWidth="1dp" />
+
+    <ProgressBar
+        android:id="@+id/progressBarVerify"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/getCodeButton"
+        android:layout_centerHorizontal="true"
+        android:elevation="@dimen/_10sdp"
+        android:theme="@style/CustomProgressBar"
+        android:visibility="gone" />
+
+    <ProgressBar
+        android:id="@+id/progressBarLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/loginButton"
+        android:layout_centerHorizontal="true"
+        android:elevation="@dimen/_10sdp"
+        android:theme="@style/CustomProgressBar"
+        android:visibility="gone" />
+
 </RelativeLayout>

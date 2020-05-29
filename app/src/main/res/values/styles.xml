@@ -7,9 +7,24 @@
         <item name="colorPrimaryDark">@color/colorPrimary</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
-
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
     <style name="MyActionBar" parent="@style/ThemeOverlay.MaterialComponents.ActionBar">
         <item name="android:background">@color/colorDivider</item>
     </style>
-
+    <style name="CustomProgressBar" parent="android:Widget.Holo.ProgressBar.Large">
+        <item name="colorAccent">@color/colorPrimary</item>
+    </style>
+    <style name="CustomMaterialTextInputLayoutStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="boxStrokeColor">@color/colorPrimary</item>
+        <item name="boxStrokeWidth">1dp</item>
+        <item name="android:textColorHint">@color/colorPrimaryDark</item>
+    </style>
+    <style name="CustomMaterialOutlinedButtonStyle" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="colorButtonNormal">@color/colorPrimary</item>
+        <item name="borderWidth">10dp</item>
+        <item name="backgroundTint">#fff</item>
+    </style>
 </resources>
