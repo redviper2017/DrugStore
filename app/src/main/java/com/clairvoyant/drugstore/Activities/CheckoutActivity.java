@@ -28,6 +28,8 @@ import com.clairvoyant.drugstore.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.text.SimpleDateFormat;
@@ -37,6 +39,7 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 public class CheckoutActivity extends AppCompatActivity {
 
@@ -173,8 +176,12 @@ public class CheckoutActivity extends AppCompatActivity {
             nestedFinalOrder.put("subTotal", totalPriceText.getText().toString());
             nestedFinalOrder.put("orderStatus", "pending");
 
+            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
             if (!TextUtils.isEmpty(deliveryAddressText.getText().toString())) {
                 nestedFinalOrder.put("address", deliveryAddressText.getText().toString());
+
+                nestedFinalOrder.put("customerPhone", Objects.requireNonNull(user).getPhoneNumber());
                 progressBar.setVisibility(View.VISIBLE);
                 db.collection("orders").document()
                         .set(nestedFinalOrder)
@@ -199,11 +206,11 @@ public class CheckoutActivity extends AppCompatActivity {
         }
     }
 
-    public void createDialog(String dialogFor){
+    public void createDialog(String dialogFor) {
         MaterialAlertDialogBuilder dialogBuilder = new MaterialAlertDialogBuilder(this);
         String dialogTitle = null;
         String dialogMessage = null;
-        switch (dialogFor){
+        switch (dialogFor) {
             case "bkash":
                 dialogTitle = "Our bKash number";
                 dialogMessage = "01789710097";
@@ -242,7 +249,7 @@ public class CheckoutActivity extends AppCompatActivity {
                         .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                startActivity(new Intent(CheckoutActivity.this,MainActivity.class));
+                                startActivity(new Intent(CheckoutActivity.this, MainActivity.class));
                             }
                         })
                         .setIcon(R.drawable.orderplacement_icon)

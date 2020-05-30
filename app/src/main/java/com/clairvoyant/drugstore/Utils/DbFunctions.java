@@ -57,11 +57,9 @@ public class DbFunctions {
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 DocumentSnapshot documentSnapshot = task.getResult();
                 if (!documentSnapshot.exists()){
-                    Toast.makeText(context,"An account is already associated with this mobile number, try with another mobile number.",Toast.LENGTH_LONG).show();
+
                 }
             }
         });
-
-
     }
 }

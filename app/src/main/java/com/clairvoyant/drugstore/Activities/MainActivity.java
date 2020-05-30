@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
 
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle actionBarDrawerToggle;
-    private NavigationView navigationView;
+    public static NavigationView navigationView;
     private FrameLayout fragmentHolder;
     private static final String TAG = "MainActivity";
 
