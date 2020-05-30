@@ -59,10 +59,10 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if(actionBarDrawerToggle.onOptionsItemSelected(item))
+        if (actionBarDrawerToggle.onOptionsItemSelected(item))
             return true;
 
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.action_cart_main:
                 return true;
         }
@@ -90,48 +90,47 @@ public class MainActivity extends AppCompatActivity {
 
         if (user == null) {
             // User is signed in.
-            startActivity(new Intent(MainActivity.this,Login.class));
-        }
-
-
-        setFragment("Home");
+            startActivity(new Intent(MainActivity.this, Login.class));
+        } else {
+            setFragment("Home");
 //        setupBadge();
 
-        drawerLayout = findViewById(R.id.drawer_layout_main);
-        actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.Open, R.string.Close);
-        navigationView = findViewById(R.id.nav_view);
-        fragmentHolder = findViewById(R.id.fragment_holder_main);
+            drawerLayout = findViewById(R.id.drawer_layout_main);
+            actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.Open, R.string.Close);
+            navigationView = findViewById(R.id.nav_view);
+            fragmentHolder = findViewById(R.id.fragment_holder_main);
 
-        Objects.requireNonNull(getSupportActionBar()).setTitle("Home");
+            Objects.requireNonNull(getSupportActionBar()).setTitle("Home");
 
-        drawerLayout.addDrawerListener(actionBarDrawerToggle);
-        actionBarDrawerToggle.syncState();
+            drawerLayout.addDrawerListener(actionBarDrawerToggle);
+            actionBarDrawerToggle.syncState();
 
-        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+            Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
-        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()){
-                    case R.id.nav_my_orders:
-                        break;
-                    case R.id.nav_profile:
-                        break;
-                    case R.id.nav_contact_us:
-                        break;
-                    case R.id.nav_sign_out:
-                        createDialog("signout");
-                        break;
-                    default:
-                        return true;
+            navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+                @Override
+                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                    switch (item.getItemId()) {
+                        case R.id.nav_my_orders:
+                            break;
+                        case R.id.nav_profile:
+                            break;
+                        case R.id.nav_contact_us:
+                            break;
+                        case R.id.nav_sign_out:
+                            createDialog("signout");
+                            break;
+                        default:
+                            return true;
+                    }
+
+                    return true;
                 }
-
-                return true;
-            }
-        });
-        User user1 = (User) new DbFunctions().getUsers(getApplicationContext(),
-                (TextView) navigationView.getHeaderView(0).findViewById(R.id.nav_header_name_text),
-                (TextView) navigationView.getHeaderView(0).findViewById(R.id.nav_header_phone_text));
+            });
+            User user1 = (User) new DbFunctions().getUsers(getApplicationContext(),
+                    (TextView) navigationView.getHeaderView(0).findViewById(R.id.nav_header_name_text),
+                    (TextView) navigationView.getHeaderView(0).findViewById(R.id.nav_header_phone_text));
+        }
     }
 
     @Override
@@ -143,7 +142,7 @@ public class MainActivity extends AppCompatActivity {
         actionView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this,AddToCartActivity.class));
+                startActivity(new Intent(MainActivity.this, AddToCartActivity.class));
                 finish();
             }
         });
@@ -154,9 +153,9 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
-    public void setFragment(String fragmentNname){
+    public void setFragment(String fragmentNname) {
         Fragment fragment;
-        switch (fragmentNname){
+        switch (fragmentNname) {
             case "Home":
                 fragment = new HomeFragment();
                 break;
@@ -167,7 +166,7 @@ public class MainActivity extends AppCompatActivity {
                 .add(R.id.fragment_holder_main, fragment).commit();
     }
 
-    private void fetchDataFromFirestore(){
+    private void fetchDataFromFirestore() {
         // Access a Cloud Firestore instance from your Activity
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("products")
@@ -180,22 +179,22 @@ public class MainActivity extends AppCompatActivity {
                                 Log.d(TAG, "document = " + " => " + document.getData());
 
                                 MedicineData medicineData;
-                                medicineData  = document.toObject(MedicineData.class);
-                                Log.d(TAG,"medicine = "+medicineData);
+                                medicineData = document.toObject(MedicineData.class);
+                                Log.d(TAG, "medicine = " + medicineData);
                                 productListFromServer.add(medicineData);
                                 storeProductsToLocalDB(medicineData);
                             }
                         } else {
                             Log.w(TAG, "Error getting documents.", task.getException());
                         }
-                        Log.d(TAG,"number of products fetched in onStart() of Main Activity = " + productListFromServer.size());
+                        Log.d(TAG, "number of products fetched in onStart() of Main Activity = " + productListFromServer.size());
                     }
                 });
     }
 
-    private void storeProductsToLocalDB(final MedicineData medicineData){
+    private void storeProductsToLocalDB(final MedicineData medicineData) {
         @SuppressLint("StaticFieldLeak")
-        class SaveProduct extends AsyncTask<Void, Void, Void>{
+        class SaveProduct extends AsyncTask<Void, Void, Void> {
             @Override
             protected Void doInBackground(Void... voids) {
                 Product product = new Product();
@@ -217,7 +216,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             protected void onPostExecute(Void aVoid) {
                 super.onPostExecute(aVoid);
-                Log.d(TAG,"products saved to local db = "+"successfully");
+                Log.d(TAG, "products saved to local db = " + "successfully");
             }
         }
 
@@ -227,15 +226,15 @@ public class MainActivity extends AppCompatActivity {
 
     public void setupBadge(int num) {
         mCartItemCount = Integer.parseInt(textCartItemCount.getText().toString()) + num;
-        Log.d(TAG,"setupBadge method called = "+num);
+        Log.d(TAG, "setupBadge method called = " + num);
         if (textCartItemCount != null) {
             if (mCartItemCount == 0) {
-                Log.d(TAG,"mCartItemCount is equal to zero = "+"YES");
+                Log.d(TAG, "mCartItemCount is equal to zero = " + "YES");
                 if (textCartItemCount.getVisibility() != View.GONE) {
                     textCartItemCount.setVisibility(View.GONE);
                 }
             } else {
-                Log.d(TAG,"mCartItemCount is equal to zero = "+"NO");
+                Log.d(TAG, "mCartItemCount is equal to zero = " + "NO");
                 textCartItemCount.setText(String.valueOf(mCartItemCount));
                 if (textCartItemCount.getVisibility() != View.VISIBLE) {
                     textCartItemCount.setVisibility(View.VISIBLE);
@@ -281,7 +280,7 @@ public class MainActivity extends AppCompatActivity {
         return null;
     }
 
-    public void createDialog(String dialogFor){
+    public void createDialog(String dialogFor) {
         MaterialAlertDialogBuilder dialogBuilder = new MaterialAlertDialogBuilder(this);
         String dialogTitle = null;
         String dialogMessage = null;
@@ -316,8 +315,8 @@ public class MainActivity extends AppCompatActivity {
                 .show();
     }
 
-    public void signOut(){
+    public void signOut() {
         FirebaseAuth.getInstance().signOut();
-        startActivity(new Intent(MainActivity.this,Login.class));
+        startActivity(new Intent(MainActivity.this, Login.class));
     }
 }
