@@ -3,9 +3,8 @@ package com.clairvoyant.drugstore.Activities;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.Manifest;
 import android.content.Intent;
-import android.os.Build;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -14,22 +13,27 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.clairvoyant.drugstore.Database.DatabaseClient;
+import com.clairvoyant.drugstore.Entities.User;
 import com.clairvoyant.drugstore.R;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.gms.tasks.TaskExecutors;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.FirebaseException;
-import com.google.firebase.FirebaseTooManyRequestsException;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthProvider;
+import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
@@ -67,7 +71,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         getCodeButton.setOnClickListener(this);
         loginButton.setOnClickListener(this);
 
-//        Objects.requireNonNull(getSupportActionBar()).setTitle("Login");
+        Objects.requireNonNull(getSupportActionBar()).setTitle("Login");
     }
 
     @Override
@@ -80,9 +84,22 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         switch (view.getId()){
             case R.id.getCodeButton:
                 if (TextUtils.isEmpty(phoneText.getText())){
-                    phoneText.setError("Enter a phone number first!");
+                    phoneText.setError("Enter a mobile number first!");
                     phoneText.requestFocus();
-                }else {
+                }else if (phoneText.getText().toString().trim().length() != 11){
+                    phoneText.setError("Enter a valid mobile number!");
+                    phoneText.requestFocus();
+                }else if(!phoneText.getText().toString().substring(0, 3).equals("015") ||
+                        !phoneText.getText().toString().substring(0, 3).equals("016")  ||
+                        !phoneText.getText().toString().substring(0, 3).equals("017")  ||
+                        !phoneText.getText().toString().substring(0, 3).equals("018")  ||
+                        !phoneText.getText().toString().substring(0, 3).equals("019")){
+                    phoneText.setError("Enter a valid mobile number!");
+                    phoneText.requestFocus();
+                } else if(TextUtils.isEmpty(nameText.getText())){
+                    nameText.setError("Enter your name first!");
+                    nameText.requestFocus();
+                } else {
                     sendVerificationCode(phoneText.getText().toString().trim());
                 }
                 break;
@@ -154,13 +171,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                         if (task.isSuccessful()) {
 //                            String user = task.getResult().getUser().getPhoneNumber();
 //                            Log.d(TAG,"user = "+user);
-
-                            progressBarLogin.setVisibility(View.GONE);
-                            //verification successful we will start the profile activity
-                            Intent intent = new Intent(Login.this, MainActivity.class);
-                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                            startActivity(intent);
-
+                            storeUserToFirestore();
                         } else {
 
                             //verification unsuccessful.. display an error message
@@ -182,5 +193,55 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                         }
                     }
                 });
+    }
+
+    public void storeUserToFirestore(){
+        Map<String,String> user = new HashMap<>();
+        user.put("name", String.valueOf(nameText.getText()));
+        user.put("mobile", String.valueOf(phoneText.getText()));
+
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("users").document()
+                .set(user)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        storeUserToLocalDB(Objects.requireNonNull(nameText.getText()).toString(), Objects.requireNonNull(phoneText.getText()).toString());
+                        progressBarLogin.setVisibility(View.GONE);
+                        //verification successful we will start the profile activity
+                        Intent intent = new Intent(Login.this, MainActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(intent);
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.w(TAG, "Error writing document", e);
+            }
+        });
+    }
+
+    public void storeUserToLocalDB(final String name, final String mobile){
+        class SaveUser extends AsyncTask<Void,Void,Void>{
+
+            @Override
+            protected Void doInBackground(Void... voids) {
+                User user = new User();
+                user.setName(name);
+                user.setPhone(mobile);
+
+                //adding to database
+                DatabaseClient.getInstance(getApplicationContext()).getAppDatabase()
+                        .userDao()
+                        .insert(user);
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(Void aVoid) {
+                super.onPostExecute(aVoid);
+                Log.d(TAG,"user saved to local db = "+"successfully");
+            }
+        }
     }
 }
