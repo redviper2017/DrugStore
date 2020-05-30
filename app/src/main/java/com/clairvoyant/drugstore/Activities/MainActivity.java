@@ -24,9 +24,11 @@ import androidx.fragment.app.Fragment;
 import com.clairvoyant.drugstore.Database.DatabaseClient;
 import com.clairvoyant.drugstore.Entities.CartProduct;
 import com.clairvoyant.drugstore.Entities.Product;
+import com.clairvoyant.drugstore.Entities.User;
 import com.clairvoyant.drugstore.Fragments.HomeFragment;
 import com.clairvoyant.drugstore.Models.MedicineData;
 import com.clairvoyant.drugstore.R;
+import com.clairvoyant.drugstore.Utils.DbFunctions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
@@ -91,6 +93,7 @@ public class MainActivity extends AppCompatActivity {
             startActivity(new Intent(MainActivity.this,Login.class));
         }
 
+
         setFragment("Home");
 //        setupBadge();
 
@@ -126,6 +129,9 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
+        User user1 = (User) new DbFunctions().getUsers(getApplicationContext(),
+                (TextView) navigationView.getHeaderView(0).findViewById(R.id.nav_header_name_text),
+                (TextView) navigationView.getHeaderView(0).findViewById(R.id.nav_header_phone_text));
     }
 
     @Override

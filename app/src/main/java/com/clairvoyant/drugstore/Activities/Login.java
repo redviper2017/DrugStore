@@ -3,6 +3,7 @@ package com.clairvoyant.drugstore.Activities;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -89,12 +90,12 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                 }else if (phoneText.getText().toString().trim().length() != 11){
                     phoneText.setError("Enter a valid mobile number!");
                     phoneText.requestFocus();
-                }else if(!phoneText.getText().toString().substring(0, 3).equals("015") ||
-                        !phoneText.getText().toString().substring(0, 3).equals("016")  ||
-                        !phoneText.getText().toString().substring(0, 3).equals("017")  ||
-                        !phoneText.getText().toString().substring(0, 3).equals("018")  ||
+                }else if(!phoneText.getText().toString().substring(0, 3).equals("015") &&
+                        !phoneText.getText().toString().substring(0, 3).equals("016")  &&
+                        !phoneText.getText().toString().substring(0, 3).equals("017")  &&
+                        !phoneText.getText().toString().substring(0, 3).equals("018")  &&
                         !phoneText.getText().toString().substring(0, 3).equals("019")){
-                    phoneText.setError("Enter a valid mobile number!");
+                    phoneText.setError("Enter a valid mobile operator number!");
                     phoneText.requestFocus();
                 } else if(TextUtils.isEmpty(nameText.getText())){
                     nameText.setError("Enter your name first!");
@@ -201,7 +202,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         user.put("mobile", String.valueOf(phoneText.getText()));
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        db.collection("users").document()
+        db.collection("users").document(String.valueOf(phoneText.getText()))
                 .set(user)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
@@ -222,6 +223,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     }
 
     public void storeUserToLocalDB(final String name, final String mobile){
+        @SuppressLint("StaticFieldLeak")
         class SaveUser extends AsyncTask<Void,Void,Void>{
 
             @Override
@@ -243,5 +245,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                 Log.d(TAG,"user saved to local db = "+"successfully");
             }
         }
+        SaveUser saveUser = new SaveUser();
+        saveUser.execute();
     }
 }
