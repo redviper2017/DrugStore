@@ -214,4 +214,22 @@ public class AdminActivity extends AppCompatActivity implements View.OnClickList
                     });
         }
     }
+
+    private List<String[]> readCVSFromAssetFolder(){
+        List<String[]> csvLine = new ArrayList<>();
+        String[] content = null;
+        try {
+            InputStream inputStream = getAssets().open("local.cvs");
+            BufferedReader br = new BufferedReader(new InputStreamReader(inputStream));
+            String line = "";
+            while((line = br.readLine()) != null){
+                content = line.split(",");
+                csvLine.add(content);
+            }
+            br.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return csvLine;
+    }
 }
