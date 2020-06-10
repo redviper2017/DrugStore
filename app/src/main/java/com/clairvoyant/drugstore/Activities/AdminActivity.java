@@ -11,10 +11,12 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 
 import com.clairvoyant.drugstore.Models.MedicineData;
+import com.clairvoyant.drugstore.Models.MedicineDataModel;
 import com.clairvoyant.drugstore.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -25,6 +27,8 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+
+import org.w3c.dom.Text;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -40,22 +44,23 @@ import java.util.Objects;
 
 public class AdminActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private List<MedicineData> medicineDataList = new ArrayList<>();
-    private ArrayList<MedicineData> productListFromServer = new ArrayList<>();
+    private List<MedicineDataModel> medicineDataList = new ArrayList<>();
+    private ArrayList<MedicineDataModel> productListFromServer = new ArrayList<>();
     private static final String TAG = "AdminActivity";
 
     private MaterialCardView productsCard, ordersCard, customersCard, salesCard, suppliersCard, requestsCard;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin);
 
-        productsCard  = findViewById(R.id.products_card);
-        ordersCard    = findViewById(R.id.orders_card);
+        productsCard = findViewById(R.id.products_card);
+        ordersCard = findViewById(R.id.orders_card);
         customersCard = findViewById(R.id.customers_card);
-        salesCard     = findViewById(R.id.sales_card);
+        salesCard = findViewById(R.id.sales_card);
         suppliersCard = findViewById(R.id.suppliers_card);
-        requestsCard  = findViewById(R.id.requests_card);
+        requestsCard = findViewById(R.id.requests_card);
 
         productsCard.setOnClickListener(this);
 
@@ -81,10 +86,10 @@ public class AdminActivity extends AppCompatActivity implements View.OnClickList
 
     @Override
     public void onClick(View view) {
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.products_card:
-                Intent intent = new Intent(AdminActivity.this,ProductsActivity.class);
-                intent.putExtra("ProductType","all");
+                Intent intent = new Intent(AdminActivity.this, ProductsActivity.class);
+                intent.putExtra("ProductType", "all");
                 startActivity(intent);
                 break;
         }
@@ -113,6 +118,7 @@ public class AdminActivity extends AppCompatActivity implements View.OnClickList
             Log.v("MainActivity", "Permission is granted");
         }
     }
+
     private void selectCSVFile() {
         Intent chooseFile = new Intent(Intent.ACTION_GET_CONTENT);
 
@@ -122,6 +128,7 @@ public class AdminActivity extends AppCompatActivity implements View.OnClickList
 
         startActivityForResult(chooseFile, 1);
     }
+
     private void readMedicineData(Uri uri) throws FileNotFoundException {
         Log.d("MainActivity", "inside readMedicineData method = " + "YES");
         InputStream is = getContentResolver().openInputStream(uri);
@@ -137,17 +144,17 @@ public class AdminActivity extends AppCompatActivity implements View.OnClickList
                 Log.d("MainActivity", "line: " + line);
                 // split by commas
                 String[] tokens = line.split(",");
+                Log.d(TAG,"size of tokens array = "+tokens.length);
                 // read the data
-                MedicineData data = new MedicineData();
+                MedicineDataModel data = new MedicineDataModel();
                 data.setName(tokens[0]);
                 data.setGenericName(tokens[1]);
-                data.setCode(tokens[2]);
-                data.setBrand(tokens[3]);
-                data.setCategory(tokens[4]);
-                data.setSaleUnit(tokens[5]);
-                data.setCost(Double.parseDouble(tokens[6]));
-                data.setPrice(Double.parseDouble(tokens[7]));
-                data.setAvailableQty(Integer.parseInt(tokens[8]));
+                data.setBrand(tokens[2]);
+                data.setCategory(tokens[3]);
+                data.setStrength((tokens[4]));
+
+                data.setPrice(tokens[5]);
+
                 medicineDataList.add(data);
                 Log.d("MainActivity", "just created: " + data);
             }
@@ -159,22 +166,21 @@ public class AdminActivity extends AppCompatActivity implements View.OnClickList
 
         Log.d("MainActivity", "medicine data list: " + medicineDataList.toString());
     }
-    private void storeDataInFirestore(){
+
+    private void storeDataInFirestore() {
         // Access a Cloud Firestore instance from your Activity
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         // Create a new user with a first and last name
-        Log.d(TAG,"medicine list size = "+medicineDataList.size());
-        for (int i=0; i<medicineDataList.size(); i++){
+        Log.d(TAG, "medicine list size = " + medicineDataList.size());
+        for (int i = 0; i < medicineDataList.size(); i++) {
             Map<String, Object> product = new HashMap<>();
             product.put("name", medicineDataList.get(i).getName());
             product.put("genericName", medicineDataList.get(i).getGenericName());
-            product.put("code", medicineDataList.get(i).getCode());
             product.put("brand", medicineDataList.get(i).getBrand());
             product.put("category", medicineDataList.get(i).getCategory());
-            product.put("saleUnit", medicineDataList.get(i).getSaleUnit());
-            product.put("cost", medicineDataList.get(i).getCost());
+            product.put("strength", medicineDataList.get(i).getStrength());
             product.put("price", medicineDataList.get(i).getPrice());
-            product.put("availableQty", medicineDataList.get(i).getAvailableQty());
+
 
             // Add a new document with a generated ID
 //            db.collection("products")
